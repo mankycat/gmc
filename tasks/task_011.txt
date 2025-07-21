@@ -1,0 +1,31 @@
+# Task ID: 11
+# Title: Backend: Add 'Purpose' Field to Server Model and APIs
+# Status: done
+# Dependencies: 5
+# Priority: medium
+# Description: Add 'purpose' field to Server data model and update backend APIs.
+# Details:
+
+
+# Test Strategy:
+
+
+# Subtasks:
+## 1. Add 'purpose' field to Server database schema and model [done]
+### Dependencies: None
+### Description: Modify the database schema for the 'servers' table to include a new column named 'purpose'. Update the corresponding backend data model (e.g., ORM model) to map to this new column.
+### Details:
+Create a database migration script to add the 'purpose' column (e.g., VARCHAR or TEXT, specify nullable/default constraints as needed). Update the Server model class/definition in the backend code to include the 'purpose' attribute.
+
+## 2. Include 'purpose' in Server API read responses [done]
+### Dependencies: 11.1
+### Description: Update the backend API endpoints that return server data (e.g., GET /servers, GET /servers/{id}) to include the new 'purpose' field in the JSON response payload.
+### Details:
+Modify the serialization logic (e.g., serializers, schema definitions) used by the server read endpoints to fetch the 'purpose' field from the model and include it in the API response.
+
+## 3. Accept and save 'purpose' in Server API write requests [done]
+### Dependencies: 11.1
+### Description: Update the backend API endpoints that create or update server data (e.g., POST /servers, PUT /servers/{id}) to accept the 'purpose' field in the request payload and save it to the database.
+### Details:
+Modify the request parsing and validation logic for server write endpoints to accept the 'purpose' field. Update the logic that saves or updates the server record to store the provided 'purpose' value using the updated model.
+

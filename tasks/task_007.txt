@@ -1,0 +1,11 @@
+# Task ID: 7
+# Title: Frontend: Build Server List UI
+# Status: done
+# Dependencies: 5, 6
+# Priority: high
+# Description: Develop frontend UI components for displaying a list of servers.
+# Details:
+
+
+# Test Strategy:
+

@@ -1,0 +1,11 @@
+# Task ID: 37
+# Title: DB Schema 調整 - 更新 Server Model
+# Status: done
+# Dependencies: None
+# Priority: medium
+# Description: 調整 Server Model 以反映新的 GPU 庫存管理方式。移除 Server Model 中的 gpuCards: GpuCard[]。新增與 GpuCardInstance 的一對多關聯：installedGpuInstances: GpuCardInstance[]。產出: 更新後的 prisma/schema.prisma 文件片段。
+# Details:
+
+
+# Test Strategy:
+

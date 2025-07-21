@@ -1,0 +1,42 @@
+# Task ID: 49
+# Title: Enhance Virtual Machine Management
+# Status: done
+# Dependencies: None
+# Priority: medium
+# Description: Enhance Virtual Machine management to include additional editable fields and improve UI/UX.
+# Details:
+
+
+# Test Strategy:
+
+
+# Subtasks:
+## 1. Update Virtual Machine Schema and Backend Code [done]
+### Dependencies: None
+### Description: Update the Virtual Machine schema to include Internal IP, Purpose, Host Server ID, and Card Usage. Update backend repository, service, controller, and index.js to handle the new fields.
+### Details:
+<info added on 2025-05-15T09:32:39.380Z>
+<details><timestamp>2025-05-15T09:32:36Z</timestamp><content>Review the current Virtual Machine schema and identify any redundant or unused fields. Add new fields for Internal IP (string), Purpose (string/enum), Host Server ID (string/reference), and Card Usage (string/enum). Update the backend repository to support CRUD operations for these fields. Modify the service layer to validate and process the new data. Update the controller to expose endpoints for managing the new fields. Adjust index.js to ensure proper routing and middleware handling. Remove or deprecate any unnecessary fields to streamline the schema and reduce technical debt.</content></details>
+</info added on 2025-05-15T09:32:39.380Z>
+<info added on 2025-05-16T09:23:10.925Z>
+Review the current Virtual Machine schema and identify any redundant or unused fields. Add new fields for Internal IP (string), Purpose (string/enum), Host Server ID (string/reference), and Card Usage (string/enum). Update the backend repository to support CRUD operations for these fields. Modify the service layer to validate and process the new data. Update the controller to expose endpoints for managing the new fields. Adjust index.js to ensure proper routing and middleware handling. Remove or deprecate any unnecessary fields to streamline the schema and reduce technical debt.
+<info added on 2025-05-15T09:32:39.380Z>
+<details><timestamp>2025-05-15T09:32:36Z</timestamp><content>Review the current Virtual Machine schema and identify any redundant or unused fields. Add new fields for Internal IP (string), Purpose (string/enum), Host Server ID (string/reference), and Card Usage (string/enum). Update the backend repository to support CRUD operations for these fields. Modify the service layer to validate and process the new data. Update the controller to expose endpoints for managing the new fields. Adjust index.js to ensure proper routing and middleware handling. Remove or deprecate any unnecessary fields to streamline the schema and reduce technical debt.</content></details>
+<info added on 2025-05-16T09:23:03Z>
+<details><timestamp>2025-05-16T09:23:03Z</timestamp><content>The updateVirtualMachine function in virtualMachineService.js has been refactored to correctly handle transactions with Prisma. The transaction now directly passes a function to prisma.$transaction, simplifying the handling and ensuring compatibility with Prisma's interactive transactions. This resolves the 'TypeError: n.map is not a function' error that occurred during Virtual Machine updates involving Card Usage changes. The service layer now robustly supports updates to all new fields, including Card Usage, and ensures data integrity during concurrent operations.</content></details>
+</info added on 2025-05-16T09:23:10.925Z>
+
+## 2. Implement Frontend UI/UX Adjustments for VM Management [done]
+### Dependencies: None
+### Description: Update the frontend VM List, Add, Edit, and View pages to include the new fields: Internal IP, Purpose, Host Server (dropdown selection), and Card Usage (sub-table editor). Ensure Host Server Name & IP are displayed in VM List.
+### Details:
+<info added on 2025-05-15T09:33:04.079Z>
+<details><timestamp>2025-05-15T09:33:00Z</timestamp><content>Update the VM List page to display Internal IP, Purpose, and Host Server Name & IP (mapped from Server ID). Add a dropdown for Host Server selection on the Add and Edit pages, populated with available servers. Implement a sub-table editor for Card Usage on the Add, Edit, and View pages, allowing users to manage card assignments per VM. Ensure all new fields are included in the View page for full transparency. Validate that all UI changes are consistent with the updated backend schema and that Host Server mapping is accurate and performant.</content></details>
+</info added on 2025-05-15T09:33:04.079Z>
+
+## 3. Review and Update Readme & API Document [done]
+### Dependencies: None
+### Description: Review and update the Readme and API document to reflect the changes made to the Virtual Machine management.
+### Details:
+
+

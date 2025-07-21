@@ -1,0 +1,66 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model servers {
+  id              Int              @id @default(autoincrement())
+  name_label      String           @db.VarChar(255)
+  ip_address      String           @unique @db.VarChar(255)
+  cpu_model       String?          @db.VarChar(255)
+  cpu_cores       Int?
+  memory_gb       Int?
+  disk_spec       String?          @db.VarChar(255)
+  os              String?          @db.VarChar(255)
+  created_at      DateTime?        @default(now()) @db.Timestamptz(6)
+  updated_at      DateTime?        @default(now()) @db.Timestamptz(6)
+  purpose         String?          @db.Text // Add purpose field
+  gpuCards        GpuCard[] // Add relation field to GpuCard
+  virtualMachines VirtualMachine[] // Add relation field to VirtualMachine
+}
+
+model users {
+  id         Int       @id @default(autoincrement())
+  email      String    @unique @db.VarChar(255)
+  status     String    @default("pending_approval") @db.VarChar(50)
+  password   String?   @db.VarChar(255) // Add password field for local login
+  isAdmin    Boolean   @default(false) // Re-add isAdmin field
+  created_at DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at DateTime? @default(now()) @db.Timestamptz(6)
+}
+
+model GpuCard {
+  id              Int              @id @default(autoincrement())
+  model           String           @db.VarChar(255)
+  memory_gb       Int
+  purpose         String?          @db.Text
+  notes           String?          @db.Text
+  serverId        Int
+  server          servers          @relation(fields: [serverId], references: [id])
+  virtualMachines VirtualMachine[] // Add relation field to VirtualMachine
+  created_at      DateTime?        @default(now()) @db.Timestamptz(6)
+  updated_at      DateTime?        @default(now()) @db.Timestamptz(6)
+}
+
+model VirtualMachine {
+  id                             Int       @id @default(autoincrement())
+  name_label                     String    @db.VarChar(255)
+  host_server_id                 Int
+  host_server                    servers   @relation(fields: [host_server_id], references: [id])
+  assigned_gpu_card_id           Int? // Renamed and type changed to Int?
+  assigned_gpu_card_index_id     Int? // Added new field
+  assigned_gpu_card              GpuCard?  @relation(fields: [assigned_gpu_card_id], references: [id]) // Updated relation to use id
+  vcpu_cores_assigned            Int?
+  ram_gb_assigned                Int?
+  gpu_resource_slice_description String?   @db.Text
+  purpose                        String?   @db.Text
+  internal_ip_address            String?   @db.VarChar(255)
+  notes                          String?   @db.Text
+  created_at                     DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at                     DateTime? @default(now()) @db.Timestamptz(6)
+}

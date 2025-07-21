@@ -1,0 +1,31 @@
+# Task ID: 12
+# Title: Frontend: Add 'Purpose' Field to Server UIs
+# Status: done
+# Dependencies: 7, 8, 11
+# Priority: medium
+# Description: Update frontend Server List, Detail, and Add/Edit Form UIs to include 'purpose' field.
+# Details:
+
+
+# Test Strategy:
+
+
+# Subtasks:
+## 1. Update Frontend Data Models and API Service for 'Purpose' [done]
+### Dependencies: None
+### Description: Modify frontend data models (e.g., TypeScript interfaces) to include the 'purpose' field. Update the API service layer to correctly handle fetching and sending the 'purpose' field when interacting with the backend server endpoints (GET, POST, PUT).
+### Details:
+Locate the relevant server data model interface (e.g., `IServer`). Add a new optional or required string field `purpose`. Update the service methods responsible for fetching (e.g., `getServers`, `getServerById`) and saving (e.g., `createServer`, `updateServer`) server data to ensure the 'purpose' field is included in requests and responses. Handle potential API changes or data transformations if necessary.
+
+## 2. Display 'Purpose' in Server List and Detail Views [done]
+### Dependencies: 12.1
+### Description: Modify the Server List view and the Server Detail view to display the 'purpose' field retrieved from the backend.
+### Details:
+In the Server List component, add a new column or integrate the 'purpose' display into an existing column (e.g., tooltip on server name). In the Server Detail component, add a new label and display element for the 'purpose' field, similar to other server attributes. Ensure proper handling of cases where the 'purpose' field might be null or empty.
+
+## 3. Add 'Purpose' Input to Server Add/Edit Form [done]
+### Dependencies: 12.1
+### Description: Modify the Server Add/Edit form component to include an input field for the 'purpose' field, allowing users to add or modify it.
+### Details:
+Locate the Server Add/Edit form component. Add a new form control (e.g., a text input or textarea) for the 'purpose' field. Bind this form control to the 'purpose' property in the form's data model. Update the form submission logic to include the value from the 'purpose' input when creating or updating a server. Add appropriate validation if required (e.g., max length).
+

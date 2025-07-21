@@ -1,0 +1,31 @@
+# Task ID: 25
+# Title: Backend: Implement Default Admin User Creation from .env Variables
+# Status: done
+# Dependencies: None
+# Priority: medium
+# Description: Create logic to automatically provision a default admin user at backend startup using credentials from environment variables, updating the password if the user already exists and it differs.
+# Details:
+Implement a backend initialization routine that reads admin username, password, and email from environment variables (e.g., ADMIN_USERNAME, ADMIN_PASSWORD, ADMIN_EMAIL). On application startup, check if a user with the specified username or email exists. If not, create the admin user with the provided credentials and assign appropriate admin privileges. If the user exists, compare the stored password hash with the hash of the provided password; if they differ, update the password to match the environment variable. Ensure password hashing and validation follow existing security standards. Log actions taken (created, updated, or no action needed) for traceability. Handle errors gracefully, especially around missing environment variables or database connectivity issues.
+
+# Test Strategy:
+1. Set environment variables with a new admin username, password, and email, then start the backend; verify that the admin user is created with correct credentials and privileges. 2. Change the ADMIN_PASSWORD variable to a new value and restart the backend; confirm that the existing admin user's password is updated. 3. Set the environment variables to match an existing admin user and password; restart the backend and ensure no unnecessary updates occur. 4. Remove or leave blank one or more required environment variables and verify that the backend logs a clear error and does not attempt user creation. 5. Check logs for accurate reporting of actions taken. 6. Attempt login with the admin credentials after each scenario to confirm correct behavior.
+
+# Subtasks:
+## 1. Read and Validate Admin Credentials from Environment Variables [done]
+### Dependencies: None
+### Description: Implement logic to read admin username, password, and email from environment variables at backend startup. Validate that all required variables are present and handle missing or invalid values gracefully.
+### Details:
+Ensure the application checks for the presence of ADMIN_USERNAME, ADMIN_PASSWORD, and ADMIN_EMAIL environment variables. If any are missing, log an error and prevent further admin user provisioning steps.
+
+## 2. Provision or Update Default Admin User in Database [done]
+### Dependencies: 25.1
+### Description: On application startup, check if a user with the specified admin username or email exists. If not, create the admin user with the provided credentials and assign admin privileges. If the user exists, compare the stored password hash with the hash of the provided password; if they differ, update the password.
+### Details:
+Use secure password hashing and validation according to existing security standards. Ensure admin privileges are correctly assigned. Log whether the user was created, updated, or no action was needed.
+
+## 3. Implement Error Handling and Logging for Admin Provisioning [done]
+### Dependencies: 25.2
+### Description: Ensure all actions and errors during admin user provisioning are logged for traceability. Handle errors related to environment variables, password hashing, and database connectivity gracefully.
+### Details:
+Log each provisioning step: creation, update, or no action. Log and handle errors such as missing environment variables, failed password hashing, or database issues without crashing the application.
+

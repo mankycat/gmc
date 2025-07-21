@@ -1,0 +1,74 @@
+# Task ID: 43
+# Title: Backend - Server API 更新 (GPU 分配)
+# Status: done
+# Dependencies: None
+# Priority: medium
+# Description: 根據現有 Readme, backend/src/index.js, backend/src/repositories/serverRepository.js, backend/src/services/serverService.js 的實作風格，更新 Server 相關的 API，以支援將 GpuCardInstance 分配給 Server 或從 Server 移除。
+# Details:
+需要實作以下 API：
+
+1.  **POST /api/servers/{serverId}/assign-gpu**
+    *   功能：將一個 GpuCardInstance 分配給指定的 Server。
+    *   Request Body: 包含要分配的 GpuCardInstance ID。
+    *   Response: 分配成功的 Server 物件或錯誤訊息。
+    *   需檢查 Server 和 GpuCardInstance 是否存在，以及 GpuCardInstance 是否未被分配。
+
+2.  **DELETE /api/servers/{serverId}/unassign-gpu/{gpuInstanceId}**
+    *   功能：從指定的 Server 移除一個已分配的 GpuCardInstance。
+    *   Response: 移除成功的 Server 物件或錯誤訊息。
+    *   需檢查 Server 和 GpuCardInstance 是否存在，以及 GpuCardInstance 是否確實分配給該 Server。
+
+實作時請參考現有程式碼（如 Server 相關的 Repository 和 Service）的結構和錯誤處理方式。
+
+# Test Strategy:
+針對新實作的 API 撰寫單元測試和整合測試，確保分配和移除功能正確，並涵蓋各種邊界情況（如 Server 或 GPU 不存在、GPU 已被分配等）。
+
+# Subtasks:
+## 1. Implement Repository Methods for GPU Assignment [done]
+### Dependencies: None
+### Description: Add or update repository methods to handle the database operations required for assigning and unassigning GpuCardInstances to Servers. This likely involves updating a foreign key on the GpuCardInstance table or managing a linking table.
+### Details:
+Modify `backend/src/repositories/serverRepository.js` or create a new repository if appropriate. Implement methods like `updateGpuInstanceServerId(gpuInstanceId, serverId)` to link a GPU to a server, and `clearGpuInstanceServerId(gpuInstanceId)` to unlink it. Ensure these methods handle potential database errors.
+
+## 2. Implement Service Logic for Assigning GPU [done]
+### Dependencies: 43.1
+### Description: Create the business logic in the service layer for assigning a GpuCardInstance to a Server, including necessary validation checks.
+### Details:
+Add a method `assignGpuToServer(serverId, gpuInstanceId)` to `backend/src/services/serverService.js`. Inside this method:
+1. Validate that the Server with `serverId` exists.
+2. Validate that the GpuCardInstance with `gpuInstanceId` exists.
+3. Validate that the GpuCardInstance is currently *not* assigned to any server.
+4. If all validations pass, call the repository method (implemented in subtask 1) to link the GPU to the server.
+5. Return the updated Server object or throw specific errors (e.g., NotFoundError, ConflictError).
+
+## 3. Implement Service Logic for Unassigning GPU [done]
+### Dependencies: 43.1
+### Description: Create the business logic in the service layer for unassigning a GpuCardInstance from a Server, including necessary validation checks.
+### Details:
+Add a method `unassignGpuFromServer(serverId, gpuInstanceId)` to `backend/src/services/serverService.js`. Inside this method:
+1. Validate that the Server with `serverId` exists.
+2. Validate that the GpuCardInstance with `gpuInstanceId` exists.
+3. Validate that the GpuCardInstance is currently assigned to the *specified* server (`serverId`).
+4. If all validations pass, call the repository method (implemented in subtask 1) to unlink the GPU from the server.
+5. Return the updated Server object or throw specific errors (e.g., NotFoundError, ConflictError).
+
+## 4. Implement Controller and Route for POST /api/servers/{serverId}/assign-gpu [done]
+### Dependencies: 43.2
+### Description: Define the API endpoint and controller function to handle requests for assigning a GPU to a server.
+### Details:
+Define the route `POST /api/servers/:serverId/assign-gpu` in `backend/src/index.js` or the appropriate router file. Create a corresponding controller function. This function should:
+1. Extract `serverId` from path parameters and `gpuInstanceId` from the request body.
+2. Call the `serverService.assignGpuToServer` method (implemented in subtask 2) with the extracted IDs.
+3. Handle potential errors thrown by the service and return appropriate HTTP responses (e.g., 200/201 for success, 400 for bad request/validation, 404 for not found, 409 for conflict).
+4. Return the service result in the response body.
+
+## 5. Implement Controller and Route for DELETE /api/servers/{serverId}/unassign-gpu/{gpuInstanceId} [done]
+### Dependencies: 43.3
+### Description: Define the API endpoint and controller function to handle requests for unassigning a GPU from a server.
+### Details:
+Define the route `DELETE /api/servers/:serverId/unassign-gpu/:gpuInstanceId` in `backend/src/index.js` or the appropriate router file. Create a corresponding controller function. This function should:
+1. Extract `serverId` and `gpuInstanceId` from path parameters.
+2. Call the `serverService.unassignGpuFromServer` method (implemented in subtask 3) with the extracted IDs.
+3. Handle potential errors thrown by the service and return appropriate HTTP responses (e.g., 200 for success, 400 for validation, 404 for not found, 409 for conflict).
+4. Return the service result in the response body.
+

@@ -1,0 +1,76 @@
+# Task ID: 28
+# Title: Backend: Implement Server CRUD Services
+# Status: done
+# Dependencies: None
+# Priority: medium
+# Description: Implement the necessary backend services to support Create, Read, Update, and Delete operations for server entities.
+# Details:
+This task involves developing the backend API endpoints and corresponding service logic for managing server resources. Define the data model for a 'Server' entity, including properties like name, IP address, status, etc. Implement the following RESTful endpoints:
+- `POST /servers`: Create a new server.
+- `GET /servers`: Retrieve a list of all servers.
+- `GET /servers/{id}`: Retrieve a specific server by its ID.
+- `PUT /servers/{id}`: Update an existing server by its ID.
+- `DELETE /servers/{id}`: Delete a server by its ID.
+Ensure proper input validation for creation and update operations. Implement appropriate error handling for cases like invalid input, server not found, or database errors. Consider using a database ORM or query builder for data persistence. Secure the endpoints as per the project's authentication/authorization strategy.
+
+# Test Strategy:
+Develop comprehensive tests to verify the CRUD functionality. This includes:
+- Unit tests for the service layer logic, ensuring correct data manipulation and validation.
+- Integration tests for the API endpoints, verifying that requests are correctly routed, processed, and persisted.
+- Test cases for creating a server (valid and invalid data).
+- Test cases for retrieving all servers (empty list, non-empty list).
+- Test cases for retrieving a specific server (existing ID, non-existing ID).
+- Test cases for updating a server (existing ID with valid data, existing ID with invalid data, non-existing ID).
+- Test cases for deleting a server (existing ID, non-existing ID).
+- Test error handling scenarios, such as invalid input formats or attempts to access/modify non-existent resources.
+- Verify that endpoints are protected by authentication/authorization if required.
+
+# Subtasks:
+## 1. Define Server Data Model and Persistence Layer [done]
+### Dependencies: None
+### Description: Define the data model for the 'Server' entity, including properties like name, IP address, status, etc. Set up the necessary database schema or model definition and configure the ORM or database access layer for this entity.
+### Details:
+Create the Server model class/schema with appropriate data types and constraints. Configure the ORM (e.g., Entity Framework, SQLAlchemy, Mongoose) to map the model to the database. Implement basic repository or DAO functions for interacting with the Server data.
+
+## 2. Implement Create Server (POST) Endpoint [done]
+### Dependencies: 28.1
+### Description: Implement the `POST /servers` API endpoint and the corresponding service logic to handle the creation of a new server entity in the database.
+### Details:
+Define the API route for POST /servers. Implement the controller/handler function to receive the request body. Add input validation for required fields (e.g., name, IP address). Call the persistence layer function (from subtask 1) to save the new server. Return a success response (e.g., 201 Created) with the newly created server data, or a validation error (e.g., 400 Bad Request).
+
+## 3. Implement Read Servers (GET) Endpoints [done]
+### Dependencies: 28.1
+### Description: Implement the `GET /servers` and `GET /servers/{id}` API endpoints and their corresponding service logic to retrieve server entities from the database.
+### Details:
+Define the API routes for GET /servers (list all) and GET /servers/{id} (get by ID). Implement controller/handler functions. Call the persistence layer functions (from subtask 1) to fetch all servers or a specific server by ID. Return a success response (e.g., 200 OK) with the server data. Implement error handling for 'server not found' (e.g., 404 Not Found) for the GET by ID endpoint.
+
+## 4. Implement Update Server (PUT) Endpoint [done]
+### Dependencies: 28.1, 28.3
+### Description: Implement the `PUT /servers/{id}` API endpoint and the corresponding service logic to handle updating an existing server entity in the database.
+### Details:
+Define the API route for PUT /servers/{id}. Implement the controller/handler function. Add input validation for update fields. Call the persistence layer function (from subtask 1, potentially reusing find logic from subtask 3) to find the server by ID. If found, update its properties based on the request body and save the changes. Handle 'server not found' (404) and validation errors (400). Return a success response (e.g., 200 OK) with the updated server data.
+
+## 5. Implement Delete Server (DELETE) Endpoint [done]
+### Dependencies: 28.1, 28.3
+### Description: Implement the `DELETE /servers/{id}` API endpoint and the corresponding service logic to handle the deletion of a server entity from the database.
+### Details:
+Define the API route for DELETE /servers/{id}. Implement the controller/handler function. Call the persistence layer function (from subtask 1, potentially reusing find logic from subtask 3) to find the server by ID. If found, delete the server from the database. Handle 'server not found' (404). Return an appropriate success response (e.g., 204 No Content or 200 OK).
+
+## 6. Add Logging for Server Creation Troubleshooting [done]
+### Dependencies: None
+### Description: Add appropriate logging to troubleshoot the issue of not being able to add a server record to the database.
+### Details:
+Implement logging at key points in the server creation process, including validation, service layer, and repository layer. Capture relevant information such as input data, validation errors, and database operation outcomes.
+
+## 7. Investigate and Fix 401 Unauthorized Error on Server Creation [done]
+### Dependencies: None
+### Description: Investigate why the POST /api/servers request is returning a 401 Unauthorized error and implement the necessary fixes.
+### Details:
+Review backend authentication middleware and frontend API call to identify the cause of the 401 error. Ensure proper token handling and inclusion in the request headers.
+
+## 8. Fix Backend Server Creation to Generate ID Before Insertion [done]
+### Dependencies: None
+### Description: Investigate and fix the issue where the backend is not generating an ID for the server record before inserting it into the database.
+### Details:
+Review the server creation logic in the backend service and repository layers to ensure that a valid ID is generated for new server records.
+

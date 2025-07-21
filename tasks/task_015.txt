@@ -1,0 +1,37 @@
+# Task ID: 15
+# Title: Backend: Implement Virtual Machine (VM) Model and CRUD APIs
+# Status: done
+# Dependencies: 2, 5, 13
+# Priority: medium
+# Description: Design and implement VirtualMachine data model and backend RESTful APIs for CRUD operations.
+# Details:
+
+
+# Test Strategy:
+
+
+# Subtasks:
+## 1. Define VirtualMachine Data Model [done]
+### Dependencies: None
+### Description: Define the data model structure for Virtual Machines, including necessary fields, data types, constraints, and relationships within the chosen ORM/database schema.
+### Details:
+Identify core VM attributes (e.g., name, status, IP address, OS, CPU cores, RAM size, storage size, creation timestamp, etc.). Define the model using the project's ORM (e.g., SQLAlchemy, Django ORM, Hibernate, etc.). Specify primary keys, unique constraints (e.g., name), data types, and any necessary indices. Create migration scripts if applicable.
+
+## 2. Implement VirtualMachine Repository/Data Access Layer [done]
+### Dependencies: 15.1
+### Description: Implement the data access methods (repository) for the VirtualMachine model to perform basic CRUD operations directly against the database.
+### Details:
+Create a repository class or module responsible for database interactions. Implement methods for: `create(vm_data)`, `get_by_id(vm_id)`, `get_all()`, `update(vm_id, vm_data)`, `delete(vm_id)`. Use the ORM defined in Subtask 1. Handle potential database errors (e.g., not found, integrity errors).
+
+## 3. Implement VirtualMachine Service/Business Logic Layer [done]
+### Dependencies: 15.2
+### Description: Implement a service layer that encapsulates the business logic for Virtual Machine operations, utilizing the repository implemented in Subtask 2.
+### Details:
+Create a service class or module that orchestrates operations using the repository. Implement methods like `create_vm(data)`, `get_vm(vm_id)`, `list_vms()`, `update_vm(vm_id, data)`, `delete_vm(vm_id)`. Add business logic such as input validation, status transitions, or checks before calling repository methods. Handle exceptions from the repository and translate them into appropriate service-level errors.
+
+## 4. Implement VirtualMachine REST API Endpoints [done]
+### Dependencies: 15.3
+### Description: Implement the RESTful API endpoints for Virtual Machine CRUD operations, exposing the service layer functionality.
+### Details:
+Define API routes (e.g., `/api/v1/vms`). Implement handlers for HTTP methods: POST (create), GET (list and get by ID), PUT/PATCH (update), DELETE (delete). Parse incoming request bodies and query parameters. Call the appropriate methods in the VirtualMachine service (Subtask 3). Format responses according to REST principles (e.g., JSON), including success data and error messages with appropriate HTTP status codes (e.g., 200, 201, 400, 404, 500).
+

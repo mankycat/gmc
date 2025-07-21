@@ -1,0 +1,11 @@
+# Task ID: 4
+# Title: Backend: Handle User Creation and Session on Google Callback
+# Status: done
+# Dependencies: 2, 3
+# Priority: high
+# Description: Implement backend logic to process Google OAuth callback data.
+# Details:
+
+
+# Test Strategy:
+

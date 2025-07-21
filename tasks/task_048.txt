@@ -1,0 +1,93 @@
+# Task ID: 48
+# Title: Update Virtual Machine CRUD after GPU Card Implementation
+# Status: done
+# Dependencies: None
+# Priority: medium
+# Description: Update Virtual Machine CRUD operations to include GPU Card related fields and functionality by implementing a new 'CardUsage' entity and integrating its management into the existing VM workflows.
+# Details:
+Implement a new database table 'CardUsage' to track GPU card assignments and usage within Virtual Machines. The table schema should include:
+- id (Primary Key)
+- cardIndex (Integer)
+- cardUuid (String)
+- usage (e.g., percentage, String/Enum)
+- virtualMachineId (Foreign Key referencing VirtualMachine.id)
+
+Implement backend components (Repository, Service, Controller) for the 'CardUsage' entity. Provide API endpoints for CRUD operations on 'CardUsage'.
+
+On the frontend, integrate the management of 'CardUsage' into the existing Virtual Machine Add, Edit, and View pages. Display assigned GPU cards and their usage details as a sub-table within the VM details. Allow adding, editing, and deleting 'CardUsage' entries directly from the VM edit page. Do not create a separate main menu item for 'CardUsage'.
+
+# Test Strategy:
+Test the creation, reading, updating, and deletion of 'CardUsage' entries via the new API endpoints.
+Test the integration of 'CardUsage' management within the Virtual Machine Add/Edit/View pages. Verify that 'CardUsage' data is correctly displayed as a sub-table.
+Test adding, editing, and deleting 'CardUsage' entries from the VM edit page.
+Verify that the foreign key constraint between 'CardUsage' and 'VirtualMachine' is correctly enforced.
+Ensure that deleting a Virtual Machine correctly handles associated 'CardUsage' entries (e.g., cascade delete or appropriate handling).
+Perform integration tests to ensure backend and frontend components interact correctly.
+
+# Subtasks:
+## 1. Design and create 'CardUsage' database table schema. Include fields: id (PK), cardIndex, cardUuid, usage, virtualMachineId (FK to VirtualMachine.id) [done]
+### Dependencies: None
+### Description: 
+### Details:
+
+
+## 2. Implement backend Repository for 'CardUsage' entity. Create methods for CRUD operations. [done]
+### Dependencies: None
+### Description: 
+### Details:
+
+
+## 3. Implement backend Service for 'CardUsage' business logic. Utilize the repository for data access. [done]
+### Dependencies: None
+### Description: 
+### Details:
+
+
+## 4. Implement backend Controller for 'CardUsage' API endpoints. Define routes for CRUD operations. [done]
+### Dependencies: None
+### Description: 
+### Details:
+
+
+## 5. Define and implement API endpoints for 'CardUsage' CRUD operations. [done]
+### Dependencies: None
+### Description: 
+### Details:
+
+
+## 6. Update backend Virtual Machine service/controller to handle 'CardUsage' relationships (e.g., fetching VM with associated cards). [done]
+### Dependencies: None
+### Description: 
+### Details:
+
+
+## 7. Integrate 'CardUsage' display as a sub-table in the Frontend VM View page. [done]
+### Dependencies: None
+### Description: 
+### Details:
+
+
+## 8. Integrate 'CardUsage' management (Add/Edit/Delete) into the Frontend VM Edit page. [done]
+### Dependencies: None
+### Description: 
+### Details:
+
+
+## 9. Update Frontend VM Add page to potentially include initial 'CardUsage' assignment. [done]
+### Dependencies: None
+### Description: 
+### Details:
+
+
+## 10. Implement frontend components for the 'CardUsage' sub-table and CRUD forms. [done]
+### Dependencies: None
+### Description: 
+### Details:
+
+
+## 11. Update API & Project Readme document [done]
+### Dependencies: None
+### Description: Review current project Readme document & backend API document and Task 48 (including subtasks), then update relevant documents.
+### Details:
+
+

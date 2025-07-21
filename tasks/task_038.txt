@@ -1,0 +1,11 @@
+# Task ID: 38
+# Title: DB Schema 調整 - 更新 VirtualMachine Model
+# Status: done
+# Dependencies: None
+# Priority: medium
+# Description: 調整 VirtualMachine Model，使其正確關聯到 GPU 卡實例。修改 assignedGpuCardId 欄位，使其正確指向 GpuCardInstance.id。更新關聯 assignedGpuCard 為 assignedGpuInstance 指向 GpuCardInstance?。產出: 更新後的 prisma/schema.prisma 文件片段。
+# Details:
+
+
+# Test Strategy:
+

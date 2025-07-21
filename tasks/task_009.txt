@@ -1,0 +1,37 @@
+# Task ID: 9
+# Title: Backend: Implement Admin User Management APIs
+# Status: done
+# Dependencies: 4
+# Priority: medium
+# Description: Implement backend APIs for Admin user management.
+# Details:
+
+
+# Test Strategy:
+
+
+# Subtasks:
+## 1. Implement List and Get Admin User APIs [done]
+### Dependencies: None
+### Description: Implement backend API endpoints and logic for listing all admin users and retrieving details for a specific admin user by ID.
+### Details:
+Define API routes (e.g., GET /admin/users, GET /admin/users/{id}). Implement service layer methods to fetch user data from the database. Handle pagination, filtering, and sorting for the list endpoint. Implement error handling for user not found.
+
+## 2. Implement Create Admin User API [done]
+### Dependencies: 9.1
+### Description: Implement backend API endpoint and logic for creating a new admin user.
+### Details:
+Define API route (e.g., POST /admin/users). Implement service layer method to validate input data (e.g., email format, password policy), hash password, and save the new user to the database. Handle potential conflicts (e.g., duplicate email).
+
+## 3. Implement Update Admin User API [done]
+### Dependencies: 9.2
+### Description: Implement backend API endpoint and logic for updating an existing admin user's details.
+### Details:
+Define API route (e.g., PUT /admin/users/{id}). Implement service layer method to fetch the existing user, validate update data, apply changes, and save to the database. Handle partial updates and permissions. Ensure sensitive fields like password require specific handling.
+
+## 4. Implement Delete Admin User API [done]
+### Dependencies: 9.3
+### Description: Implement backend API endpoint and logic for deleting an admin user.
+### Details:
+Define API route (e.g., DELETE /admin/users/{id}). Implement service layer method to soft-delete or hard-delete the user from the database. Implement checks to prevent deleting the last admin user or the currently logged-in user if applicable.
+

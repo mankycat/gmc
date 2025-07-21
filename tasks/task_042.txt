@@ -1,0 +1,88 @@
+# Task ID: 42
+# Title: Backend - GpuCardInstance CRUD API
+# Status: done
+# Dependencies: None
+# Priority: medium
+# Description: 實作 GpuCardInstance (GPU 庫存實例) 的後端 CRUD API。API 端點用於列表、創建、讀取、更新、刪除 GPU 庫存實例，包括更新其狀態和所在伺服器。實作前請 review & 參考 Readme, backend/src/index.js, backend/src/repositories/serverRepository.js, backend/src/services/serverService.js 的實作方式。
+# Details:
+根據 Readme 和現有的 Server 相關實作 (repository, service, index.js) 的模式，實作 GpuCardInstance 的後端 CRUD API。
+
+API 應包含以下功能：
+- 列表所有 GpuCardInstance
+- 創建新的 GpuCardInstance
+- 讀取單個 GpuCardInstance 的詳細信息
+- 更新單個 GpuCardInstance 的信息 (包括狀態和關聯的伺服器)
+- 刪除單個 GpuCardInstance
+
+# Test Strategy:
+1. 單元測試：
+   - 測試 Repository 層的各個方法 (create, find, findById, update, delete)。
+   - 測試 Service 層的業務邏輯，確保正確調用 Repository 方法並處理數據。
+2. 整合測試：
+   - 測試 API 端點，使用測試客戶端發送 HTTP 請求 (GET, POST, PUT, DELETE)，驗證響應狀態碼和數據是否正確。
+   - 測試創建、讀取、更新 (特別是狀態和伺服器字段)、刪除的完整流程。
+   - 驗證數據庫中的數據是否與 API 操作一致。
+3. 手動測試：
+   - 使用 API 開發工具 (如 Postman) 手動測試各個 API 端點。
+
+# Subtasks:
+## 42-1. undefined [done]
+### Dependencies: None
+### Description: Review Readme 和現有的 Server 相關實作 (repository, service, index.js)
+### Details:
+
+
+## 42-2. undefined [done]
+### Dependencies: None
+### Description: 設計 GpuCardInstance 的資料模型和資料庫操作 (Repository 層)
+### Details:
+
+
+## 42-3. undefined [done]
+### Dependencies: None
+### Description: 實作 GpuCardInstance 的資料庫操作方法 (Repository 層)
+### Details:
+
+
+## 42-4. undefined [done]
+### Dependencies: None
+### Description: 實作 GpuCardInstance 的業務邏輯 (Service 層)
+### Details:
+
+
+## 42-5. undefined [done]
+### Dependencies: None
+### Description: 實作 GpuCardInstance 的 API 控制器 (Controller 層)
+### Details:
+
+
+## 42-6. undefined [done]
+### Dependencies: None
+### Description: 定義 GpuCardInstance 的 API 路由並連接到 Controller
+### Details:
+
+
+## 42-7. undefined [done]
+### Dependencies: None
+### Description: 編寫 GpuCardInstance Repository 的單元測試
+### Details:
+
+
+## 42-8. undefined [done]
+### Dependencies: None
+### Description: 編寫 GpuCardInstance Service 的單元測試
+### Details:
+
+
+## 42-9. undefined [done]
+### Dependencies: None
+### Description: 編寫 GpuCardInstance API 的整合測試
+### Details:
+
+
+## 42-10. undefined [done]
+### Dependencies: None
+### Description: 手動測試所有 GpuCardInstance API 端點
+### Details:
+
+

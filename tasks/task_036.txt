@@ -1,0 +1,11 @@
+# Task ID: 36
+# Title: DB Schema 設計 - GpuCardInstance (GPU 庫存實例)
+# Status: done
+# Dependencies: None
+# Priority: medium
+# Description: 設計新的 GpuCardInstance Model，用於追蹤每一張實際的 GPU 卡。包含欄位：id (PK), gpuCardModelId (FK to GpuCardModel.id), serialNumber (String, Optional, Unique), status (String, e.g., "available", "in_server", "in_use_by_vm", "maintenance", "defective"), purchaseDate (DateTime, Optional), notes (String, Optional), serverId (String, FK to Server.id, Optional, 表示當前安裝在哪台伺服器)。產出: 更新後的 prisma/schema.prisma 文件片段。
+# Details:
+
+
+# Test Strategy:
+

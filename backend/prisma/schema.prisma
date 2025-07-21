@@ -1,0 +1,91 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["interactiveTransactions"]
+}
+
+model User {
+  id       String   @id @default(cuid())
+  email    String   @unique
+  password String
+  isAdmin  Boolean @default(false)
+  status   String   @default("pending_approval")
+
+  servers   Server[]
+  virtualMachines VirtualMachine[]
+}
+
+model Server {
+  id        String   @id @default(cuid())
+  nameLabel String
+  ipAddress String   @unique
+  cpuModel  String
+  cpuCores  Int
+  memoryGb  Int
+  diskSpec  String
+  os        String
+  purpose   String?
+
+  userId String @map("userId")
+  user   User   @relation(fields: [userId], references: [id])
+
+  gpuCardInstances GpuCardInstance[]
+  virtualMachines VirtualMachine[]
+}
+
+
+model VirtualMachine {
+  id                String   @id @default(cuid())
+  nameLabel         String   @unique
+  vcpuCoresAssigned Int
+  ramGbAssigned     Int
+  gpuResourceSlice  String?
+  purpose           String?
+  internalIpAddress String   @unique
+  notes             String?
+
+  hostServerId String @map("hostServerId")
+  hostServer   Server   @relation(fields: [hostServerId], references: [id])
+
+  userId String @map("userId")
+  user   User   @relation(fields: [userId], references: [id])
+
+  cardUsages CardUsage[]
+}
+
+model GpuCardModel {
+  id String @id @default(cuid())
+  vendor String
+  modelName String
+  architecture String?
+  memoryGb Int
+  totalAcquiredStock Int @default(0)
+
+  @@unique([vendor, modelName])
+  gpuCardInstances GpuCardInstance[]
+}
+
+model GpuCardInstance {
+  id String @id @default(cuid())
+  count Int
+  gpuCardModelId String @map("gpuCardModelId")
+  gpuCardModel GpuCardModel @relation(fields: [gpuCardModelId], references: [id])
+  serverId String @map("serverId")
+  server Server @relation(fields: [serverId], references: [id])
+}
+
+model CardUsage {
+  id String @id @default(cuid())
+  cardIndex Int
+  cardUuid String
+  usage String?
+
+  virtualMachineId String @map("virtualMachineId")
+  virtualMachine VirtualMachine @relation(fields: [virtualMachineId], references: [id])
+
+  @@index([virtualMachineId])
+}

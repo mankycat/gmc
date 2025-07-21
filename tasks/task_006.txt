@@ -1,0 +1,43 @@
+# Task ID: 6
+# Title: Frontend: Setup Project, Routing, and Basic Auth Integration
+# Status: done
+# Dependencies: 1, 3, 4
+# Priority: high
+# Description: Set up frontend project and integrate with backend authentication endpoints.
+# Details:
+
+
+# Test Strategy:
+
+
+# Subtasks:
+## 1. Initialize Frontend Project with Modern UI Framework [done]
+### Dependencies: None
+### Description: Set up a new React project using a tool like Create React App or Vite, and integrate a modern UI framework such as Material-UI or React Bootstrap for styling.
+### Details:
+Ensure the project structure follows best practices for scalability and maintainability, including a clear folder layout for components, pages, and assets.
+
+## 2. Implement Project Routing Structure [done]
+### Dependencies: 6.1
+### Description: Configure client-side routing to support multiple pages within the Admin Portal, such as Dashboard, Users, and Settings.
+### Details:
+Use React Router or an equivalent library to define routes and navigation between pages. Organize routes in a dedicated folder or file for maintainability.
+
+## 3. Design Common Admin Portal Layout [done]
+### Dependencies: 6.2
+### Description: Develop a reusable layout component featuring a sidebar navigation, topbar, and main content area, styled with the chosen UI framework.
+### Details:
+Ensure the layout is responsive and supports dynamic content rendering based on the current route.
+
+## 4. Integrate Google OAuth Authentication [done]
+### Dependencies: 6.1
+### Description: Implement authentication flow using Google OAuth, connecting the frontend to backend authentication endpoints.
+### Details:
+Use a library like react-oauth/google or similar to handle OAuth login, and securely store authentication tokens for session management.
+
+## 5. Protect Routes and Sync Auth State [done]
+### Dependencies: 6.2, 6.4
+### Description: Implement route guards and context/state management to restrict access to authenticated users and synchronize authentication state across the app.
+### Details:
+Use React Context or a state management library to manage user authentication state and enforce access control on protected routes.
+

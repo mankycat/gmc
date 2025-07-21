@@ -1,0 +1,11 @@
+# Task ID: 3
+# Title: Backend: Implement Google OAuth Initiation and Callback
+# Status: done
+# Dependencies: 1
+# Priority: high
+# Description: Implement backend endpoints for Google OAuth 2.0 flow.
+# Details:
+
+
+# Test Strategy:
+

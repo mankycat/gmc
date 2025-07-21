@@ -1,0 +1,31 @@
+# Task ID: 23
+# Title: Frontend: Implement Authentication Check Logic
+# Status: done
+# Dependencies: None
+# Priority: medium
+# Description: Implement robust authentication checking logic within the frontend application to protect routes and manage user sessions.
+# Details:
+Implement logic to check for a valid authentication token (e.g., JWT stored in local storage or cookies) on application load and before allowing access to protected routes. This involves setting up route guards or similar mechanisms in the frontend routing configuration. Ensure that users are redirected to a login page if they attempt to access protected content without a valid token. Handle token expiration by implementing refresh logic if applicable, or by redirecting the user to log in again. Integrate this check with API calls, potentially adding the token to request headers and handling 401 Unauthorized responses gracefully (e.g., redirecting to login). Update the application's state management to reflect the user's authentication status.
+
+# Test Strategy:
+1. Verify that accessing a protected route without logging in redirects the user to the login page. 2. Verify that accessing a public route works correctly without authentication. 3. Log in successfully and verify that protected routes are accessible. 4. Log out and verify that protected routes are no longer accessible and the user is redirected. 5. Manually tamper with or remove the authentication token (e.g., from local storage) while on a protected page and verify that subsequent actions or page loads redirect to login. 6. If token expiration is handled, simulate an expired token scenario and verify the expected behavior (e.g., token refresh or logout/redirect). 7. Test API calls from protected sections to ensure the token is included and that 401 responses are handled correctly (e.g., triggering a logout/redirect).
+
+# Subtasks:
+## 1. Implement Core Authentication State and Initial Check [done]
+### Dependencies: None
+### Description: Set up frontend state management to track authentication status and store the authentication token. Implement logic to check for an existing token (e.g., in local storage or cookies) when the application loads and update the state accordingly. This establishes the foundational `isAuthenticated` status.
+### Details:
+Choose a suitable state management solution (e.g., Redux, Vuex, Context API, Zustand, Pinia). Define the authentication state structure (e.g., `{ token: string | null, isAuthenticated: boolean, user: any | null }`). Implement an effect or lifecycle hook that runs on application initialization to read the token from storage. Based on the token's presence and validity (basic check), dispatch an action or update the state to reflect the user's authentication status.
+
+## 2. Implement Route Protection and Unauthenticated Redirection [done]
+### Dependencies: 23.1
+### Description: Configure the frontend router to protect specific routes based on the authentication status managed in Subtask 1. Implement route guards or navigation guards that check the `isAuthenticated` state before allowing navigation to protected routes. If a user is not authenticated and attempts to access a protected route, redirect them to the login page.
+### Details:
+Use the routing library's features (e.g., React Router's `<PrivateRoute>` component or hooks, Vue Router's `beforeEach` navigation guard, Angular's `CanActivate` guard). Access the authentication state from the state management store implemented in Subtask 1. For protected routes, if `isAuthenticated` is false, prevent navigation to the requested route and programmatically navigate the user to the login route (`/login`).
+
+## 3. Integrate Token with API Calls and Handle 401 Errors [done]
+### Dependencies: 23.2
+### Description: Implement logic to automatically include the authentication token in the headers of outgoing API requests. Set up global error handling (e.g., using HTTP interceptors) to detect 401 Unauthorized responses from the backend API. When a 401 is received, trigger a logout process: clear the token from storage and state (using logic potentially similar to initial check/logout flow established in Subtask 1 and leveraging redirection logic from Subtask 2), and redirect the user to the login page.
+### Details:
+Use an HTTP client library like Axios or configure the native `fetch` API with wrappers/interceptors. Implement a request interceptor to read the token from state/storage (from Subtask 1) and add it to the `Authorization: Bearer <token>` header for relevant API calls. Implement a response interceptor to check for a 401 status code. On receiving a 401, dispatch a logout action (clearing state and storage) and programmatically navigate to the login route (`/login`), potentially reusing navigation logic from Subtask 2.
+

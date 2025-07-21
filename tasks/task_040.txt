@@ -1,0 +1,11 @@
+# Task ID: 40
+# Title: 執行 Prisma Migrate
+# Status: done
+# Dependencies: None
+# Priority: medium
+# Description: 套用所有 Schema 變更到資料庫。運行 prisma migrate dev --name update_gpu_management_schema 命令來產生並應用資料庫遷移。解決遷移過程中可能出現的任何衝突。
+# Details:
+
+
+# Test Strategy:
+

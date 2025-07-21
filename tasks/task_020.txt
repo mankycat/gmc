@@ -1,0 +1,43 @@
+# Task ID: 20
+# Title: Implement Frontend Server CRUD Functionality
+# Status: done
+# Dependencies: None
+# Priority: high
+# Description: Implement frontend UI and logic for server management.
+# Details:
+
+
+# Test Strategy:
+
+
+# Subtasks:
+## 1. Setup Page Structure and Implement Server Listing [done]
+### Dependencies: None
+### Description: Create server management page and implement server listing.
+### Details:
+
+
+## 2. Implement Add Server Form and Logic [done]
+### Dependencies: 20.1
+### Description: Create form for adding new servers and implement logic.
+### Details:
+
+
+## 3. Implement Edit Server Form and Logic [done]
+### Dependencies: 20.1, 20.2
+### Description: Implement functionality to edit existing servers.
+### Details:
+
+
+## 4. Implement Delete Server Functionality [done]
+### Dependencies: 20.1
+### Description: Implement delete functionality for servers.
+### Details:
+
+
+## 5. Add Input Validation, Refine State Management, and UI Polish [done]
+### Dependencies: 20.2, 20.3, 20.4
+### Description: Implement input validation, refine state management, and polish UI.
+### Details:
+
+

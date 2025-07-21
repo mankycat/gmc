@@ -1,0 +1,43 @@
+# Task ID: 26
+# Title: Frontend: Optimize Login Page Layout
+# Status: done
+# Dependencies: None
+# Priority: medium
+# Description: Optimize the login page layout to center the form vertically and horizontally on the screen and improve the alignment of input fields and the submit button within the form.
+# Details:
+Refactor the CSS for the login page container and form elements. Use modern CSS techniques like Flexbox or Grid to center the form block both horizontally and vertically within the viewport. Ensure the form elements (input fields, labels, button) have consistent spacing and alignment. Pay attention to responsiveness, ensuring the layout remains clean and functional on various screen sizes (mobile, tablet, desktop). Consider adding appropriate padding and margins to improve visual hierarchy and readability. If using a UI framework, leverage its layout components and utility classes where appropriate.
+
+# Test Strategy:
+Manually test the login page layout across different screen resolutions and browser window sizes (desktop, tablet, mobile views). Verify that the login form is centered both horizontally and vertically in the viewport. Check that input fields, labels, and the submit button are properly aligned and have consistent spacing within the form. Use browser developer tools to inspect element positioning and styling. Ensure the layout does not break or become unusable on small screens.
+
+# Subtasks:
+## 1. Prepare Container for Centering [done]
+### Dependencies: None
+### Description: Identify or create the main container element that wraps the login form. Apply initial CSS properties to this container or its parent (e.g., body or a main wrapper div) to prepare it for Flexbox or Grid layout, which will be used for centering.
+### Details:
+Locate the HTML structure for the login page. Identify the element that directly contains the login form. Apply `display: flex;` or `display: grid;` to its parent container (e.g., `body` or a dedicated wrapper div) to enable layout control. Ensure the container takes up sufficient height (e.g., `min-height: 100vh;` on the body or wrapper).
+
+## 2. Implement Vertical and Horizontal Centering [done]
+### Dependencies: 26.1
+### Description: Apply CSS properties to the container prepared in Subtask 1 to center the login form block both vertically and horizontally within the viewport.
+### Details:
+Using the Flexbox or Grid container set up in Subtask 1, apply properties like `justify-content: center;` and `align-items: center;` (for Flexbox) or `place-items: center;` (for Grid) to center the child element (the login form container).
+
+## 3. Refactor Internal Form Element Layout [done]
+### Dependencies: 26.2
+### Description: Refactor the CSS for the elements *inside* the login form (labels, input fields, button) to use a modern layout approach like Flexbox or Grid to manage their flow and alignment.
+### Details:
+Apply `display: flex;` to the form element itself or a direct wrapper inside the form. Choose a `flex-direction` (likely `column`) to stack elements vertically. Use properties like `width: 100%;` on input fields and buttons to make them fill the available width within the form.
+
+## 4. Add Spacing and Refine Alignment within Form [done]
+### Dependencies: 26.3
+### Description: Apply appropriate padding, margins, and alignment properties to the internal form elements (labels, inputs, button) to ensure consistent spacing, visual hierarchy, and clean alignment.
+### Details:
+Add `margin-bottom` to labels and input fields for vertical spacing. Ensure consistent padding within input fields. Use `align-self: stretch;` or similar properties if needed to ensure elements like buttons or inputs span the full width. Add padding around the form content itself if necessary.
+
+## 5. Implement Responsiveness and Final Testing [done]
+### Dependencies: 26.4
+### Description: Add media queries or use responsive utility classes to ensure the centered layout and internal form styling adapt correctly to various screen sizes (mobile, tablet, desktop). Perform final testing across different devices or browser emulators.
+### Details:
+Review the layout on different screen widths. Add media queries to adjust margins, padding, or potentially the centering approach if needed for very small screens. Ensure the form doesn't become too wide on large screens (e.g., set a `max-width` on the form container). Test thoroughly on common device sizes.
+

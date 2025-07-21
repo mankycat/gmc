@@ -1,0 +1,46 @@
+# Task ID: 2
+# Title: Database Setup and Initial Schema Implementation
+# Status: done
+# Dependencies: 1
+# Priority: high
+# Description: Choose and set up the database system. Design and implement the initial database schema.
+# Details:
+
+
+# Test Strategy:
+
+
+# Subtasks:
+## 1. Choose Database System [done]
+### Dependencies: None
+### Description: Evaluate and decide on the database system.
+### Details:
+
+
+## 2. Install and Configure Database Server [done]
+### Dependencies: 2.1
+### Description: Install and configure PostgreSQL using Docker.
+### Details:
+Install Docker if you haven't already.
+Create a `docker-compose.yml` file in the project root with the necessary content.
+Run `docker-compose up -d` in the project root to start the PostgreSQL container.
+Verify the container is running and the database is accessible on `localhost:5432`.
+
+## 3. Design Initial Database Schema [done]
+### Dependencies: 2.2
+### Description: Design the structure for the User and Server tables.
+### Details:
+
+
+## 4. Write Schema Implementation Scripts [done]
+### Dependencies: 2.3
+### Description: Create SQL scripts or database migration files.
+### Details:
+
+
+## 5. Implement Initial Schema [done]
+### Dependencies: 2.4
+### Description: Execute the prepared SQL scripts or migration files.
+### Details:
+
+

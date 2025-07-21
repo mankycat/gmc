@@ -1,0 +1,2134 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Setup Project Structure and Repositories",
+      "description": "Set up project structure for backend API server and frontend console UI.",
+      "details": "",
+      "testStrategy": "",
+      "priority": "high",
+      "dependencies": [],
+      "status": "done",
+      "subtasks": []
+    },
+    {
+      "id": 2,
+      "title": "Database Setup and Initial Schema Implementation",
+      "description": "Choose and set up the database system. Design and implement the initial database schema.",
+      "details": "",
+      "testStrategy": "",
+      "priority": "high",
+      "dependencies": [
+        1
+      ],
+      "status": "done",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Choose Database System",
+          "description": "Evaluate and decide on the database system.",
+          "dependencies": [],
+          "details": "",
+          "status": "done",
+          "testStrategy": ""
+        },
+        {
+          "id": 2,
+          "title": "Install and Configure Database Server",
+          "description": "Install and configure PostgreSQL using Docker.",
+          "dependencies": [
+            1
+          ],
+          "details": "Install Docker if you haven't already.\nCreate a `docker-compose.yml` file in the project root with the necessary content.\nRun `docker-compose up -d` in the project root to start the PostgreSQL container.\nVerify the container is running and the database is accessible on `localhost:5432`.",
+          "status": "done",
+          "testStrategy": ""
+        },
+        {
+          "id": 3,
+          "title": "Design Initial Database Schema",
+          "description": "Design the structure for the User and Server tables.",
+          "dependencies": [
+            2
+          ],
+          "details": "",
+          "status": "done",
+          "testStrategy": ""
+        },
+        {
+          "id": 4,
+          "title": "Write Schema Implementation Scripts",
+          "description": "Create SQL scripts or database migration files.",
+          "dependencies": [
+            3
+          ],
+          "details": "",
+          "status": "done",
+          "testStrategy": ""
+        },
+        {
+          "id": 5,
+          "title": "Implement Initial Schema",
+          "description": "Execute the prepared SQL scripts or migration files.",
+          "dependencies": [
+            4
+          ],
+          "details": "",
+          "status": "done",
+          "testStrategy": ""
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Backend: Implement Google OAuth Initiation and Callback",
+      "description": "Implement backend endpoints for Google OAuth 2.0 flow.",
+      "details": "",
+      "testStrategy": "",
+      "priority": "high",
+      "dependencies": [
+        1
+      ],
+      "status": "done",
+      "subtasks": []
+    },
+    {
+      "id": 4,
+      "title": "Backend: Handle User Creation and Session on Google Callback",
+      "description": "Implement backend logic to process Google OAuth callback data.",
+      "details": "",
+      "testStrategy": "",
+      "priority": "high",
+      "dependencies": [
+        2,
+        3
+      ],
+      "status": "done",
+      "subtasks": []
+    },
+    {
+      "id": 5,
+      "title": "Backend: Implement Server (MVP) CRUD APIs",
+      "description": "Implement backend RESTful APIs for Server model CRUD operations.",
+      "details": "",
+      "testStrategy": "",
+      "priority": "high",
+      "dependencies": [
+        2
+      ],
+      "status": "done",
+      "subtasks": []
+    },
+    {
+      "id": 6,
+      "title": "Frontend: Setup Project, Routing, and Basic Auth Integration",
+      "description": "Set up frontend project and integrate with backend authentication endpoints.",
+      "details": "",
+      "testStrategy": "",
+      "priority": "high",
+      "dependencies": [
+        1,
+        3,
+        4
+      ],
+      "status": "done",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Initialize Frontend Project with Modern UI Framework",
+          "description": "Set up a new React project using a tool like Create React App or Vite, and integrate a modern UI framework such as Material-UI or React Bootstrap for styling.",
+          "dependencies": [],
+          "details": "Ensure the project structure follows best practices for scalability and maintainability, including a clear folder layout for components, pages, and assets.",
+          "status": "done",
+          "testStrategy": "Verify the project builds and runs successfully with the UI framework components rendering correctly."
+        },
+        {
+          "id": 2,
+          "title": "Implement Project Routing Structure",
+          "description": "Configure client-side routing to support multiple pages within the Admin Portal, such as Dashboard, Users, and Settings.",
+          "dependencies": [
+            1
+          ],
+          "details": "Use React Router or an equivalent library to define routes and navigation between pages. Organize routes in a dedicated folder or file for maintainability.",
+          "status": "done",
+          "testStrategy": "Test navigation between all defined routes and ensure the correct components render for each path."
+        },
+        {
+          "id": 3,
+          "title": "Design Common Admin Portal Layout",
+          "description": "Develop a reusable layout component featuring a sidebar navigation, topbar, and main content area, styled with the chosen UI framework.",
+          "dependencies": [
+            2
+          ],
+          "details": "Ensure the layout is responsive and supports dynamic content rendering based on the current route.",
+          "status": "done",
+          "testStrategy": "Check layout consistency across all pages and verify sidebar and topbar navigation functionality."
+        },
+        {
+          "id": 4,
+          "title": "Integrate Google OAuth Authentication",
+          "description": "Implement authentication flow using Google OAuth, connecting the frontend to backend authentication endpoints.",
+          "dependencies": [
+            1
+          ],
+          "details": "Use a library like react-oauth/google or similar to handle OAuth login, and securely store authentication tokens for session management.",
+          "status": "done",
+          "testStrategy": "Test login and logout flows, ensuring only authenticated users can access protected routes."
+        },
+        {
+          "id": 5,
+          "title": "Protect Routes and Sync Auth State",
+          "description": "Implement route guards and context/state management to restrict access to authenticated users and synchronize authentication state across the app.",
+          "dependencies": [
+            2,
+            4
+          ],
+          "details": "Use React Context or a state management library to manage user authentication state and enforce access control on protected routes.",
+          "status": "done",
+          "testStrategy": "Attempt to access protected routes without authentication and verify redirection to login; confirm authenticated users retain access after refresh."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Frontend: Build Server List UI",
+      "description": "Develop frontend UI components for displaying a list of servers.",
+      "details": "",
+      "testStrategy": "",
+      "priority": "high",
+      "dependencies": [
+        5,
+        6
+      ],
+      "status": "done",
+      "subtasks": []
+    },
+    {
+      "id": 8,
+      "title": "Frontend: Build Server Add/Edit Form UI",
+      "description": "Develop frontend UI components for adding and editing server information.",
+      "details": "",
+      "testStrategy": "",
+      "priority": "high",
+      "dependencies": [
+        5,
+        7
+      ],
+      "status": "done",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Implement Basic Server Form Structure",
+          "description": "Create the core HTML/JSX structure for the server add/edit form component. Include input fields for essential server properties like name, IP address, status, and any other relevant fields. Add placeholder buttons for submit and cancel actions.",
+          "dependencies": [],
+          "details": "Use standard form elements (input, select, textarea, etc.). Define the basic component structure using the chosen frontend framework (e.g., React functional component, Vue component). Focus only on the structure, not state or styling yet.",
+          "status": "done",
+          "testStrategy": "Render the component in a test environment or browser and visually verify that all required input fields and buttons are present and correctly labeled."
+        },
+        {
+          "id": 2,
+          "title": "Implement Form State Management and Basic Validation",
+          "description": "Add state management to the form component to track the values entered into each input field. Implement basic client-side validation rules, such as marking required fields and validating the format of specific inputs (e.g., IP address). Display simple validation error messages next to the relevant fields.",
+          "dependencies": [
+            1
+          ],
+          "details": "Use framework-specific state hooks or data properties to manage form input values. Implement validation logic either on input change (`onChange`, `v-model`) or on form submission attempt. Display validation errors conditionally based on the validation state.",
+          "status": "done",
+          "testStrategy": "Test submitting the form with empty required fields and invalid data formats (e.g., non-IP string in IP field) to ensure validation errors are displayed correctly. Test entering valid data to ensure state updates correctly."
+        },
+        {
+          "id": 3,
+          "title": "Implement Edit Mode Data Loading",
+          "description": "Modify the form component to support an 'edit' mode. This involves accepting existing server data as input (e.g., via props) and pre-populating the form fields with this data when the component is used for editing an existing server.",
+          "dependencies": [
+            2
+          ],
+          "details": "Add logic to detect if the component is in edit mode (e.g., based on a prop indicating an existing server ID or data object). If in edit mode, initialize the form's state with the provided server data when the component mounts or receives new data.",
+          "status": "done",
+          "testStrategy": "Render the form component in edit mode with sample existing server data. Verify that all form fields are correctly pre-populated with the provided data."
+        },
+        {
+          "id": 4,
+          "title": "Apply Styling and Finalize UI Elements",
+          "description": "Apply CSS or use a styling framework/library to style the form component. Ensure the layout is clean, input fields and buttons are visually distinct, and validation messages are clearly visible. Refine button appearances (e.g., primary for submit, secondary for cancel).",
+          "dependencies": [
+            3
+          ],
+          "details": "Use CSS modules, styled-components, Tailwind CSS, Bootstrap, or another chosen styling method. Ensure consistent padding, margins, font styles, and colors according to the application's design system. Make sure the form is usable and visually appealing.",
+          "status": "done",
+          "testStrategy": "Visually inspect the form component in the browser to ensure styling is applied correctly. Check responsiveness if applicable. Verify that validation messages are styled appropriately."
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Backend: Implement Admin User Management APIs",
+      "description": "Implement backend APIs for Admin user management.",
+      "details": "",
+      "testStrategy": "",
+      "priority": "medium",
+      "dependencies": [
+        4
+      ],
+      "status": "done",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Implement List and Get Admin User APIs",
+          "description": "Implement backend API endpoints and logic for listing all admin users and retrieving details for a specific admin user by ID.",
+          "dependencies": [],
+          "details": "Define API routes (e.g., GET /admin/users, GET /admin/users/{id}). Implement service layer methods to fetch user data from the database. Handle pagination, filtering, and sorting for the list endpoint. Implement error handling for user not found.",
+          "status": "done",
+          "testStrategy": "Unit tests for service methods. Integration tests for API endpoints, verifying correct data retrieval and error responses."
+        },
+        {
+          "id": 2,
+          "title": "Implement Create Admin User API",
+          "description": "Implement backend API endpoint and logic for creating a new admin user.",
+          "dependencies": [
+            1
+          ],
+          "details": "Define API route (e.g., POST /admin/users). Implement service layer method to validate input data (e.g., email format, password policy), hash password, and save the new user to the database. Handle potential conflicts (e.g., duplicate email).",
+          "status": "done",
+          "testStrategy": "Unit tests for validation and creation logic. Integration tests for the API endpoint, verifying successful creation and handling of invalid input or conflicts."
+        },
+        {
+          "id": 3,
+          "title": "Implement Update Admin User API",
+          "description": "Implement backend API endpoint and logic for updating an existing admin user's details.",
+          "dependencies": [
+            2
+          ],
+          "details": "Define API route (e.g., PUT /admin/users/{id}). Implement service layer method to fetch the existing user, validate update data, apply changes, and save to the database. Handle partial updates and permissions. Ensure sensitive fields like password require specific handling.",
+          "status": "done",
+          "testStrategy": "Unit tests for update logic and validation. Integration tests for the API endpoint, verifying successful updates, handling of invalid data, and user not found errors."
+        },
+        {
+          "id": 4,
+          "title": "Implement Delete Admin User API",
+          "description": "Implement backend API endpoint and logic for deleting an admin user.",
+          "dependencies": [
+            3
+          ],
+          "details": "Define API route (e.g., DELETE /admin/users/{id}). Implement service layer method to soft-delete or hard-delete the user from the database. Implement checks to prevent deleting the last admin user or the currently logged-in user if applicable.",
+          "status": "done",
+          "testStrategy": "Unit tests for deletion logic. Integration tests for the API endpoint, verifying successful deletion and handling of user not found or permission errors."
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Frontend: Build Admin User Management UI",
+      "description": "Develop frontend UI for Admin user management page.",
+      "details": "",
+      "testStrategy": "",
+      "priority": "medium",
+      "dependencies": [
+        6,
+        9
+      ],
+      "status": "done",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Setup Admin User Management Page Structure",
+          "description": "Create the basic page component for admin user management, define its route, add necessary navigation links (if applicable), and establish the overall layout including placeholders for the user list and action buttons.",
+          "dependencies": [],
+          "details": "Create a new React/Vue/Angular component (e.g., `AdminUserManagementPage`). Define the route in the application's router configuration. Add a link to this page in the admin navigation menu. Structure the page using layout components (e.g., grid, flexbox) to accommodate a title, potential filters/search, a table area for the user list, and buttons for actions like 'Add User'.",
+          "status": "done",
+          "testStrategy": "Verify the page route is accessible and the basic layout structure renders correctly with placeholder elements."
+        },
+        {
+          "id": 2,
+          "title": "Implement User List Display",
+          "description": "Fetch and display the list of users in a table format within the page structure created in the previous step. Include columns for key user information (e.g., name, email, role, status).",
+          "dependencies": [
+            1
+          ],
+          "details": "Integrate with the backend API endpoint for fetching the list of users. Use a data table component (e.g., Material UI Table, Ant Design Table, or a custom component) to render the user data. Implement basic features like displaying data, handling loading states, and displaying an empty state message if no users are found. Add placeholder columns for future action buttons (edit, delete).",
+          "status": "done",
+          "testStrategy": "Test fetching data with mock API responses (empty list, list with users). Verify data is displayed correctly in the table. Check loading and error states."
+        },
+        {
+          "id": 3,
+          "title": "Implement User Add/Edit/Delete Functionality",
+          "description": "Add forms or modals for creating new users and editing existing users. Implement functionality to trigger user deletion. Integrate these actions with the appropriate backend API endpoints.",
+          "dependencies": [
+            2
+          ],
+          "details": "Create separate components for the 'Add User' form/modal and 'Edit User' form/modal. These forms should include fields for relevant user attributes (name, email, password, role, etc.). Add buttons ('Add User' on the page, 'Edit' and 'Delete' in the user list rows). Implement logic to open the correct form/modal, populate it for editing, handle form submission (including validation), and make API calls for create, update, and delete operations. Handle success and error responses (e.g., showing notifications, refreshing the user list).",
+          "status": "done",
+          "testStrategy": "Test adding a new user (valid/invalid data). Test editing an existing user. Test deleting a user. Verify API calls are made correctly and the UI updates accordingly (e.g., list refreshes). Test form validation."
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Backend: Add 'Purpose' Field to Server Model and APIs",
+      "description": "Add 'purpose' field to Server data model and update backend APIs.",
+      "details": "",
+      "testStrategy": "",
+      "priority": "medium",
+      "dependencies": [
+        5
+      ],
+      "status": "done",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Add 'purpose' field to Server database schema and model",
+          "description": "Modify the database schema for the 'servers' table to include a new column named 'purpose'. Update the corresponding backend data model (e.g., ORM model) to map to this new column.",
+          "dependencies": [],
+          "details": "Create a database migration script to add the 'purpose' column (e.g., VARCHAR or TEXT, specify nullable/default constraints as needed). Update the Server model class/definition in the backend code to include the 'purpose' attribute.",
+          "status": "done",
+          "testStrategy": "Run the migration script and verify the database schema change. Write a unit test to ensure the Server model can be instantiated and the 'purpose' field can be accessed and set."
+        },
+        {
+          "id": 2,
+          "title": "Include 'purpose' in Server API read responses",
+          "description": "Update the backend API endpoints that return server data (e.g., GET /servers, GET /servers/{id}) to include the new 'purpose' field in the JSON response payload.",
+          "dependencies": [
+            1
+          ],
+          "details": "Modify the serialization logic (e.g., serializers, schema definitions) used by the server read endpoints to fetch the 'purpose' field from the model and include it in the API response.",
+          "status": "done",
+          "testStrategy": "Use API testing tools (e.g., curl, Postman) or automated tests to call the GET endpoints for servers. Verify that the 'purpose' field is present in the JSON response for existing server records."
+        },
+        {
+          "id": 3,
+          "title": "Accept and save 'purpose' in Server API write requests",
+          "description": "Update the backend API endpoints that create or update server data (e.g., POST /servers, PUT /servers/{id}) to accept the 'purpose' field in the request payload and save it to the database.",
+          "dependencies": [
+            1
+          ],
+          "details": "Modify the request parsing and validation logic for server write endpoints to accept the 'purpose' field. Update the logic that saves or updates the server record to store the provided 'purpose' value using the updated model.",
+          "status": "done",
+          "testStrategy": "Use API testing tools or automated tests to send POST and PUT requests with the 'purpose' field included. Verify that the server is created/updated successfully and that the 'purpose' value is correctly stored in the database (can be verified by subsequently calling the GET endpoint for that server)."
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Frontend: Add 'Purpose' Field to Server UIs",
+      "description": "Update frontend Server List, Detail, and Add/Edit Form UIs to include 'purpose' field.",
+      "details": "",
+      "testStrategy": "",
+      "priority": "medium",
+      "dependencies": [
+        7,
+        8,
+        11
+      ],
+      "status": "done",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Update Frontend Data Models and API Service for 'Purpose'",
+          "description": "Modify frontend data models (e.g., TypeScript interfaces) to include the 'purpose' field. Update the API service layer to correctly handle fetching and sending the 'purpose' field when interacting with the backend server endpoints (GET, POST, PUT).",
+          "dependencies": [],
+          "details": "Locate the relevant server data model interface (e.g., `IServer`). Add a new optional or required string field `purpose`. Update the service methods responsible for fetching (e.g., `getServers`, `getServerById`) and saving (e.g., `createServer`, `updateServer`) server data to ensure the 'purpose' field is included in requests and responses. Handle potential API changes or data transformations if necessary.",
+          "status": "done",
+          "testStrategy": "Verify that fetching server data includes the 'purpose' field (if present in backend data) and that saving/updating server data correctly sends the 'purpose' field to the backend API. Use mock API responses or a development backend environment."
+        },
+        {
+          "id": 2,
+          "title": "Display 'Purpose' in Server List and Detail Views",
+          "description": "Modify the Server List view and the Server Detail view to display the 'purpose' field retrieved from the backend.",
+          "dependencies": [
+            1
+          ],
+          "details": "In the Server List component, add a new column or integrate the 'purpose' display into an existing column (e.g., tooltip on server name). In the Server Detail component, add a new label and display element for the 'purpose' field, similar to other server attributes. Ensure proper handling of cases where the 'purpose' field might be null or empty.",
+          "status": "done",
+          "testStrategy": "Navigate to the Server List view and verify that the 'purpose' is displayed correctly for servers that have it. Navigate to the Server Detail view for a server and verify the 'purpose' is displayed correctly. Test with servers having and not having a purpose."
+        },
+        {
+          "id": 3,
+          "title": "Add 'Purpose' Input to Server Add/Edit Form",
+          "description": "Modify the Server Add/Edit form component to include an input field for the 'purpose' field, allowing users to add or modify it.",
+          "dependencies": [
+            1
+          ],
+          "details": "Locate the Server Add/Edit form component. Add a new form control (e.g., a text input or textarea) for the 'purpose' field. Bind this form control to the 'purpose' property in the form's data model. Update the form submission logic to include the value from the 'purpose' input when creating or updating a server. Add appropriate validation if required (e.g., max length).",
+          "status": "done",
+          "testStrategy": "Open the Server Add form, enter a purpose, and create a new server. Verify the purpose is saved and displayed correctly in the list/detail views. Open the Server Edit form for an existing server, modify the purpose, save, and verify the change is reflected in the list/detail views. Test with adding/editing servers with and without a purpose."
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Backend: Implement GPU Card Model and CRUD APIs",
+      "description": "Design and implement GpuCard data model and backend RESTful APIs for CRUD operations.",
+      "details": "",
+      "testStrategy": "",
+      "priority": "medium",
+      "dependencies": [
+        2,
+        5
+      ],
+      "status": "done",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Design and Implement GpuCard Data Model",
+          "description": "Define the database schema or ORM model for the GpuCard entity. This includes identifying necessary fields (e.g., name, manufacturer, memory size/type, clock speed, interface, power, release date), choosing appropriate data types, and setting constraints.",
+          "dependencies": [],
+          "details": "Use the chosen backend framework's ORM (e.g., SQLAlchemy, Django ORM, Mongoose, etc.) to define the model class/schema. Implement necessary database migrations if applicable.",
+          "status": "done",
+          "testStrategy": "Verify model definition syntax and ensure database table/collection is created correctly (e.g., by running migrations or checking the database directly)."
+        },
+        {
+          "id": 2,
+          "title": "Implement GpuCard Create and Read APIs",
+          "description": "Implement the backend API endpoints for creating a new GpuCard (POST /gpu-cards) and retrieving GpuCards (GET /gpu-cards for list, GET /gpu-cards/{id} for single).",
+          "dependencies": [
+            1
+          ],
+          "details": "Use the backend framework's routing and controller/view layer. Implement logic to receive data for creation, save it using the model from Subtask 1. For read, implement logic to query the database for a single card by ID or a list of cards.",
+          "status": "done",
+          "testStrategy": "Use API testing tools (like Postman, curl, or framework test clients) to send POST requests and verify creation, then send GET requests to list and retrieve the created item by ID."
+        },
+        {
+          "id": 3,
+          "title": "Implement GpuCard Update and Delete APIs",
+          "description": "Implement the backend API endpoints for updating an existing GpuCard (PUT/PATCH /gpu-cards/{id}) and deleting a GpuCard (DELETE /gpu-cards/{id}).",
+          "dependencies": [
+            2
+          ],
+          "details": "Implement logic to find the record by ID, update its fields based on request data, and save changes. For deletion, find by ID and remove the record. Handle cases where the specified ID does not exist.",
+          "status": "done",
+          "testStrategy": "Use API testing tools. Create a card (using Subtask 2's logic), then send PUT/PATCH to update it and verify changes with GET. Send DELETE and verify it's no longer retrievable."
+        },
+        {
+          "id": 4,
+          "title": "Add Validation, Error Handling, and Basic API Tests",
+          "description": "Enhance the implemented CRUD APIs with input validation (e.g., required fields, data types), proper error handling (e.g., 400 Bad Request, 404 Not Found, 500 Internal Server Error), and write basic unit/integration tests for the API endpoints.",
+          "dependencies": [
+            3
+          ],
+          "details": "Implement validation logic (e.g., using serializers, request parsers, or model validation). Add error handling middleware or specific error responses for common issues (invalid input, resource not found). Write automated tests covering successful operations and key error scenarios for all CRUD endpoints.",
+          "status": "done",
+          "testStrategy": "Run automated tests. Manually test API endpoints with invalid data (e.g., missing required fields, wrong data types) and non-existent IDs to ensure correct error responses and status codes."
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Frontend: Build GPU Card Management UI on Server Detail",
+      "description": "Develop frontend UI components to display and manage GPU cards on Server Detail page.",
+      "details": "",
+      "testStrategy": "",
+      "priority": "medium",
+      "dependencies": [
+        7,
+        13
+      ],
+      "status": "done",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Fetch and Display Basic GPU List",
+          "description": "Implement the API call to fetch the list of GPU cards associated with the current server and display a basic list or table showing essential information like GPU name, model, and current status.",
+          "dependencies": [],
+          "details": "Use the existing frontend API client to call the appropriate backend endpoint for fetching server details, ensuring it includes the list of associated GPUs. Render the fetched data in a simple list or table format within a new section on the Server Detail page. Handle loading and error states gracefully.",
+          "status": "done",
+          "testStrategy": "Verify that the API call is made when the Server Detail page loads. Check that the basic list displays the correct number of GPUs and shows accurate basic information (name, model, status) based on mock or real backend data. Test loading and error state rendering."
+        },
+        {
+          "id": 2,
+          "title": "Create Detailed GPU Card Component",
+          "description": "Develop a reusable UI component to display detailed information for a single GPU card. This component should present data like vendor, model, memory, driver version, temperature, utilization, and any relevant status indicators in a visually clear card or panel format.",
+          "dependencies": [
+            1
+          ],
+          "details": "Design and implement a dedicated component (e.g., `GpuCard`) that accepts a single GPU data object as props. Display detailed attributes using appropriate labels and formatting. Include visual elements like icons or color coding for status and utilization metrics. Ensure the component is responsive.",
+          "status": "done",
+          "testStrategy": "Create mock data for various GPU states and configurations. Test the `GpuCard` component in isolation to ensure it renders all detailed information correctly and handles different data values and statuses as expected."
+        },
+        {
+          "id": 3,
+          "title": "Integrate Detailed GPU Cards into Server Detail Layout",
+          "description": "Modify the basic list implemented in Subtask 1 to use the detailed `GpuCard` component for each item. Integrate the complete GPU section (the list of detailed cards) into the final layout of the Server Detail page, ensuring proper placement, styling, and responsiveness within the overall page structure.",
+          "dependencies": [
+            1,
+            2
+          ],
+          "details": "Update the rendering logic from Subtask 1 to iterate over the fetched GPU list and render the `GpuCard` component for each GPU, passing the respective data. Place this list/section within the designated area on the Server Detail page (e.g., a dedicated tab, a section below other hardware details). Apply necessary CSS for layout, spacing, and alignment to fit seamlessly with the rest of the page.",
+          "status": "done",
+          "testStrategy": "Navigate to the Server Detail page for a server with GPUs. Verify that the GPU section appears in the correct location. Check that each GPU is displayed using the detailed card component and shows accurate, comprehensive information. Test the responsiveness of the entire Server Detail page with the new GPU section included."
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Backend: Implement Virtual Machine (VM) Model and CRUD APIs",
+      "description": "Design and implement VirtualMachine data model and backend RESTful APIs for CRUD operations.",
+      "details": "",
+      "testStrategy": "",
+      "priority": "medium",
+      "dependencies": [
+        2,
+        5,
+        13
+      ],
+      "status": "done",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Define VirtualMachine Data Model",
+          "description": "Define the data model structure for Virtual Machines, including necessary fields, data types, constraints, and relationships within the chosen ORM/database schema.",
+          "dependencies": [],
+          "details": "Identify core VM attributes (e.g., name, status, IP address, OS, CPU cores, RAM size, storage size, creation timestamp, etc.). Define the model using the project's ORM (e.g., SQLAlchemy, Django ORM, Hibernate, etc.). Specify primary keys, unique constraints (e.g., name), data types, and any necessary indices. Create migration scripts if applicable.",
+          "status": "done",
+          "testStrategy": "Verify the model definition against requirements. Ensure migration scripts run successfully and create the expected table/schema in the database."
+        },
+        {
+          "id": 2,
+          "title": "Implement VirtualMachine Repository/Data Access Layer",
+          "description": "Implement the data access methods (repository) for the VirtualMachine model to perform basic CRUD operations directly against the database.",
+          "dependencies": [
+            1
+          ],
+          "details": "Create a repository class or module responsible for database interactions. Implement methods for: `create(vm_data)`, `get_by_id(vm_id)`, `get_all()`, `update(vm_id, vm_data)`, `delete(vm_id)`. Use the ORM defined in Subtask 1. Handle potential database errors (e.g., not found, integrity errors).",
+          "status": "done",
+          "testStrategy": "Write unit tests for the repository methods, mocking the database connection or using an in-memory database. Test each CRUD operation to ensure data is correctly saved, retrieved, updated, and deleted."
+        },
+        {
+          "id": 3,
+          "title": "Implement VirtualMachine Service/Business Logic Layer",
+          "description": "Implement a service layer that encapsulates the business logic for Virtual Machine operations, utilizing the repository implemented in Subtask 2.",
+          "dependencies": [
+            2
+          ],
+          "details": "Create a service class or module that orchestrates operations using the repository. Implement methods like `create_vm(data)`, `get_vm(vm_id)`, `list_vms()`, `update_vm(vm_id, data)`, `delete_vm(vm_id)`. Add business logic such as input validation, status transitions, or checks before calling repository methods. Handle exceptions from the repository and translate them into appropriate service-level errors.",
+          "status": "done",
+          "testStrategy": "Write unit tests for the service methods, mocking the repository. Test validation rules, error handling, and ensure the correct repository methods are called with the right arguments for each service operation."
+        },
+        {
+          "id": 4,
+          "title": "Implement VirtualMachine REST API Endpoints",
+          "description": "Implement the RESTful API endpoints for Virtual Machine CRUD operations, exposing the service layer functionality.",
+          "dependencies": [
+            3
+          ],
+          "details": "Define API routes (e.g., `/api/v1/vms`). Implement handlers for HTTP methods: POST (create), GET (list and get by ID), PUT/PATCH (update), DELETE (delete). Parse incoming request bodies and query parameters. Call the appropriate methods in the VirtualMachine service (Subtask 3). Format responses according to REST principles (e.g., JSON), including success data and error messages with appropriate HTTP status codes (e.g., 200, 201, 400, 404, 500).",
+          "status": "done",
+          "testStrategy": "Write integration tests for the API endpoints. Use a testing framework to send HTTP requests to the defined routes and verify the responses (status code, body content) for each CRUD operation, including edge cases like invalid input or non-existent resources."
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "Implement User Account Login",
+      "description": "Implement user account login functionality.",
+      "details": "",
+      "testStrategy": "",
+      "status": "done",
+      "dependencies": [],
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Implement Login Form UI and Submission Handling",
+          "description": "Create or update the user interface to include input fields for username/email and password, a submit button, and basic client-side validation (e.g., required fields). Implement the event handler for form submission to collect the input and send it to the backend login endpoint.",
+          "dependencies": [],
+          "details": "Use the chosen frontend framework (e.g., React, Vue, Angular) or plain HTML/JS to build the form. Ensure inputs have appropriate types (text/email, password). Use fetch API or a library like Axios to send a POST request to the planned backend login endpoint with the collected credentials.",
+          "status": "done",
+          "testStrategy": "Manually test form rendering, input fields, and submission. Use browser developer tools to verify that the correct data is collected and sent in the network request upon submission."
+        },
+        {
+          "id": 2,
+          "title": "Implement Backend Authentication Endpoint and Logic",
+          "description": "Create a backend API endpoint (e.g., `/api/login`) that receives the username/email and password from the client. Implement the logic to query the database for a user matching the provided username/email. Securely compare the provided password with the stored hashed password. Return a success or failure response.",
+          "dependencies": [
+            1
+          ],
+          "details": "Use the chosen backend framework (e.g., Node.js/Express, Python/Flask/Django). Implement the endpoint to handle POST requests. Use a secure password hashing library (e.g., bcrypt) for comparison. Query the user database. Return appropriate HTTP status codes (e.g., 200 for success, 401 for unauthorized) and a JSON body indicating success or failure.",
+          "status": "done",
+          "testStrategy": "Use API testing tools (e.g., Postman, curl) to send requests to the endpoint with valid and invalid credentials and verify the responses (status code and body). Write unit tests for the password comparison and database query logic."
+        },
+        {
+          "id": 3,
+          "title": "Implement Session/Token Creation and Response",
+          "description": "Modify the backend authentication logic (implemented in Subtask 2) to, upon successful authentication, generate a secure session ID or JWT (JSON Web Token). Include this session ID or token in the success response sent back to the client (e.g., via cookie or response body).",
+          "dependencies": [
+            2
+          ],
+          "details": "Choose between server-side sessions (using a library like `express-session`) or JWTs (using a library like `jsonwebtoken`). If using sessions, store the session on the server and send the session ID cookie. If using JWTs, sign the token with a secure secret and include it in the response body or a cookie. Ensure appropriate security settings (e.g., httpOnly cookies, token expiration).",
+          "status": "done",
+          "testStrategy": "Test the login endpoint with valid credentials and verify that the success response includes the expected session ID cookie or JWT in the response body. Check token validity and expiration if using JWTs."
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "title": "Implement Default Admin User Creation on Startup",
+      "description": "Add logic to create default admin user on application startup.",
+      "details": "",
+      "testStrategy": "",
+      "status": "done",
+      "dependencies": [],
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Implement Core Default Admin User Creation Logic",
+          "description": "Create a function or service that encapsulates the logic for creating a default admin user. This logic should check if an admin user already exists (e.g., by a specific identifier like email or role). If no admin user is found, it should create a new user with predefined default credentials (username, password, role), hash the password, and persist the user to the database.",
+          "dependencies": [],
+          "details": "Define default admin credentials (consider using environment variables or configuration files). Utilize existing user service/repository methods for checking user existence and saving new users. Ensure password hashing is correctly applied before saving. This function/service should be callable independently of the application startup process.",
+          "status": "done",
+          "testStrategy": "Write unit tests for the creation logic: test cases for when an admin user already exists (should do nothing), when no admin user exists (should create and save a new user with hashed password), and handle potential database errors during saving."
+        },
+        {
+          "id": 2,
+          "title": "Integrate Default Admin User Creation into Application Startup",
+          "description": "Modify the application's startup sequence to call the core default admin user creation logic implemented in Subtask 1. This call should happen after the database connection is established and necessary services (like the user service/repository) are initialized, but before the application starts serving requests.",
+          "dependencies": [
+            1
+          ],
+          "details": "Identify the appropriate place in your application's lifecycle for initialization tasks (e.g., an application listener, a specific startup class, or within the main application entry point). Call the function/service from Subtask 1 here. Ensure this logic runs only once upon successful application startup.",
+          "status": "done",
+          "testStrategy": "Perform integration tests: Start the application for the first time and verify that the default admin user is created in the database. Restart the application and verify that no new admin user is created (i.e., the check for existence works correctly). Manually verify the created user's details in the database."
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "title": "Frontend UI Enhancement: Header, Footer, and Navigation",
+      "description": "Refactor frontend UI styling and implement header, footer, and navigation.",
+      "details": "",
+      "testStrategy": "",
+      "status": "done",
+      "dependencies": [],
+      "priority": "medium",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Style Server List Component",
+          "description": "Apply CSS styles to ServerList component.",
+          "details": "",
+          "status": "done",
+          "dependencies": [],
+          "parentTaskId": 18
+        },
+        {
+          "id": 2,
+          "title": "Style Server Form Component",
+          "description": "Apply CSS styles to ServerForm component.",
+          "details": "",
+          "status": "done",
+          "dependencies": [],
+          "parentTaskId": 18
+        },
+        {
+          "id": 3,
+          "title": "Style Admin User List Component",
+          "description": "Apply CSS styles to AdminUserList component.",
+          "details": "",
+          "status": "done",
+          "dependencies": [],
+          "parentTaskId": 18
+        },
+        {
+          "id": 4,
+          "title": "Style Server Detail and GPU Cards",
+          "description": "Apply CSS styles to ServerDetail page and ServerGpuCards component.",
+          "details": "",
+          "status": "done",
+          "dependencies": [],
+          "parentTaskId": 18
+        },
+        {
+          "id": 5,
+          "title": "Implement Header and Footer",
+          "description": "Add consistent header and footer to frontend application layout.",
+          "details": "",
+          "status": "done",
+          "dependencies": [],
+          "parentTaskId": 18
+        },
+        {
+          "id": 6,
+          "title": "Enhance Navigation Menu",
+          "description": "Improve styling and structure of frontend navigation menu.",
+          "details": "",
+          "status": "done",
+          "dependencies": [],
+          "parentTaskId": 18
+        },
+        {
+          "id": 7,
+          "title": "Style Buttons Consistently",
+          "description": "Apply consistent styling to buttons across frontend application.",
+          "details": "",
+          "status": "done",
+          "dependencies": [],
+          "parentTaskId": 18
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "title": "Optimize Frontend UI/UX with Modern Design or UI Framework",
+      "description": "Optimize frontend UI/UX using modern design patterns or UI framework.",
+      "details": "",
+      "testStrategy": "",
+      "status": "done",
+      "dependencies": [],
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Research and Decide UI/UX Approach",
+          "description": "Research and decide on UI/UX approach.",
+          "dependencies": [],
+          "details": "",
+          "status": "done"
+        },
+        {
+          "id": 2,
+          "title": "Setup and Configure Chosen Approach Foundation",
+          "description": "Set up foundational elements based on chosen UI/UX approach.",
+          "dependencies": [
+            1
+          ],
+          "details": "",
+          "status": "done"
+        },
+        {
+          "id": 3,
+          "title": "Refactor/Implement Core UI Components",
+          "description": "Refactor or implement key UI components.",
+          "dependencies": [
+            2
+          ],
+          "details": "",
+          "status": "done"
+        },
+        {
+          "id": 4,
+          "title": "Integrate Components into Layouts and Pages",
+          "description": "Integrate new components into application layouts and pages.",
+          "dependencies": [
+            3
+          ],
+          "details": "",
+          "status": "done"
+        },
+        {
+          "id": 5,
+          "title": "Test, Refine, and Document UI/UX Changes",
+          "description": "Test, refine, and document UI/UX changes.",
+          "dependencies": [
+            4
+          ],
+          "details": "",
+          "status": "done"
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title": "Implement Frontend Server CRUD Functionality",
+      "description": "Implement frontend UI and logic for server management.",
+      "details": "",
+      "testStrategy": "",
+      "status": "done",
+      "dependencies": [],
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Setup Page Structure and Implement Server Listing",
+          "description": "Create server management page and implement server listing.",
+          "dependencies": [],
+          "details": "",
+          "status": "done"
+        },
+        {
+          "id": 2,
+          "title": "Implement Add Server Form and Logic",
+          "description": "Create form for adding new servers and implement logic.",
+          "dependencies": [
+            1
+          ],
+          "details": "",
+          "status": "done"
+        },
+        {
+          "id": 3,
+          "title": "Implement Edit Server Form and Logic",
+          "description": "Implement functionality to edit existing servers.",
+          "dependencies": [
+            1,
+            2
+          ],
+          "details": "",
+          "status": "done"
+        },
+        {
+          "id": 4,
+          "title": "Implement Delete Server Functionality",
+          "description": "Implement delete functionality for servers.",
+          "dependencies": [
+            1
+          ],
+          "details": "",
+          "status": "done"
+        },
+        {
+          "id": 5,
+          "title": "Add Input Validation, Refine State Management, and UI Polish",
+          "description": "Implement input validation, refine state management, and polish UI.",
+          "dependencies": [
+            2,
+            3,
+            4
+          ],
+          "details": "",
+          "status": "done"
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "Frontend: Implement VM Management UI and Logic",
+      "description": "Implement the user interface and frontend logic for managing virtual machines, including listing, viewing details, creating, updating, and deleting VMs.",
+      "details": "This task involves building the frontend components and logic required to interact with the backend Virtual Machine (VM) management APIs (Task 15). Key areas include:\n\n1.  **Component Development:** Create reusable UI components for displaying VM lists, individual VM details, and forms for creating/editing VMs.\n2.  **API Integration:** Implement service layer functions to call the backend CRUD APIs for VMs (GET all, GET by ID, POST, PUT, DELETE). Handle asynchronous operations and potential API errors.\n3.  **State Management:** Manage the state of the VM list, individual VM data, loading states, and error states using the chosen frontend state management solution.\n4.  **Routing:** Set up routing to navigate between the VM list view, VM detail view, and VM creation/edit forms.\n5.  **Form Handling:** Implement form validation and submission logic for creating and updating VMs.\n6.  **User Experience:** Ensure a smooth user experience with appropriate loading indicators, error messages, and confirmation dialogs (e.g., for deletion).\n7.  **Dependency:** This task is dependent on the successful completion and availability of the backend VM CRUD APIs developed in Task 15.",
+      "testStrategy": "Testing for this task should cover UI functionality, logic, and API integration:\n\n1.  **Unit Tests:** Write unit tests for individual components (e.g., rendering with different data states) and frontend logic (e.g., form validation, state updates).\n2.  **Integration Tests:** Implement integration tests to verify the interaction between frontend services and the backend APIs. Use mocking or a test backend environment to simulate API responses, including success, error, and edge cases.\n3.  **End-to-End Tests:** Develop end-to-end tests using a testing framework (e.g., Cypress, Selenium) to simulate user flows for listing, viewing, creating, updating, and deleting VMs through the UI.\n4.  **Manual Testing:** Perform manual testing to visually inspect the UI, test responsiveness, usability, and verify all CRUD operations function correctly in a deployed environment interacting with the actual backend.\n5.  **Error Handling Tests:** Specifically test how the UI handles various API error responses (e.g., network errors, validation errors, not found errors) and displays appropriate feedback to the user.",
+      "status": "done",
+      "dependencies": [
+        15
+      ],
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Set up VM Management Routing and Base Pages",
+          "description": "Establish the basic routing structure for VM management, including routes for the VM list, VM detail view, and VM creation/edit forms. Create placeholder components or pages for each route.",
+          "dependencies": [],
+          "details": "Configure the frontend router (e.g., React Router, Vue Router) to handle paths like `/vms` (list), `/vms/:id` (detail), and `/vms/new` or `/vms/:id/edit` (forms). Create minimal page components (e.g., `VmListPage`, `VmDetailPage`, `VmFormPage`) that will be populated in later steps. Ensure navigation links or programmatic navigation is possible between these routes.",
+          "status": "done",
+          "testStrategy": "Verify that navigating to the defined URLs loads the corresponding placeholder components/pages."
+        },
+        {
+          "id": 2,
+          "title": "Implement VM API Service Layer",
+          "description": "Create a dedicated service or module responsible for making API calls to the backend VM management endpoints (GET all, GET by ID, POST, PUT, DELETE).",
+          "dependencies": [],
+          "details": "Develop asynchronous functions (e.g., using `fetch` or Axios) that encapsulate the logic for interacting with the backend API (Task 15). Handle request parameters, headers, and basic response parsing. Implement error handling for API calls (e.g., network errors, API error responses). This layer should be reusable by different components.",
+          "status": "done",
+          "testStrategy": "Write unit tests or integration tests for the service functions, mocking API responses to ensure correct data handling and error propagation."
+        },
+        {
+          "id": 3,
+          "title": "Implement VM List View and Data Fetching",
+          "description": "Develop the component(s) for displaying the list of virtual machines. Integrate the API service to fetch the list data and display it.",
+          "dependencies": [
+            1,
+            2
+          ],
+          "details": "Create the `VmListPage` component. Use the VM API service (Subtask 2) to fetch the list of VMs when the page loads. Display the data in a table or list format. Implement basic state management for the list data, loading state, and potential errors. Add links or actions to navigate to the VM detail or edit pages (using routing from Subtask 1).",
+          "status": "done",
+          "testStrategy": "Verify that the list page loads, fetches data from the API service, displays the list correctly, shows loading indicators, and handles errors gracefully. Check navigation links to detail/edit views."
+        },
+        {
+          "id": 4,
+          "title": "Implement VM Detail View and Create/Edit Forms",
+          "description": "Develop components and logic for viewing individual VM details and for creating/editing VMs using forms. Integrate API calls for fetching a single VM, creating, and updating.",
+          "dependencies": [
+            1,
+            2
+          ],
+          "details": "Create `VmDetailPage` and `VmFormPage` components. For the detail page, use the VM API service (Subtask 2) to fetch data based on the ID from the route parameters (Subtask 1). Display the VM's properties. For the form page, create a reusable form component for VM properties. Implement logic to handle form input, validation, and submission. Use the API service (Subtask 2) to send POST requests for new VMs and PUT requests for updates. Handle form state, loading, and errors. Redirect or navigate appropriately after successful submission.",
+          "status": "done",
+          "testStrategy": "Verify that the detail page loads correct data for a given ID. Test the create form: submit valid/invalid data, check API calls, verify success/error handling and navigation. Test the edit form: load existing data, submit changes, check API calls, verify success/error handling and navigation."
+        },
+        {
+          "id": 5,
+          "title": "Implement VM Deletion and Enhance User Experience",
+          "description": "Add functionality to delete VMs, including confirmation dialogs. Refine the overall user experience across all VM management views.",
+          "dependencies": [
+            2,
+            3,
+            4
+          ],
+          "details": "Add a delete action (e.g., button) to the VM list items (Subtask 3) and/or the detail page (Subtask 4). Implement a confirmation dialog before proceeding with deletion. Use the VM API service (Subtask 2) to send the DELETE request. Handle the response and update the UI accordingly (e.g., remove the VM from the list, navigate away from the detail page). Review all views (list, detail, form) to ensure consistent loading indicators, clear error messages, and appropriate feedback for user actions (e.g., success notifications after create/edit/delete).",
+          "status": "done",
+          "testStrategy": "Test the delete action: click delete, verify confirmation dialog appears, cancel deletion, confirm deletion, verify API call, verify UI update (VM removed), verify error handling if deletion fails. Review all pages for consistent and helpful loading/error/success feedback."
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "title": "Review Implementation vs. README.md for Discrepancies",
+      "description": "Review the current project implementation and compare it against the original README.md to identify any discrepancies, particularly regarding startup procedures and necessary configurations.",
+      "details": "Perform a detailed comparison between the current state of the project's codebase and the instructions/descriptions provided in the original README.md file. Focus specifically on:\n\n1.  **Startup Procedures:** Verify if the steps outlined in the README for building, running, and starting the application (both frontend and backend, if applicable) are still accurate and complete.\n2.  **Dependencies:** Check if the required dependencies listed in the README match the actual dependencies used in the project (e.g., package.json, requirements.txt, etc.).\n3.  **Configuration:** Compare configuration instructions or examples in the README with the current configuration methods and requirements.\n4.  **Key Features/Architecture:** Briefly review if the high-level description of features or architecture in the README still aligns with the implemented system.\n\nDocument all identified discrepancies clearly, noting the section in the README and the corresponding part of the current implementation that differs. Propose necessary updates to the README or potential code adjustments if the README is deemed correct and the code is outdated.",
+      "testStrategy": "Verification involves reviewing the documented findings. The task is considered complete when:\n\n1.  A comprehensive list of discrepancies between the current implementation and the original README.md has been compiled.\n2.  Each discrepancy is clearly described, referencing the relevant sections of both the README and the code/configuration.\n3.  Potential actions (e.g., update README, update code) are suggested for each discrepancy.\n4.  The reviewer confirms that all major sections of the README relevant to setup, dependencies, and startup have been thoroughly checked against the current codebase.",
+      "status": "done",
+      "dependencies": [],
+      "priority": "medium",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Review current project implementation",
+          "description": "Compare current implementation with README.md instructions",
+          "details": "Check if the current implementation matches the setup and running instructions in README.md. Identify any differences or missing steps.",
+          "status": "done",
+          "dependencies": [],
+          "parentTaskId": 22
+        },
+        {
+          "id": 2,
+          "title": "Identify differences in startup procedures or other necessary adjustments",
+          "description": "Compare current implementation with README.md and identify any differences",
+          "details": "",
+          "status": "done",
+          "dependencies": [],
+          "parentTaskId": 22
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "title": "Frontend: Implement Authentication Check Logic",
+      "description": "Implement robust authentication checking logic within the frontend application to protect routes and manage user sessions.",
+      "details": "Implement logic to check for a valid authentication token (e.g., JWT stored in local storage or cookies) on application load and before allowing access to protected routes. This involves setting up route guards or similar mechanisms in the frontend routing configuration. Ensure that users are redirected to a login page if they attempt to access protected content without a valid token. Handle token expiration by implementing refresh logic if applicable, or by redirecting the user to log in again. Integrate this check with API calls, potentially adding the token to request headers and handling 401 Unauthorized responses gracefully (e.g., redirecting to login). Update the application's state management to reflect the user's authentication status.",
+      "testStrategy": "1. Verify that accessing a protected route without logging in redirects the user to the login page. 2. Verify that accessing a public route works correctly without authentication. 3. Log in successfully and verify that protected routes are accessible. 4. Log out and verify that protected routes are no longer accessible and the user is redirected. 5. Manually tamper with or remove the authentication token (e.g., from local storage) while on a protected page and verify that subsequent actions or page loads redirect to login. 6. If token expiration is handled, simulate an expired token scenario and verify the expected behavior (e.g., token refresh or logout/redirect). 7. Test API calls from protected sections to ensure the token is included and that 401 responses are handled correctly (e.g., triggering a logout/redirect).",
+      "status": "done",
+      "dependencies": [],
+      "priority": "medium",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Implement Core Authentication State and Initial Check",
+          "description": "Set up frontend state management to track authentication status and store the authentication token. Implement logic to check for an existing token (e.g., in local storage or cookies) when the application loads and update the state accordingly. This establishes the foundational `isAuthenticated` status.",
+          "dependencies": [],
+          "details": "Choose a suitable state management solution (e.g., Redux, Vuex, Context API, Zustand, Pinia). Define the authentication state structure (e.g., `{ token: string | null, isAuthenticated: boolean, user: any | null }`). Implement an effect or lifecycle hook that runs on application initialization to read the token from storage. Based on the token's presence and validity (basic check), dispatch an action or update the state to reflect the user's authentication status.",
+          "status": "done",
+          "testStrategy": "Manually verify that the application state correctly reflects the authentication status on page load, both when a valid token is present in storage and when it is absent. Write unit tests for the state management logic and the initial token checking function."
+        },
+        {
+          "id": 2,
+          "title": "Implement Route Protection and Unauthenticated Redirection",
+          "description": "Configure the frontend router to protect specific routes based on the authentication status managed in Subtask 1. Implement route guards or navigation guards that check the `isAuthenticated` state before allowing navigation to protected routes. If a user is not authenticated and attempts to access a protected route, redirect them to the login page.",
+          "dependencies": [
+            1
+          ],
+          "details": "Use the routing library's features (e.g., React Router's `<PrivateRoute>` component or hooks, Vue Router's `beforeEach` navigation guard, Angular's `CanActivate` guard). Access the authentication state from the state management store implemented in Subtask 1. For protected routes, if `isAuthenticated` is false, prevent navigation to the requested route and programmatically navigate the user to the login route (`/login`).",
+          "status": "done",
+          "testStrategy": "Manually attempt to access protected routes directly via the URL bar when logged out. Verify that the user is redirected to the login page. Manually attempt to access protected routes when logged in. Verify that navigation is successful. Write unit tests for the route guard logic."
+        },
+        {
+          "id": 3,
+          "title": "Integrate Token with API Calls and Handle 401 Errors",
+          "description": "Implement logic to automatically include the authentication token in the headers of outgoing API requests. Set up global error handling (e.g., using HTTP interceptors) to detect 401 Unauthorized responses from the backend API. When a 401 is received, trigger a logout process: clear the token from storage and state (using logic potentially similar to initial check/logout flow established in Subtask 1 and leveraging redirection logic from Subtask 2), and redirect the user to the login page.",
+          "dependencies": [
+            2
+          ],
+          "details": "Use an HTTP client library like Axios or configure the native `fetch` API with wrappers/interceptors. Implement a request interceptor to read the token from state/storage (from Subtask 1) and add it to the `Authorization: Bearer <token>` header for relevant API calls. Implement a response interceptor to check for a 401 status code. On receiving a 401, dispatch a logout action (clearing state and storage) and programmatically navigate to the login route (`/login`), potentially reusing navigation logic from Subtask 2.",
+          "status": "done",
+          "testStrategy": "Use mock API calls or a local development backend to simulate protected endpoints. Verify that requests to protected endpoints include the token header. Simulate a 401 response from a protected endpoint and verify that it triggers the logout process (state/storage clear) and redirection to the login page."
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "title": "Frontend: Integrate Features and Fix Routing",
+      "description": "Integrate implemented frontend features like VM management and authentication logic with the routing configuration, and fix any existing routing issues.",
+      "details": "This task involves connecting the previously implemented frontend components and logic (specifically VM management UI/logic from Task 21 and authentication checks from Task 23) with the application's routing system. Review the current routing configuration (e.g., in `src/router/index.js` or similar) to ensure it correctly handles public and protected routes. Implement route guards using the authentication logic to prevent unauthorized access to protected areas (like the VM management dashboard). Ensure smooth navigation between different views (login, dashboard, VM list, VM details, etc.). Address any known issues with the current routing setup, such as incorrect redirects, broken links, or components not rendering correctly on route changes. Verify that parameters are passed correctly through routes where needed (e.g., for VM details).",
+      "testStrategy": "1. Verify that accessing a protected route (e.g., /dashboard, /vms) while logged out redirects the user to the login page. 2. Verify that accessing a public route (e.g., /login, /register) while logged in redirects the user to the dashboard or a designated landing page. 3. Log in successfully and navigate to the VM management section. Verify that the VM list loads correctly. 4. Click on a VM in the list and verify that the VM details page loads with the correct information. 5. Test navigation links/buttons within the application to ensure they direct to the correct routes. 6. Log out and verify that the user is redirected to the login page and cannot access protected routes. 7. Check the browser console for any routing-related errors or warnings during navigation.",
+      "status": "done",
+      "dependencies": [],
+      "priority": "medium",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Analyze and Clean Up Base Routing Configuration",
+          "description": "Review the existing frontend routing configuration (e.g., in `src/router/index.js`). Identify and fix any fundamental issues unrelated to the new features, such as incorrect paths, broken links, misconfigured redirects for public routes, or components not rendering correctly on basic navigation. Ensure the basic structure is sound before adding new logic.",
+          "dependencies": [],
+          "details": "Examine the route definitions, history mode vs hash mode, base paths, and any existing navigation logic. Use browser developer tools to trace navigation and identify errors. Refactor or correct basic route definitions as needed. Ensure public routes like login or home (if applicable) function correctly.",
+          "status": "done",
+          "testStrategy": "Manually navigate between existing public routes. Verify URLs, component rendering, and console for errors."
+        },
+        {
+          "id": 2,
+          "title": "Implement Authentication Route Guards",
+          "description": "Integrate the authentication logic (from Task 23) with the routing system by implementing navigation guards. These guards should check if a user is authenticated before allowing access to protected routes. Redirect unauthenticated users attempting to access protected routes to the login page.",
+          "dependencies": [
+            1
+          ],
+          "details": "Utilize global navigation guards (`router.beforeEach`) or per-route guards. Access the authentication state (e.g., from a Vuex store or Pinia store). Define which routes are protected. If a user is not authenticated and tries to access a protected route, use `next('/login')` or similar to redirect. Handle the case where a user *is* authenticated and tries to access the login/register page (e.g., redirect to dashboard).",
+          "status": "done",
+          "testStrategy": "Attempt to access protected routes directly via URL when logged out. Verify redirection to login. Log in and verify access to protected routes. Log out and verify redirection from protected routes."
+        },
+        {
+          "id": 3,
+          "title": "Define and Configure VM Management Routes",
+          "description": "Add the specific routes required for the VM management features (from Task 21). This includes routes for listing VMs, viewing VM details, and potentially creation/editing. Ensure these routes are correctly defined, use the appropriate components, and are configured as protected routes using the guards implemented in Subtask 2.",
+          "dependencies": [
+            2
+          ],
+          "details": "Define new route objects in the router configuration for paths like `/vms`, `/vms/:id`, `/vms/create`, etc. Map these paths to the relevant VM management components (e.g., `VmListView`, `VmDetailsView`). Mark these routes as requiring authentication (e.g., using meta fields like `meta: { requiresAuth: true }`) so the guards from Subtask 2 protect them. Ensure route parameters (like `:id` for details) are correctly configured.",
+          "status": "done",
+          "testStrategy": "Log in and navigate to the new VM routes (`/vms`, `/vms/:id`). Verify the correct components load. Log out and attempt to access these routes directly. Verify redirection to login."
+        },
+        {
+          "id": 4,
+          "title": "End-to-End Navigation Testing and Refinement",
+          "description": "Perform comprehensive testing of all navigation paths, covering both public and protected routes, including the newly added VM management routes. Test user flows like login -> dashboard -> VM list -> VM details -> logout. Verify correct parameter passing for detail views. Address any remaining routing issues, such as incorrect redirects, broken links within the application, or state issues on navigation.",
+          "dependencies": [
+            3
+          ],
+          "details": "Manually test all significant navigation paths. Click on links and use browser back/forward buttons. Verify that route parameters are correctly received by components (e.g., VM ID in the details view). Check for console errors during navigation. Refine route definitions, guards, or component logic as needed to fix any discovered issues.",
+          "status": "done",
+          "testStrategy": "Execute full user flow tests: Login -> Navigate through all accessible pages (Dashboard, VM List, VM Details) -> Logout. Test edge cases like navigating back after logout, or trying to access protected routes after session expiry (if applicable)."
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "title": "Backend: Implement Default Admin User Creation from .env Variables",
+      "description": "Create logic to automatically provision a default admin user at backend startup using credentials from environment variables, updating the password if the user already exists and it differs.",
+      "details": "Implement a backend initialization routine that reads admin username, password, and email from environment variables (e.g., ADMIN_USERNAME, ADMIN_PASSWORD, ADMIN_EMAIL). On application startup, check if a user with the specified username or email exists. If not, create the admin user with the provided credentials and assign appropriate admin privileges. If the user exists, compare the stored password hash with the hash of the provided password; if they differ, update the password to match the environment variable. Ensure password hashing and validation follow existing security standards. Log actions taken (created, updated, or no action needed) for traceability. Handle errors gracefully, especially around missing environment variables or database connectivity issues.",
+      "testStrategy": "1. Set environment variables with a new admin username, password, and email, then start the backend; verify that the admin user is created with correct credentials and privileges. 2. Change the ADMIN_PASSWORD variable to a new value and restart the backend; confirm that the existing admin user's password is updated. 3. Set the environment variables to match an existing admin user and password; restart the backend and ensure no unnecessary updates occur. 4. Remove or leave blank one or more required environment variables and verify that the backend logs a clear error and does not attempt user creation. 5. Check logs for accurate reporting of actions taken. 6. Attempt login with the admin credentials after each scenario to confirm correct behavior.",
+      "status": "done",
+      "dependencies": [],
+      "priority": "medium",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Read and Validate Admin Credentials from Environment Variables",
+          "description": "Implement logic to read admin username, password, and email from environment variables at backend startup. Validate that all required variables are present and handle missing or invalid values gracefully.",
+          "dependencies": [],
+          "details": "Ensure the application checks for the presence of ADMIN_USERNAME, ADMIN_PASSWORD, and ADMIN_EMAIL environment variables. If any are missing, log an error and prevent further admin user provisioning steps.",
+          "status": "done",
+          "testStrategy": "Test with all variables present, some missing, and all missing. Confirm correct error handling and logging in each scenario."
+        },
+        {
+          "id": 2,
+          "title": "Provision or Update Default Admin User in Database",
+          "description": "On application startup, check if a user with the specified admin username or email exists. If not, create the admin user with the provided credentials and assign admin privileges. If the user exists, compare the stored password hash with the hash of the provided password; if they differ, update the password.",
+          "dependencies": [
+            1
+          ],
+          "details": "Use secure password hashing and validation according to existing security standards. Ensure admin privileges are correctly assigned. Log whether the user was created, updated, or no action was needed.",
+          "status": "done",
+          "testStrategy": "Test cases: user does not exist (should be created), user exists with same password (no action), user exists with different password (should update). Verify admin privileges and logging."
+        },
+        {
+          "id": 3,
+          "title": "Implement Error Handling and Logging for Admin Provisioning",
+          "description": "Ensure all actions and errors during admin user provisioning are logged for traceability. Handle errors related to environment variables, password hashing, and database connectivity gracefully.",
+          "dependencies": [
+            2
+          ],
+          "details": "Log each provisioning step: creation, update, or no action. Log and handle errors such as missing environment variables, failed password hashing, or database issues without crashing the application.",
+          "status": "done",
+          "testStrategy": "Simulate errors (e.g., missing variables, database down) and verify that errors are logged and the application remains stable."
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "title": "Frontend: Optimize Login Page Layout",
+      "description": "Optimize the login page layout to center the form vertically and horizontally on the screen and improve the alignment of input fields and the submit button within the form.",
+      "details": "Refactor the CSS for the login page container and form elements. Use modern CSS techniques like Flexbox or Grid to center the form block both horizontally and vertically within the viewport. Ensure the form elements (input fields, labels, button) have consistent spacing and alignment. Pay attention to responsiveness, ensuring the layout remains clean and functional on various screen sizes (mobile, tablet, desktop). Consider adding appropriate padding and margins to improve visual hierarchy and readability. If using a UI framework, leverage its layout components and utility classes where appropriate.",
+      "testStrategy": "Manually test the login page layout across different screen resolutions and browser window sizes (desktop, tablet, mobile views). Verify that the login form is centered both horizontally and vertically in the viewport. Check that input fields, labels, and the submit button are properly aligned and have consistent spacing within the form. Use browser developer tools to inspect element positioning and styling. Ensure the layout does not break or become unusable on small screens.",
+      "status": "done",
+      "dependencies": [],
+      "priority": "medium",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Prepare Container for Centering",
+          "description": "Identify or create the main container element that wraps the login form. Apply initial CSS properties to this container or its parent (e.g., body or a main wrapper div) to prepare it for Flexbox or Grid layout, which will be used for centering.",
+          "dependencies": [],
+          "details": "Locate the HTML structure for the login page. Identify the element that directly contains the login form. Apply `display: flex;` or `display: grid;` to its parent container (e.g., `body` or a dedicated wrapper div) to enable layout control. Ensure the container takes up sufficient height (e.g., `min-height: 100vh;` on the body or wrapper).",
+          "status": "done",
+          "testStrategy": "Verify in the browser's developer tools that the main container element and its parent have the correct display properties applied."
+        },
+        {
+          "id": 2,
+          "title": "Implement Vertical and Horizontal Centering",
+          "description": "Apply CSS properties to the container prepared in Subtask 1 to center the login form block both vertically and horizontally within the viewport.",
+          "dependencies": [
+            1
+          ],
+          "details": "Using the Flexbox or Grid container set up in Subtask 1, apply properties like `justify-content: center;` and `align-items: center;` (for Flexbox) or `place-items: center;` (for Grid) to center the child element (the login form container).",
+          "status": "done",
+          "testStrategy": "Load the login page in the browser and visually confirm that the entire login form block is centered on the screen, both horizontally and vertically."
+        },
+        {
+          "id": 3,
+          "title": "Refactor Internal Form Element Layout",
+          "description": "Refactor the CSS for the elements *inside* the login form (labels, input fields, button) to use a modern layout approach like Flexbox or Grid to manage their flow and alignment.",
+          "dependencies": [
+            2
+          ],
+          "details": "Apply `display: flex;` to the form element itself or a direct wrapper inside the form. Choose a `flex-direction` (likely `column`) to stack elements vertically. Use properties like `width: 100%;` on input fields and buttons to make them fill the available width within the form.",
+          "status": "done",
+          "testStrategy": "Inspect the form elements in developer tools to ensure they are using the new display properties (flex/grid) and are stacking correctly within the form boundaries."
+        },
+        {
+          "id": 4,
+          "title": "Add Spacing and Refine Alignment within Form",
+          "description": "Apply appropriate padding, margins, and alignment properties to the internal form elements (labels, inputs, button) to ensure consistent spacing, visual hierarchy, and clean alignment.",
+          "dependencies": [
+            3
+          ],
+          "details": "Add `margin-bottom` to labels and input fields for vertical spacing. Ensure consistent padding within input fields. Use `align-self: stretch;` or similar properties if needed to ensure elements like buttons or inputs span the full width. Add padding around the form content itself if necessary.",
+          "status": "done",
+          "testStrategy": "Visually inspect the form to ensure consistent spacing between elements, proper alignment of labels/inputs, and adequate padding around the content. Check for visual consistency."
+        },
+        {
+          "id": 5,
+          "title": "Implement Responsiveness and Final Testing",
+          "description": "Add media queries or use responsive utility classes to ensure the centered layout and internal form styling adapt correctly to various screen sizes (mobile, tablet, desktop). Perform final testing across different devices or browser emulators.",
+          "dependencies": [
+            4
+          ],
+          "details": "Review the layout on different screen widths. Add media queries to adjust margins, padding, or potentially the centering approach if needed for very small screens. Ensure the form doesn't become too wide on large screens (e.g., set a `max-width` on the form container). Test thoroughly on common device sizes.",
+          "status": "done",
+          "testStrategy": "Use browser developer tools responsive mode or actual devices/emulators to test the login page layout on multiple screen sizes (e.g., 320px, 768px, 1024px, 1440px). Verify centering and internal layout remain correct and usable."
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title": "Implement User Logout Functionality",
+      "description": "Implement both frontend and backend logic to allow users to securely log out of the application, invalidating their session or token.",
+      "details": "Frontend Implementation:\n- Add a 'Logout' button or link, typically in a navigation bar or user profile menu.\n- On click, trigger an action that communicates with the backend logout endpoint.\n- Clear any client-side stored authentication data (e.g., tokens in local storage, session cookies).\n- Redirect the user to the login page or homepage after successful logout.\n- Handle potential errors during the logout process (e.g., network issues, backend errors).\n\nBackend Implementation:\n- Create a dedicated API endpoint for logout (e.g., POST /api/auth/logout).\n- This endpoint should receive the logout request, typically including the user's authentication token or session identifier.\n- Invalidate the user's session on the server-side or blacklist/revoke the authentication token.\n- Ensure the endpoint is protected against CSRF attacks if using cookie-based sessions.\n- Return a success response (e.g., 200 OK) upon successful logout.\n- Do not require authentication for the logout endpoint itself, but the logic within should handle requests from both authenticated and potentially unauthenticated users gracefully (though only authenticated users can truly 'log out').\n\nConsiderations:\n- How is authentication managed (sessions, JWT, etc.)? The logout logic must align with the chosen method.\n- Ensure that simply deleting client-side data is not sufficient; server-side invalidation is crucial for security.\n- Provide clear user feedback upon successful logout.",
+      "testStrategy": "1. Manual Testing:\n- Log in with a valid user account.\n- Locate and click the 'Logout' button/link.\n- Verify that the user is redirected to the login page or homepage.\n- Attempt to access a protected page (e.g., dashboard, user profile) directly via URL after logging out. Verify that the user is denied access and potentially redirected back to the login page.\n- Check browser storage (local storage, cookies) to ensure authentication tokens/session identifiers have been removed or invalidated client-side.\n\n2. API Testing:\n- Use a tool like Postman or curl to send a logout request to the backend endpoint with a valid token/session.\n- Verify that the backend returns a success status code (e.g., 200 OK).\n- After the logout request, attempt to use the same token/session to access a protected API endpoint. Verify that the request is rejected with an appropriate error (e.g., 401 Unauthorized, 403 Forbidden).\n- Test sending a logout request without a token/session or with an invalid one. Verify the backend handles this gracefully (e.g., returns 200 OK or a specific error indicating no active session).\n\n3. Automated Testing:\n- Write end-to-end tests using a framework like Cypress or Selenium to simulate user login, navigation to a protected page, clicking logout, and verifying redirection and inability to access protected pages.\n- Write backend integration tests to verify the logout endpoint correctly invalidates sessions/tokens and rejects subsequent requests with the invalidated credentials.",
+      "status": "done",
+      "dependencies": [],
+      "priority": "medium",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Backend: Create Logout Endpoint and Invalidation Logic",
+          "description": "Implement the server-side API endpoint for logout. This involves defining the route, receiving the request (potentially with a token/session identifier), and implementing the core logic to invalidate the user's session or revoke their authentication token in the backend system.",
+          "dependencies": [],
+          "details": "Define the endpoint (e.g., `POST /api/auth/logout`). Implement logic based on the authentication method (e.g., destroy session, mark JWT as invalid/blacklisted). Return a basic success response (e.g., 200 OK). Ensure this endpoint does not require prior authentication to be *called*, but the internal logic should handle the presence or absence of a valid session/token.",
+          "status": "done",
+          "testStrategy": "Use an API client (like Postman or curl) to call the endpoint with a valid token/session identifier and verify that the session/token is invalidated in the backend. Call it without a valid identifier and ensure it doesn't cause errors."
+        },
+        {
+          "id": 2,
+          "title": "Backend: Secure and Refine Logout Endpoint",
+          "description": "Enhance the backend logout endpoint with security measures and handle different request scenarios. This includes adding CSRF protection if using cookie-based sessions and gracefully handling requests from users who are already logged out or provide invalid credentials.",
+          "dependencies": [
+            1
+          ],
+          "details": "If using cookies, implement CSRF protection (e.g., check CSRF token). Add logic to check if the user is currently authenticated before attempting to log out, although the endpoint should still return a success status (200 OK) even if the user wasn't authenticated, as the desired state (logged out) is achieved. Ensure proper logging for logout attempts.",
+          "status": "done",
+          "testStrategy": "Test the endpoint with missing/invalid tokens/sessions. Test with a valid session/token after it has already been invalidated. If using cookies, test with and without a valid CSRF token. Verify the response status code is consistently 200 OK for any logout attempt."
+        },
+        {
+          "id": 3,
+          "title": "Frontend: Add Logout UI Element",
+          "description": "Add a visible user interface element (button or link) that users can click to initiate the logout process. This element should be placed in an appropriate location, such as a navigation bar, user profile dropdown, or settings page.",
+          "dependencies": [
+            2
+          ],
+          "details": "Implement the UI component (e.g., `<button>` or `<a>`). Style it appropriately according to the application's design system. Ensure it's conditionally rendered and only visible when a user is authenticated.",
+          "status": "done",
+          "testStrategy": "Visually inspect the application in a browser. Log in and verify the logout element appears in the correct location. Log out (manually or via other means if available) and verify the element is hidden."
+        },
+        {
+          "id": 4,
+          "title": "Frontend: Implement Logout Action and Backend Call",
+          "description": "Implement the client-side JavaScript logic that is triggered when the logout UI element is clicked. This logic should make an asynchronous call (e.g., using Fetch API or Axios) to the backend logout endpoint created in previous steps.",
+          "dependencies": [
+            3
+          ],
+          "details": "Add an event listener to the logout element. Inside the listener, prevent the default action (if it's a link). Make a `POST` request to the backend logout endpoint (`/api/auth/logout`). Handle the promise/callback for the request, specifically looking for a successful response status (e.g., 200 OK).",
+          "status": "done",
+          "testStrategy": "Log in as a user. Click the logout button/link. Use browser developer tools (Network tab) to verify that the correct `POST` request is sent to the backend endpoint and that a successful response is received."
+        },
+        {
+          "id": 5,
+          "title": "Frontend: Implement Client-side Cleanup and Redirection",
+          "description": "Complete the frontend logout process by clearing any authentication data stored client-side (e.g., tokens in local storage, cookies) and redirecting the user to a post-logout page, typically the login page or homepage. Also, provide user feedback (e.g., a success message) and handle errors.",
+          "dependencies": [
+            4
+          ],
+          "details": "After receiving a successful response from the backend logout endpoint in the logic from subtask 4, remove authentication tokens from `localStorage` or `sessionStorage`. Clear any relevant cookies that store authentication state. Use `window.location.replace()` or a routing library's navigation function to redirect the user to the login page or homepage. Implement error handling for the backend call (e.g., display a temporary error message to the user if the logout request fails).",
+          "status": "done",
+          "testStrategy": "Log in as a user. Click the logout button. Verify that client-side storage (local storage, session storage, relevant cookies) is cleared. Verify that the user is automatically redirected to the expected post-logout page. Simulate a backend error response (e.g., using browser dev tools network tab to block/modify the response) and verify that an error message is displayed."
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "title": "Backend: Implement Server CRUD Services",
+      "description": "Implement the necessary backend services to support Create, Read, Update, and Delete operations for server entities.",
+      "details": "This task involves developing the backend API endpoints and corresponding service logic for managing server resources. Define the data model for a 'Server' entity, including properties like name, IP address, status, etc. Implement the following RESTful endpoints:\n- `POST /servers`: Create a new server.\n- `GET /servers`: Retrieve a list of all servers.\n- `GET /servers/{id}`: Retrieve a specific server by its ID.\n- `PUT /servers/{id}`: Update an existing server by its ID.\n- `DELETE /servers/{id}`: Delete a server by its ID.\nEnsure proper input validation for creation and update operations. Implement appropriate error handling for cases like invalid input, server not found, or database errors. Consider using a database ORM or query builder for data persistence. Secure the endpoints as per the project's authentication/authorization strategy.",
+      "testStrategy": "Develop comprehensive tests to verify the CRUD functionality. This includes:\n- Unit tests for the service layer logic, ensuring correct data manipulation and validation.\n- Integration tests for the API endpoints, verifying that requests are correctly routed, processed, and persisted.\n- Test cases for creating a server (valid and invalid data).\n- Test cases for retrieving all servers (empty list, non-empty list).\n- Test cases for retrieving a specific server (existing ID, non-existing ID).\n- Test cases for updating a server (existing ID with valid data, existing ID with invalid data, non-existing ID).\n- Test cases for deleting a server (existing ID, non-existing ID).\n- Test error handling scenarios, such as invalid input formats or attempts to access/modify non-existent resources.\n- Verify that endpoints are protected by authentication/authorization if required.",
+      "status": "done",
+      "dependencies": [],
+      "priority": "medium",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Define Server Data Model and Persistence Layer",
+          "description": "Define the data model for the 'Server' entity, including properties like name, IP address, status, etc. Set up the necessary database schema or model definition and configure the ORM or database access layer for this entity.",
+          "dependencies": [],
+          "details": "Create the Server model class/schema with appropriate data types and constraints. Configure the ORM (e.g., Entity Framework, SQLAlchemy, Mongoose) to map the model to the database. Implement basic repository or DAO functions for interacting with the Server data.",
+          "status": "done",
+          "testStrategy": "Verify the model definition and database mapping are correctly configured. Run schema migrations if applicable. Test basic connectivity to the database via the configured layer."
+        },
+        {
+          "id": 2,
+          "title": "Implement Create Server (POST) Endpoint",
+          "description": "Implement the `POST /servers` API endpoint and the corresponding service logic to handle the creation of a new server entity in the database.",
+          "dependencies": [
+            1
+          ],
+          "details": "Define the API route for POST /servers. Implement the controller/handler function to receive the request body. Add input validation for required fields (e.g., name, IP address). Call the persistence layer function (from subtask 1) to save the new server. Return a success response (e.g., 201 Created) with the newly created server data, or a validation error (e.g., 400 Bad Request).",
+          "status": "done",
+          "testStrategy": "Write integration tests to send POST requests with valid and invalid server data. Verify the response status code, response body, and check the database to confirm the server was created correctly or not created on failure."
+        },
+        {
+          "id": 3,
+          "title": "Implement Read Servers (GET) Endpoints",
+          "description": "Implement the `GET /servers` and `GET /servers/{id}` API endpoints and their corresponding service logic to retrieve server entities from the database.",
+          "dependencies": [
+            1
+          ],
+          "details": "Define the API routes for GET /servers (list all) and GET /servers/{id} (get by ID). Implement controller/handler functions. Call the persistence layer functions (from subtask 1) to fetch all servers or a specific server by ID. Return a success response (e.g., 200 OK) with the server data. Implement error handling for 'server not found' (e.g., 404 Not Found) for the GET by ID endpoint.",
+          "status": "done",
+          "testStrategy": "Write integration tests to send GET requests for the list endpoint and for specific server IDs (existing and non-existing). Verify the response status codes and the correctness of the returned data."
+        },
+        {
+          "id": 4,
+          "title": "Implement Update Server (PUT) Endpoint",
+          "description": "Implement the `PUT /servers/{id}` API endpoint and the corresponding service logic to handle updating an existing server entity in the database.",
+          "dependencies": [
+            1,
+            3
+          ],
+          "details": "Define the API route for PUT /servers/{id}. Implement the controller/handler function. Add input validation for update fields. Call the persistence layer function (from subtask 1, potentially reusing find logic from subtask 3) to find the server by ID. If found, update its properties based on the request body and save the changes. Handle 'server not found' (404) and validation errors (400). Return a success response (e.g., 200 OK) with the updated server data.",
+          "status": "done",
+          "testStrategy": "Write integration tests to send PUT requests with valid and invalid data for existing and non-existing server IDs. Verify the response status codes, response body, and check the database to confirm the server was updated correctly or not."
+        },
+        {
+          "id": 5,
+          "title": "Implement Delete Server (DELETE) Endpoint",
+          "description": "Implement the `DELETE /servers/{id}` API endpoint and the corresponding service logic to handle the deletion of a server entity from the database.",
+          "dependencies": [
+            1,
+            3
+          ],
+          "details": "Define the API route for DELETE /servers/{id}. Implement the controller/handler function. Call the persistence layer function (from subtask 1, potentially reusing find logic from subtask 3) to find the server by ID. If found, delete the server from the database. Handle 'server not found' (404). Return an appropriate success response (e.g., 204 No Content or 200 OK).",
+          "status": "done",
+          "testStrategy": "Write integration tests to send DELETE requests for existing and non-existing server IDs. Verify the response status codes and check the database to confirm the server was deleted or remained untouched."
+        },
+        {
+          "id": 6,
+          "title": "Add Logging for Server Creation Troubleshooting",
+          "description": "Add appropriate logging to troubleshoot the issue of not being able to add a server record to the database.",
+          "details": "Implement logging at key points in the server creation process, including validation, service layer, and repository layer. Capture relevant information such as input data, validation errors, and database operation outcomes.",
+          "status": "done",
+          "dependencies": [],
+          "parentTaskId": 28
+        },
+        {
+          "id": 7,
+          "title": "Investigate and Fix 401 Unauthorized Error on Server Creation",
+          "description": "Investigate why the POST /api/servers request is returning a 401 Unauthorized error and implement the necessary fixes.",
+          "details": "Review backend authentication middleware and frontend API call to identify the cause of the 401 error. Ensure proper token handling and inclusion in the request headers.",
+          "status": "done",
+          "dependencies": [],
+          "parentTaskId": 28
+        },
+        {
+          "id": 8,
+          "title": "Fix Backend Server Creation to Generate ID Before Insertion",
+          "description": "Investigate and fix the issue where the backend is not generating an ID for the server record before inserting it into the database.",
+          "details": "Review the server creation logic in the backend service and repository layers to ensure that a valid ID is generated for new server records.",
+          "status": "done",
+          "dependencies": [],
+          "parentTaskId": 28
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "title": "Optimize Admin Users Functionality Layout and UI/UX",
+      "description": "Improve the layout and UI/UX of the Admin Users management page to display list data and enhance the add user functionality.",
+      "details": "",
+      "testStrategy": "",
+      "status": "done",
+      "dependencies": [],
+      "priority": "medium",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Improve User List Table Layout and Styling",
+          "description": "Redesign and implement the layout and styling for the table or list view displaying existing admin users. Focus on readability, column structure, basic sorting/filtering UI elements (if applicable), and pagination UI.",
+          "dependencies": [],
+          "details": "Update the HTML/component structure for the user list table. Apply CSS/styling to improve visual appearance, spacing, and alignment. Ensure key user information (e.g., username, email, roles, status) is clearly displayed. Consider responsive table design principles.",
+          "status": "done",
+          "testStrategy": "Manually verify the table layout and styling on different screen sizes. Check that data is displayed correctly and columns are aligned."
+        },
+        {
+          "id": 2,
+          "title": "Design and Implement 'Add User' Button and Entry Point UI",
+          "description": "Design and implement the UI element (button or link) to initiate the 'Add User' process. Define and implement the initial state of the add user interface, such as a modal, a slide-out panel, or a dedicated form section.",
+          "dependencies": [
+            1
+          ],
+          "details": "Add a prominent 'Add User' button to the page, typically above or near the user list. Implement the mechanism to trigger the add user form display (e.g., toggle a modal component, navigate to a new route, or reveal an inline form area). Style the button and the container for the add user form.",
+          "status": "done",
+          "testStrategy": "Verify the 'Add User' button is visible and clickable. Confirm that clicking the button correctly displays the intended add user interface container (modal, panel, etc.) in its initial empty state."
+        },
+        {
+          "id": 3,
+          "title": "Implement Add User Form Fields and Basic Validation UI",
+          "description": "Build the user interface for the 'Add User' form itself. Include necessary input fields (e.g., username, email, password, role selection). Implement basic client-side validation UI feedback (e.g., highlighting required fields, showing format errors).",
+          "dependencies": [
+            2
+          ],
+          "details": "Add input elements (text fields, dropdowns, checkboxes) within the add user interface container defined in subtask 2. Label fields clearly. Implement visual cues for required fields and display error messages or styling for invalid input based on client-side checks (e.g., email format, password strength requirements). Include Save/Submit and Cancel buttons.",
+          "status": "done",
+          "testStrategy": "Manually test the form fields: ensure they are editable, labels are correct. Test basic client-side validation by entering invalid data and verifying error messages/styling appear correctly. Test the Cancel button functionality."
+        },
+        {
+          "id": 4,
+          "title": "Refine Overall Page Layout, Responsiveness, and UI/UX Flow",
+          "description": "Review the complete Admin Users page with the list and add user components integrated. Make final adjustments to the overall page layout, spacing, and alignment. Ensure responsiveness across various devices. Refine the UI/UX flow for adding a user, including success/error feedback display.",
+          "dependencies": [
+            3
+          ],
+          "details": "Adjust margins, padding, and component positioning for optimal layout. Use CSS media queries or responsive design frameworks to ensure the page is usable on desktops, tablets, and mobile phones. Implement UI feedback for form submission (e.g., loading state, success message on successful add, error message on failure). Ensure smooth transitions or interactions between the list view and the add user form.",
+          "status": "done",
+          "testStrategy": "Test the full page flow: view the list, open the add user form, attempt to submit valid and invalid data, observe feedback. Test the page layout and functionality on multiple devices or using browser developer tools' responsive mode."
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "title": "Implement Frontend and Backend Integration for User Management",
+      "description": "Create frontend API service for User Management and integrate it with the backend API endpoints.",
+      "details": "",
+      "testStrategy": "",
+      "status": "done",
+      "dependencies": [],
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Define and Implement Frontend User Management API Service Structure",
+          "description": "Create the basic structure and interface for the frontend service responsible for interacting with the backend User Management API. Define methods for common operations (e.g., getUsers, createUser, updateUser, deleteUser) without implementing the actual HTTP calls yet. This service will act as a wrapper around backend API interactions.",
+          "dependencies": [],
+          "details": "Create a new service file (e.g., `userService.js` or `userService.ts`). Define an object or class with methods corresponding to user management operations. Use promises or async/await for method return types. Initially, these methods can return mock data or simply log calls to verify the structure.",
+          "status": "done",
+          "testStrategy": "Write unit tests for the service structure to ensure methods are defined correctly and handle basic input/output types (even with mock data)."
+        },
+        {
+          "id": 2,
+          "title": "Implement Backend API Calls in Frontend User Management Service",
+          "description": "Add the actual logic to the frontend user management service methods to make HTTP requests to the corresponding backend API endpoints. This involves using a frontend HTTP client (like Axios, Fetch API, etc.) to send requests and handle responses.",
+          "dependencies": [
+            1
+          ],
+          "details": "Modify the methods defined in Subtask 1. Use the chosen HTTP client to make GET, POST, PUT, DELETE requests to the backend User Management endpoints. Configure request headers (e.g., Content-Type, Authorization), include request bodies for create/update operations, and handle response data and potential errors. Ensure correct mapping of frontend method parameters to backend request parameters/bodies.",
+          "status": "done",
+          "testStrategy": "Perform integration tests by running the frontend application and verifying that the service methods successfully make calls to the backend API (using browser developer tools network tab) and handle responses correctly. Mock backend responses for specific unit tests if necessary."
+        },
+        {
+          "id": 3,
+          "title": "Integrate Frontend User Management Service into UI Components",
+          "description": "Use the implemented frontend user management service (from Subtask 2) within the relevant frontend UI components that require user management functionality (e.g., a user list page, a user detail form, a user creation modal).",
+          "dependencies": [
+            2
+          ],
+          "details": "Import the user management service into the necessary components. Call the service methods based on user interactions (button clicks, form submissions) or component lifecycle events (component mount for fetching data). Handle loading states, display data returned by the service, and manage errors. Update UI based on successful operations (e.g., refresh list after deletion).",
+          "status": "done",
+          "testStrategy": "Perform end-to-end testing by interacting with the UI components. Verify that user actions trigger the correct API calls via the service and that the UI updates correctly based on the responses (e.g., users appear in the list, user details are displayed, error messages are shown)."
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "title": "Optimize and Refine Virtual Machine List, CRUD Operations, and Frontend Layout",
+      "description": "Enhance the Virtual Machine management module by optimizing the list display, perfecting CRUD functionality, and improving the frontend layout for usability and consistency.",
+      "details": "Review and refactor the Virtual Machine (VM) list component to ensure efficient data loading, sorting, and filtering. Audit and enhance all Create, Read, Update, and Delete (CRUD) operations for VMs, ensuring robust error handling, validation, and user feedback. Redesign the frontend layout for the VM management section to align with modern UI/UX standards, ensuring responsiveness, accessibility, and consistency with the rest of the application. Collaborate with backend developers to address any API performance or data consistency issues uncovered during optimization. Document all changes and update user-facing help or tooltips as needed.",
+      "testStrategy": "Verify that the VM list loads efficiently with large datasets, supports sorting and filtering, and displays all relevant VM attributes. Test all CRUD operations for VMs, including edge cases and error scenarios, ensuring proper validation and user notifications. Conduct UI/UX reviews to confirm layout improvements, responsiveness, and accessibility compliance. Perform cross-browser and device testing. Solicit feedback from stakeholders or end users, and confirm that all acceptance criteria are met before closing the task.",
+      "status": "done",
+      "dependencies": [],
+      "priority": "medium",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Optimize VM List Component Performance",
+          "description": "Refactor the Virtual Machine list component to improve data loading, implement efficient sorting and filtering mechanisms, and reduce rendering time.",
+          "dependencies": [],
+          "details": "Implement lazy loading for VM data to reduce initial load time. Add server-side pagination to handle large datasets. Optimize sorting algorithms for VM attributes like name, status, and resource usage. Implement client-side caching for frequently accessed VM data. Add performance metrics tracking to measure improvements.\n<info added on 2025-05-14T08:04:50.957Z>\nImplement lazy loading for VM data to reduce initial load time. Add server-side pagination to handle large datasets. Optimize sorting algorithms for VM attributes like name, status, and resource usage. Implement client-side caching for frequently accessed VM data. Add performance metrics tracking to measure improvements. Key files to modify or create include frontend/src/pages/VmListPage.tsx (for UI and data handling logic) and frontend/src/services/vmApiService.ts (for API calls, caching, and pagination logic). Ensure these files are updated to support efficient data fetching, sorting, filtering, and caching. Test with varying dataset sizes (10, 100, 1000 VMs) to validate performance gains and correct functionality.\n</info added on 2025-05-14T08:04:50.957Z>",
+          "status": "done",
+          "testStrategy": "Measure component load time before and after optimization. Test with varying dataset sizes (10, 100, 1000 VMs). Verify sorting and filtering functionality works correctly with different VM attributes."
+        },
+        {
+          "id": 2,
+          "title": "Enhance VM CRUD Operations",
+          "description": "Audit and improve all Create, Read, Update, and Delete operations for Virtual Machines with robust error handling, validation, and user feedback mechanisms.",
+          "dependencies": [
+            1
+          ],
+          "details": "Implement comprehensive form validation for VM creation and updates following best practices for VM configuration. Add detailed error handling with user-friendly messages for common VM operation failures. Create confirmation dialogs for destructive operations. Implement progress indicators for long-running operations. Add success notifications with appropriate context.\n<info added on 2025-05-14T08:05:03.898Z>\nImplement comprehensive form validation for VM creation and updates following best practices for VM configuration. Add detailed error handling with user-friendly messages for common VM operation failures. Create confirmation dialogs for destructive operations. Implement progress indicators for long-running operations. Add success notifications with appropriate context. Key files to modify or create include frontend/src/pages/VmFormPage.tsx (for form logic, validation, and user feedback) and frontend/src/services/vmApiService.ts (for API calls, error handling, and status tracking). Ensure all CRUD operations are tested with valid and invalid inputs, and that error messages are clear and actionable. Test edge cases such as network interruptions during operations.\n</info added on 2025-05-14T08:05:03.898Z>",
+          "status": "done",
+          "testStrategy": "Test all CRUD operations with valid and invalid inputs. Verify error messages are clear and actionable. Test edge cases like network interruptions during operations."
+        },
+        {
+          "id": 3,
+          "title": "Redesign VM Management Frontend Layout",
+          "description": "Revamp the frontend layout for VM management to align with modern UI/UX standards, ensuring responsiveness, accessibility, and visual consistency.",
+          "dependencies": [
+            1
+          ],
+          "details": "Create responsive layouts that work across desktop and mobile devices. Implement consistent spacing, typography, and color schemes matching application design system. Add keyboard navigation support for all VM management functions. Ensure WCAG 2.1 AA compliance for accessibility. Optimize layout for different VM management workflows based on user research.\n<info added on 2025-05-14T08:05:54.057Z>\nCreate responsive layouts that work across desktop and mobile devices. Implement consistent spacing, typography, and color schemes matching application design system. Add keyboard navigation support for all VM management functions. Ensure WCAG 2.1 AA compliance for accessibility. Optimize layout for different VM management workflows based on user research. Key files to modify or create include frontend/src/pages/VmListPage.tsx for the main VM listing and management interface, and frontend/src/components/VmCard.tsx for individual VM card components. These files should be updated to support new layout structures, accessibility features, and responsive design patterns. Consider integrating modern UI components such as cards, modals, and action menus for CRUD operations, and ensure all interactive elements are keyboard navigable and screen-reader friendly. Test layouts across multiple screen sizes and devices. Conduct accessibility audit using automated tools and manual testing. Gather user feedback on the new design through usability testing.\n</info added on 2025-05-14T08:05:54.057Z>",
+          "status": "done",
+          "testStrategy": "Test layouts across multiple screen sizes and devices. Conduct accessibility audit using automated tools and manual testing. Gather user feedback on the new design through usability testing."
+        },
+        {
+          "id": 4,
+          "title": "Optimize Backend API Integration",
+          "description": "Collaborate with backend developers to address API performance issues, improve data consistency, and optimize VM data retrieval and manipulation.",
+          "dependencies": [
+            2
+          ],
+          "details": "Identify and resolve bottlenecks in VM data retrieval. Implement efficient data transfer formats to reduce payload size. Establish consistent error handling patterns between frontend and backend. Create or update API documentation for VM endpoints. Implement retry mechanisms for transient failures in VM operations.\n<info added on 2025-05-14T08:06:18.383Z>\nIdentify and resolve bottlenecks in VM data retrieval by reviewing and optimizing backend/src/services/virtualMachineService.js and backend/src/repositories/virtualMachineRepository.js. Implement efficient data transfer formats (such as selective property fetching and pagination) to reduce payload size and improve response times. Establish consistent error handling patterns between frontend and backend, ensuring clear error codes and messages are returned. Create or update API documentation for VM endpoints, including request/response examples and rate limits. Implement retry mechanisms for transient failures in VM operations, such as network timeouts or rate limit errors. Measure API response times before and after optimization, and test concurrent API requests to ensure stability. Verify error handling works consistently across all VM operations.\n</info added on 2025-05-14T08:06:18.383Z>",
+          "status": "done",
+          "testStrategy": "Measure API response times before and after optimization. Test concurrent API requests to ensure stability. Verify error handling works consistently across all VM operations."
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "title": "全面審查專案代碼與現有 Schema",
+      "description": "詳細審查專案的 Readme.md, backend/ (特別是 backend/prisma/schema.prisma), 以及 frontend/ 目錄下的所有代碼。完全理解目前專案的啟動流程、環境配置需求。掌握後端 API 的實作方式、代碼結構、資料庫互動邏輯。掌握前端元件的組織方式、狀態管理、API 串接方法。深入理解當前 prisma/schema.prisma 中各 Model 的定義及其之間的關聯性。產出: 一份審查筆記，記錄關鍵發現、潛在問題點、以及對當前架構的理解。",
+      "details": "",
+      "testStrategy": "",
+      "status": "done",
+      "dependencies": [],
+      "priority": "medium",
+      "subtasks": []
+    },
+    {
+      "id": 35,
+      "title": "DB Schema 設計 - GpuCardModel (GPU 型號/規格)",
+      "description": "根據需求設計新的 GpuCardModel。此 Model 用於記錄 GPU 的唯一型號資訊。包含欄位：id (PK), vendor (String), modelName (String), architecture (String, 可選), memoryGb (Int)。確保 vendor 和 modelName 的組合具有唯一性約束。產出: 更新後的 prisma/schema.prisma 文件片段。",
+      "details": "",
+      "testStrategy": "",
+      "status": "done",
+      "dependencies": [],
+      "priority": "medium",
+      "subtasks": []
+    },
+    {
+      "id": 36,
+      "title": "DB Schema 設計 - GpuCardInstance (GPU 庫存實例)",
+      "description": "設計新的 GpuCardInstance Model，用於追蹤每一張實際的 GPU 卡。包含欄位：id (PK), gpuCardModelId (FK to GpuCardModel.id), serialNumber (String, Optional, Unique), status (String, e.g., \"available\", \"in_server\", \"in_use_by_vm\", \"maintenance\", \"defective\"), purchaseDate (DateTime, Optional), notes (String, Optional), serverId (String, FK to Server.id, Optional, 表示當前安裝在哪台伺服器)。產出: 更新後的 prisma/schema.prisma 文件片段。",
+      "details": "",
+      "testStrategy": "",
+      "status": "done",
+      "dependencies": [],
+      "priority": "medium",
+      "subtasks": []
+    },
+    {
+      "id": 37,
+      "title": "DB Schema 調整 - 更新 Server Model",
+      "description": "調整 Server Model 以反映新的 GPU 庫存管理方式。移除 Server Model 中的 gpuCards: GpuCard[]。新增與 GpuCardInstance 的一對多關聯：installedGpuInstances: GpuCardInstance[]。產出: 更新後的 prisma/schema.prisma 文件片段。",
+      "details": "",
+      "testStrategy": "",
+      "status": "done",
+      "dependencies": [],
+      "priority": "medium",
+      "subtasks": []
+    },
+    {
+      "id": 38,
+      "title": "DB Schema 調整 - 更新 VirtualMachine Model",
+      "description": "調整 VirtualMachine Model，使其正確關聯到 GPU 卡實例。修改 assignedGpuCardId 欄位，使其正確指向 GpuCardInstance.id。更新關聯 assignedGpuCard 為 assignedGpuInstance 指向 GpuCardInstance?。產出: 更新後的 prisma/schema.prisma 文件片段。",
+      "details": "",
+      "testStrategy": "",
+      "status": "done",
+      "dependencies": [],
+      "priority": "medium",
+      "subtasks": []
+    },
+    {
+      "id": 39,
+      "title": "DB Schema 調整 - 處理舊 GpuCard Model",
+      "description": "決定如何處理現有的 GpuCard Model。建議是移除或重命名，並規劃數據遷移策略（如果需要）。分析現有 GpuCard 中的數據。如果數據需要保留，規劃遷移至新的 GpuCardModel 和 GpuCardInstance 的腳本或步驟。從 prisma/schema.prisma 中移除舊的 GpuCard Model 定義。調整 User Model，移除與舊 GpuCard 的直接關聯 gpuCards: GpuCard[]。",
+      "details": "",
+      "testStrategy": "",
+      "status": "done",
+      "dependencies": [],
+      "priority": "medium",
+      "subtasks": []
+    },
+    {
+      "id": 40,
+      "title": "執行 Prisma Migrate",
+      "description": "套用所有 Schema 變更到資料庫。運行 prisma migrate dev --name update_gpu_management_schema 命令來產生並應用資料庫遷移。解決遷移過程中可能出現的任何衝突。",
+      "details": "",
+      "testStrategy": "",
+      "status": "done",
+      "dependencies": [],
+      "priority": "medium",
+      "subtasks": []
+    },
+    {
+      "id": 41,
+      "title": "Backend - GpuCardModel CRUD API",
+      "description": "實作 GpuCardModel (GPU 型號/規格) 的後端 CRUD API。API 端點用於列表、創建、讀取、更新、刪除 GPU 型號。\n\n請review & 參考 Readme 以及現有的 backend/src/index.js, backend/src/repositories/serverRepository.js, backend/src/services/serverService.js 的實作方式來進行。",
+      "status": "done",
+      "dependencies": [],
+      "priority": "medium",
+      "details": "根據現有的專案結構，實作 GpuCardModel 的 CRUD API 應包含以下層次：\n\n1.  **Repository 層**: 負責與資料庫互動，執行 GpuCardModel 的增刪改查操作。\n2.  **Service 層**: 包含業務邏輯，協調 Repository 層的操作。\n3.  **Controller/Router 層**: 定義 API 端點，處理請求和回應，呼叫 Service 層。",
+      "testStrategy": "1.  使用工具 (如 Postman, curl) 或自動化測試框架測試各個 CRUD API 端點。\n2.  測試列表 (GET /api/gpu-card-models) 是否能正確返回資料。\n3.  測試創建 (POST /api/gpu-card-models) 是否能成功新增資料並返回新資料。\n4.  測試讀取 (GET /api/gpu-card-models/:id) 是否能根據 ID 返回特定資料。\n5.  測試更新 (PUT /api/gpu-card-models/:id) 是否能成功更新特定資料。\n6.  測試刪除 (DELETE /api/gpu-card-models/:id) 是否能成功刪除特定資料。\n7.  測試邊界情況和錯誤處理 (如無效 ID, 缺少必要欄位等)。",
+      "subtasks": [
+        {
+          "id": "41-1",
+          "description": "Review existing code structure (Readme, server related files).",
+          "status": "done",
+          "details": ""
+        },
+        {
+          "id": "41-2",
+          "description": "Implement GpuCardModel Repository.",
+          "status": "done",
+          "details": "Create `backend/src/repositories/gpuCardModelRepository.js` following the pattern of `serverRepository.js`."
+        },
+        {
+          "id": "41-3",
+          "description": "Implement GpuCardModel Service.",
+          "status": "done",
+          "details": "Create `backend/src/services/gpuCardModelService.js` following the pattern of `serverService.js`."
+        },
+        {
+          "id": "41-4",
+          "description": "Implement GpuCardModel Controller/Router.",
+          "status": "done",
+          "details": "Create `backend/src/controllers/gpuCardModelController.js` or similar, defining API endpoints for CRUD operations."
+        },
+        {
+          "id": "41-5",
+          "description": "Integrate GpuCardModel routes into the main application.",
+          "status": "done",
+          "details": "Add the new routes to `backend/src/index.js` or a dedicated router file."
+        },
+        {
+          "id": "41-6",
+          "description": "Write and execute tests for GpuCardModel CRUD API.",
+          "status": "done",
+          "details": "Implement tests based on the defined test strategy."
+        }
+      ]
+    },
+    {
+      "id": 42,
+      "title": "Backend - GpuCardInstance CRUD API",
+      "description": "實作 GpuCardInstance (GPU 庫存實例) 的後端 CRUD API。API 端點用於列表、創建、讀取、更新、刪除 GPU 庫存實例，包括更新其狀態和所在伺服器。實作前請 review & 參考 Readme, backend/src/index.js, backend/src/repositories/serverRepository.js, backend/src/services/serverService.js 的實作方式。",
+      "status": "done",
+      "dependencies": [],
+      "priority": "medium",
+      "details": "根據 Readme 和現有的 Server 相關實作 (repository, service, index.js) 的模式，實作 GpuCardInstance 的後端 CRUD API。\n\nAPI 應包含以下功能：\n- 列表所有 GpuCardInstance\n- 創建新的 GpuCardInstance\n- 讀取單個 GpuCardInstance 的詳細信息\n- 更新單個 GpuCardInstance 的信息 (包括狀態和關聯的伺服器)\n- 刪除單個 GpuCardInstance",
+      "testStrategy": "1. 單元測試：\n   - 測試 Repository 層的各個方法 (create, find, findById, update, delete)。\n   - 測試 Service 層的業務邏輯，確保正確調用 Repository 方法並處理數據。\n2. 整合測試：\n   - 測試 API 端點，使用測試客戶端發送 HTTP 請求 (GET, POST, PUT, DELETE)，驗證響應狀態碼和數據是否正確。\n   - 測試創建、讀取、更新 (特別是狀態和伺服器字段)、刪除的完整流程。\n   - 驗證數據庫中的數據是否與 API 操作一致。\n3. 手動測試：\n   - 使用 API 開發工具 (如 Postman) 手動測試各個 API 端點。",
+      "subtasks": [
+        {
+          "id": "42-1",
+          "description": "Review Readme 和現有的 Server 相關實作 (repository, service, index.js)",
+          "status": "done"
+        },
+        {
+          "id": "42-2",
+          "description": "設計 GpuCardInstance 的資料模型和資料庫操作 (Repository 層)",
+          "status": "done"
+        },
+        {
+          "id": "42-3",
+          "description": "實作 GpuCardInstance 的資料庫操作方法 (Repository 層)",
+          "status": "done"
+        },
+        {
+          "id": "42-4",
+          "description": "實作 GpuCardInstance 的業務邏輯 (Service 層)",
+          "status": "done"
+        },
+        {
+          "id": "42-5",
+          "description": "實作 GpuCardInstance 的 API 控制器 (Controller 層)",
+          "status": "done"
+        },
+        {
+          "id": "42-6",
+          "description": "定義 GpuCardInstance 的 API 路由並連接到 Controller",
+          "status": "done"
+        },
+        {
+          "id": "42-7",
+          "description": "編寫 GpuCardInstance Repository 的單元測試",
+          "status": "done"
+        },
+        {
+          "id": "42-8",
+          "description": "編寫 GpuCardInstance Service 的單元測試",
+          "status": "done"
+        },
+        {
+          "id": "42-9",
+          "description": "編寫 GpuCardInstance API 的整合測試",
+          "status": "done"
+        },
+        {
+          "id": "42-10",
+          "description": "手動測試所有 GpuCardInstance API 端點",
+          "status": "done"
+        }
+      ]
+    },
+    {
+      "id": 43,
+      "title": "Backend - Server API 更新 (GPU 分配)",
+      "description": "根據現有 Readme, backend/src/index.js, backend/src/repositories/serverRepository.js, backend/src/services/serverService.js 的實作風格，更新 Server 相關的 API，以支援將 GpuCardInstance 分配給 Server 或從 Server 移除。",
+      "status": "done",
+      "dependencies": [],
+      "priority": "medium",
+      "details": "需要實作以下 API：\n\n1.  **POST /api/servers/{serverId}/assign-gpu**\n    *   功能：將一個 GpuCardInstance 分配給指定的 Server。\n    *   Request Body: 包含要分配的 GpuCardInstance ID。\n    *   Response: 分配成功的 Server 物件或錯誤訊息。\n    *   需檢查 Server 和 GpuCardInstance 是否存在，以及 GpuCardInstance 是否未被分配。\n\n2.  **DELETE /api/servers/{serverId}/unassign-gpu/{gpuInstanceId}**\n    *   功能：從指定的 Server 移除一個已分配的 GpuCardInstance。\n    *   Response: 移除成功的 Server 物件或錯誤訊息。\n    *   需檢查 Server 和 GpuCardInstance 是否存在，以及 GpuCardInstance 是否確實分配給該 Server。\n\n實作時請參考現有程式碼（如 Server 相關的 Repository 和 Service）的結構和錯誤處理方式。",
+      "testStrategy": "針對新實作的 API 撰寫單元測試和整合測試，確保分配和移除功能正確，並涵蓋各種邊界情況（如 Server 或 GPU 不存在、GPU 已被分配等）。",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Implement Repository Methods for GPU Assignment",
+          "description": "Add or update repository methods to handle the database operations required for assigning and unassigning GpuCardInstances to Servers. This likely involves updating a foreign key on the GpuCardInstance table or managing a linking table.",
+          "dependencies": [],
+          "details": "Modify `backend/src/repositories/serverRepository.js` or create a new repository if appropriate. Implement methods like `updateGpuInstanceServerId(gpuInstanceId, serverId)` to link a GPU to a server, and `clearGpuInstanceServerId(gpuInstanceId)` to unlink it. Ensure these methods handle potential database errors.",
+          "status": "done",
+          "testStrategy": "Write unit tests for the new repository methods to ensure they correctly update the database based on provided IDs."
+        },
+        {
+          "id": 2,
+          "title": "Implement Service Logic for Assigning GPU",
+          "description": "Create the business logic in the service layer for assigning a GpuCardInstance to a Server, including necessary validation checks.",
+          "dependencies": [
+            1
+          ],
+          "details": "Add a method `assignGpuToServer(serverId, gpuInstanceId)` to `backend/src/services/serverService.js`. Inside this method:\n1. Validate that the Server with `serverId` exists.\n2. Validate that the GpuCardInstance with `gpuInstanceId` exists.\n3. Validate that the GpuCardInstance is currently *not* assigned to any server.\n4. If all validations pass, call the repository method (implemented in subtask 1) to link the GPU to the server.\n5. Return the updated Server object or throw specific errors (e.g., NotFoundError, ConflictError).",
+          "status": "done",
+          "testStrategy": "Write unit tests for the `assignGpuToServer` service method covering success cases, server not found, GPU not found, and GPU already assigned scenarios."
+        },
+        {
+          "id": 3,
+          "title": "Implement Service Logic for Unassigning GPU",
+          "description": "Create the business logic in the service layer for unassigning a GpuCardInstance from a Server, including necessary validation checks.",
+          "dependencies": [
+            1
+          ],
+          "details": "Add a method `unassignGpuFromServer(serverId, gpuInstanceId)` to `backend/src/services/serverService.js`. Inside this method:\n1. Validate that the Server with `serverId` exists.\n2. Validate that the GpuCardInstance with `gpuInstanceId` exists.\n3. Validate that the GpuCardInstance is currently assigned to the *specified* server (`serverId`).\n4. If all validations pass, call the repository method (implemented in subtask 1) to unlink the GPU from the server.\n5. Return the updated Server object or throw specific errors (e.g., NotFoundError, ConflictError).",
+          "status": "done",
+          "testStrategy": "Write unit tests for the `unassignGpuFromServer` service method covering success cases, server not found, GPU not found, and GPU not assigned to the specified server scenarios."
+        },
+        {
+          "id": 4,
+          "title": "Implement Controller and Route for POST /api/servers/{serverId}/assign-gpu",
+          "description": "Define the API endpoint and controller function to handle requests for assigning a GPU to a server.",
+          "dependencies": [
+            2
+          ],
+          "details": "Define the route `POST /api/servers/:serverId/assign-gpu` in `backend/src/index.js` or the appropriate router file. Create a corresponding controller function. This function should:\n1. Extract `serverId` from path parameters and `gpuInstanceId` from the request body.\n2. Call the `serverService.assignGpuToServer` method (implemented in subtask 2) with the extracted IDs.\n3. Handle potential errors thrown by the service and return appropriate HTTP responses (e.g., 200/201 for success, 400 for bad request/validation, 404 for not found, 409 for conflict).\n4. Return the service result in the response body.",
+          "status": "done",
+          "testStrategy": "Use integration tests or API tests to verify the endpoint behaves correctly for valid and invalid requests (missing body, invalid IDs, already assigned GPU, non-existent server/GPU)."
+        },
+        {
+          "id": 5,
+          "title": "Implement Controller and Route for DELETE /api/servers/{serverId}/unassign-gpu/{gpuInstanceId}",
+          "description": "Define the API endpoint and controller function to handle requests for unassigning a GPU from a server.",
+          "dependencies": [
+            3
+          ],
+          "details": "Define the route `DELETE /api/servers/:serverId/unassign-gpu/:gpuInstanceId` in `backend/src/index.js` or the appropriate router file. Create a corresponding controller function. This function should:\n1. Extract `serverId` and `gpuInstanceId` from path parameters.\n2. Call the `serverService.unassignGpuFromServer` method (implemented in subtask 3) with the extracted IDs.\n3. Handle potential errors thrown by the service and return appropriate HTTP responses (e.g., 200 for success, 400 for validation, 404 for not found, 409 for conflict).\n4. Return the service result in the response body.",
+          "status": "done",
+          "testStrategy": "Use integration tests or API tests to verify the endpoint behaves correctly for valid and invalid requests (invalid IDs, GPU not assigned to this server, non-existent server/GPU)."
+        }
+      ]
+    },
+    {
+      "id": 44,
+      "title": "Frontend - GpuCardModel 管理介面",
+      "description": "參考現有 Server 相關頁面 (如 ServerList, ServerDetail, ServerForm 等) 及服務 (如 serverApiService, apiClient) 的實作方式，開發前端介面，用於管理 (列表、新增、編輯、刪除) GpuCardModel (GPU 型號)。列表頁顯示所有 GPU 型號，表單用於新增/編輯 GPU 型號資訊。",
+      "status": "done",
+      "dependencies": [],
+      "priority": "medium",
+      "details": "根據以下檔案的實作模式進行開發：\n- Readme\n- frontend/src/main.tsx (路由設定)\n- frontend/src/components/ServerGpuCard.tsx (元件參考)\n- frontend/src/components/ServerForm.tsx (表單元件參考)\n- frontend/src/components/ServerFormWrapper.tsx (表單頁面結構參考)\n- frontend/src/pages/ServerDetail.tsx (詳細頁面結構參考)\n- frontend/src/pages/ServerList.tsx (列表頁面結構參考)\n- frontend/src/services/apiClient.ts (API 客戶端參考)\n- frontend/src/services/serverApiService.ts (API 服務參考)\n- frontend/src/utils/auth.ts (認證處理參考)\n\n開發內容包含：\n1.  建立 GpuCardModel 相關的 API 服務 (類似 serverApiService)。\n2.  開發 GpuCardModel 列表頁面，顯示所有 GPU 型號。\n3.  開發 GpuCardModel 新增/編輯表單頁面。\n4.  實作新增、編輯、刪除 GPU 型號的功能。\n5.  設定相關路由。",
+      "testStrategy": "1.  單元測試：測試 GpuCardModel API 服務函式。\n2.  單元測試：測試列表頁面元件是否正確渲染資料。\n3.  單元測試：測試表單元件的輸入處理和驗證邏輯。\n4.  整合測試：測試列表頁面是否能正確呼叫 API 並顯示資料。\n5.  整合測試：測試新增/編輯表單提交後是否能正確呼叫 API。\n6.  整合測試：測試刪除功能是否能正確呼叫 API。\n7.  端對端測試：測試從列表頁到新增/編輯頁面的導航，以及完整的 CRUD 操作流程。",
+      "subtasks": [
+        {
+          "id": "44-1",
+          "description": "參考 serverApiService.ts 建立 gpuCardModelApiService.ts，包含列表、取得單一、新增、編輯、刪除的 API 呼叫函式。",
+          "status": "done"
+        },
+        {
+          "id": "44-2",
+          "description": "參考 ServerList.tsx 建立 GpuCardModelList.tsx 頁面元件，用於顯示 GPU 型號列表。",
+          "status": "done"
+        },
+        {
+          "id": "44-3",
+          "description": "在 GpuCardModel 列表頁面中，實作從 API 載入並顯示資料的功能。",
+          "status": "done"
+        },
+        {
+          "id": "44-4",
+          "description": "參考 ServerForm.tsx 和 ServerFormWrapper.tsx 建立 GpuCardModelForm.tsx 元件和 GpuCardModelFormWrapper.tsx 頁面元件，用於新增/編輯 GPU 型號。",
+          "status": "done"
+        },
+        {
+          "id": "44-5",
+          "description": "在 GpuCardModel 表單頁面中，實作新增 GPU 型號的功能。",
+          "status": "done"
+        },
+        {
+          "id": "44-6",
+          "description": "在 GpuCardModel 表單頁面中，實作編輯 GPU 型號的功能 (根據 ID 載入資料並提交更新)。",
+          "status": "done"
+        },
+        {
+          "id": "44-7",
+          "description": "在列表頁或詳細頁中，實作刪除 GPU 型號的功能。",
+          "status": "done"
+        },
+        {
+          "id": "44-8",
+          "description": "參考 main.tsx 設定 GpuCardModel 相關的路由 (列表頁、新增頁、編輯頁)。",
+          "status": "done"
+        },
+        {
+          "id": "44-9",
+          "description": "為 gpuCardModelApiService 編寫單元測試。",
+          "status": "done"
+        },
+        {
+          "id": "44-10",
+          "description": "為 GpuCardModel 列表和表單元件編寫單元測試。",
+          "status": "done"
+        },
+        {
+          "id": "44-11",
+          "description": "編寫 GpuCardModel CRUD 操作的整合測試。",
+          "status": "done"
+        }
+      ]
+    },
+    {
+      "id": 45,
+      "title": "Frontend - GpuCardInstance 庫存管理介面",
+      "description": "開發前端介面，用於管理 (列表、新增、編輯、刪除) GpuCardInstance (GPU 庫存實例)。列表顯示所有 GPU 實例及其狀態、所屬型號、所在伺服器等。表單用於新增/編輯實例資訊。請參考 Readme 及現有檔案 (frontend/src/main.tsx, frontend/src/components/ServerGpuCard.tsx, frontend/src/components/ServerForm.tsx, frontend/src/components/ServerFormWrapper.tsx, frontend/src/pages/ServerDetail.tsx, frontend/src/pages/ServerList.tsx, frontend/src/services/apiClient.ts, frontend/src/services/serverApiService.ts, frontend/src/utils/auth.ts) 的實作方式。",
+      "status": "done",
+      "dependencies": [],
+      "priority": "medium",
+      "details": "根據現有的 Server 相關頁面和服務的實作模式，開發 GpuCardInstance 的管理介面。\n\n1.  **API Service**: 建立類似 `serverApiService.ts` 的 `gpuCardInstanceApiService.ts`，包含用於獲取列表、獲取單一實例、新增、編輯、刪除 GpuCardInstance 的 API 呼叫函數，並使用 `apiClient.ts`。\n2.  **列表頁面**: 建立一個頁面元件 (例如 `GpuCardInstanceList.tsx`)，用於顯示 GpuCardInstance 的列表。列表應包含 ID, 型號 (關聯 GpuCardModel), 狀態, 所在伺服器 (關聯 Server), 購買日期等關鍵資訊。參考 `ServerList.tsx` 的結構。\n3.  **表單元件**: 建立一個表單元件 (例如 `GpuCardInstanceForm.tsx`)，用於新增和編輯 GpuCardInstance 的資訊。表單應包含所有可編輯的欄位，例如狀態、購買日期、所屬伺服器、所屬型號等。考慮如何處理關聯欄位 (Server, GpuCardModel) 的選擇，可能需要額外的 API 呼叫來獲取選項列表。參考 `ServerForm.tsx`。\n4.  **整合**: 將列表和表單元件整合到適當的路由中。新增功能可能導向一個空白表單頁面，編輯功能則導向帶有現有資料的表單頁面。\n5.  **刪除功能**: 在列表或詳細頁面中實現刪除 GpuCardInstance 的功能，並提供確認提示。\n6.  **狀態管理**: 根據需要使用 React state 或其他狀態管理方案來處理資料獲取、載入狀態、錯誤處理和表單狀態，參考現有頁面的模式。\n7.  **UI/UX**: 確保介面易於使用，提供必要的驗證和回饋。",
+      "testStrategy": "1.  **單元測試**: 對 `gpuCardInstanceApiService.ts` 中的各個 API 呼叫函數進行單元測試，模擬 API 響應，驗證請求參數和返回值的正確性。\n2.  **元件測試**: 對 `GpuCardInstanceList.tsx` 和 `GpuCardInstanceForm.tsx` 等元件進行測試，驗證元件的渲染、使用者互動 (點擊、輸入) 是否觸發正確的行為和狀態更新。例如，測試列表是否正確顯示從 API 獲取的資料，表單提交是否調用正確的 API 服務函數。\n3.  **整合測試**: 測試頁面之間的導航 (例如從列表到新增/編輯頁面)。測試新增、編輯、刪除的完整流程，驗證資料在後端是否正確更新，以及前端介面是否正確反映這些變化。\n4.  **端到端測試**: (如果適用) 使用 Cypress 或其他工具進行端到端測試，模擬使用者在瀏覽器中的操作，驗證整個管理介面的功能是否按預期工作。",
+      "subtasks": [
+        {
+          "id": "45-1",
+          "description": "Review Readme and existing frontend files (ServerList, ServerForm, apiClient, serverApiService, etc.) to understand the current architecture and patterns.",
+          "status": "done"
+        },
+        {
+          "id": "45-2",
+          "description": "Define API service functions for GpuCardInstance (list, get, create, update, delete) in a new file like `gpuCardInstanceApiService.ts`, using `apiClient.ts`.",
+          "status": "done"
+        },
+        {
+          "id": "45-3",
+          "description": "Create the GpuCardInstance list page component (`GpuCardInstanceList.tsx`) to fetch and display the list of instances.",
+          "status": "done"
+        },
+        {
+          "id": "45-4",
+          "description": "Implement table/list display for GpuCardInstances, including relevant fields (ID, Model, Status, Server, Purchase Date).",
+          "status": "done"
+        },
+        {
+          "id": "45-5",
+          "description": "Add functionality to the list view for navigating to edit/detail pages and triggering delete.",
+          "status": "done"
+        },
+        {
+          "id": "45-6",
+          "description": "Create the GpuCardInstance form component (`GpuCardInstanceForm.tsx`) for adding and editing instances.",
+          "status": "done"
+        },
+        {
+          "id": "45-7",
+          "description": "Implement form fields for GpuCardInstance attributes, including handling selections for related Server and GpuCardModel (fetch options if needed).",
+          "status": "done"
+        },
+        {
+          "id": "45-8",
+          "description": "Implement form submission logic for creating new instances and updating existing ones using the API service.",
+          "status": "done"
+        },
+        {
+          "id": "45-9",
+          "description": "Add routing for GpuCardInstance list, create, and edit pages.",
+          "status": "done"
+        },
+        {
+          "id": "45-10",
+          "description": "Implement delete functionality using the API service, including user confirmation.",
+          "status": "done"
+        },
+        {
+          "id": "45-11",
+          "description": "Add basic validation and error handling for form inputs and API calls.",
+          "status": "done"
+        },
+        {
+          "id": "45-12",
+          "description": "Write unit tests for `gpuCardInstanceApiService.ts`.",
+          "status": "done"
+        },
+        {
+          "id": "45-13",
+          "description": "Write component/integration tests for `GpuCardInstanceList.tsx` and `GpuCardInstanceForm.tsx`.",
+          "status": "done"
+        }
+      ]
+    },
+    {
+      "id": 46,
+      "title": "Frontend - Server 介面整合 GPU 分配",
+      "description": "在 Server 的新增/編輯/詳情頁面，整合 GpuCardInstance 的分配功能。允許用戶查看伺服器已安裝的 GPU 實例，並能從可用庫存中選擇 GpuCardInstance 分配給該伺服器，或移除已分配的實例。",
+      "details": "",
+      "testStrategy": "",
+      "status": "done",
+      "dependencies": [],
+      "priority": "medium",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Fetch and Display Assigned GPUs on Server Detail/Edit",
+          "description": "Modify the server detail and edit pages to fetch and display the list of GpuCardInstances currently assigned to the specific server. This involves updating the data fetching logic for the server and rendering a dedicated section or list for assigned GPUs.",
+          "dependencies": [],
+          "details": "Update the API call used to fetch server details to include associated GpuCardInstances. Render a new component or section on the server detail/edit page to list the assigned GPUs. Display relevant information for each assigned GPU (e.g., serial number, model).",
+          "status": "done",
+          "testStrategy": "Verify that the correct list of GPUs assigned to a server is displayed on both the detail and edit pages. Test with servers having no GPUs, one GPU, and multiple GPUs."
+        },
+        {
+          "id": 2,
+          "title": "Fetch and Display Available GPU Inventory",
+          "description": "Add functionality to fetch a list of GpuCardInstances that are currently available (not assigned to any server). Display this list in a separate section or modal on the server edit page, allowing users to select GPUs for allocation.",
+          "dependencies": [
+            1
+          ],
+          "details": "Create a new API call or modify an existing one to retrieve GpuCardInstances with a null or unassigned server relationship. Implement a UI component (e.g., a selectable list, dropdown, or table) to display these available GPUs on the server edit page. Ensure the UI clearly distinguishes available GPUs from assigned ones.",
+          "status": "done",
+          "testStrategy": "Verify that the list of available GPUs is correctly fetched and displayed. Test with varying numbers of available GPUs in the inventory. Ensure only unassigned GPUs are shown."
+        },
+        {
+          "id": 3,
+          "title": "Implement GPU Allocation Action",
+          "description": "Add UI elements and logic to allow users to select one or more available GPUs from the inventory list and allocate them to the current server. This involves triggering an API call to update the selected GpuCardInstances with the server's ID.",
+          "dependencies": [
+            1,
+            2
+          ],
+          "details": "Add selection mechanisms (e.g., checkboxes, multi-select) to the available GPU list. Implement an 'Allocate' button or similar action. On click, gather the IDs of selected available GPUs and make an API call (e.g., PUT or POST to a dedicated endpoint) to assign them to the server. Handle the API response, update the UI to move the allocated GPUs from the 'available' list to the 'assigned' list, and clear the selection.",
+          "status": "done",
+          "testStrategy": "Test allocating a single GPU and multiple GPUs. Verify that the selected GPUs move from the available list to the assigned list upon successful allocation. Check API calls and database updates."
+        },
+        {
+          "id": 4,
+          "title": "Implement GPU Deallocation Action",
+          "description": "Add UI elements and logic to allow users to select one or more assigned GPUs and deallocate them from the server. This involves triggering an API call to remove the server's ID from the selected GpuCardInstances.",
+          "dependencies": [
+            1,
+            3
+          ],
+          "details": "Add selection mechanisms or 'Remove' buttons next to the assigned GPUs. Implement a 'Deallocate' or 'Remove' action. On click, gather the IDs of selected assigned GPUs and make an API call (e.g., DELETE or PUT to a dedicated endpoint) to unassign them from the server. Handle the API response, update the UI to move the deallocated GPUs from the 'assigned' list back to the 'available' list, and clear the selection.",
+          "status": "done",
+          "testStrategy": "Test deallocating a single GPU and multiple GPUs. Verify that the selected GPUs move from the assigned list back to the available list upon successful deallocation. Check API calls and database updates."
+        },
+        {
+          "id": 5,
+          "title": "Integrate into Server Forms and Refine UI/UX",
+          "description": "Integrate the GPU allocation/deallocation functionality seamlessly into the Server Add and Edit forms. Refine the user interface and user experience, add validation, loading states, and error handling.",
+          "dependencies": [
+            4
+          ],
+          "details": "Ensure the GPU management section is part of the Server Add/Edit form flow. Handle saving the server form along with the GPU assignments (potentially requiring a single API call or coordinated calls). Add validation (e.g., preventing allocation if server save fails). Implement loading indicators during API calls. Display user-friendly success/error messages. Ensure the UI is responsive and intuitive.",
+          "status": "done",
+          "testStrategy": "Test the full workflow: adding a new server with GPU assignments, editing an existing server to change GPU assignments (add/remove), and saving the form. Test error scenarios (e.g., API failure). Verify UI responsiveness and user feedback."
+        }
+      ]
+    },
+    {
+      "id": 47,
+      "title": "文件更新與測試",
+      "description": "更新相關的 API 文件和使用者文件，並讓使用者針對新功能進行完整測試。",
+      "details": "",
+      "testStrategy": "",
+      "status": "done",
+      "dependencies": [],
+      "priority": "medium",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "更新 API 文件",
+          "description": "根據新功能或修改，更新相關的 API 文件，確保文件準確反映當前 API 的行為、參數、返回值及錯誤碼。",
+          "dependencies": [],
+          "details": "檢視所有受新功能影響的 API 端點。更新或新增 API 說明、請求/響應範例、認證要求等。使用 Swagger/OpenAPI 或其他現有工具生成或手動更新文件。確保文件版本控制正確。",
+          "status": "done",
+          "testStrategy": "內部技術人員或開發者審核更新後的 API 文件，確認其準確性和完整性。"
+        },
+        {
+          "id": 2,
+          "title": "更新使用者文件",
+          "description": "根據新功能或修改，更新使用者手冊、FAQ 或線上幫助文檔，說明如何使用新功能及其影響。",
+          "dependencies": [
+            1
+          ],
+          "details": "識別受新功能影響的使用者流程和介面。編寫或修改相關章節，包含功能介紹、操作步驟、常見問題解答等。使用清晰易懂的語言和適當的截圖。確保文件發布到使用者可訪問的平台。",
+          "status": "done",
+          "testStrategy": "產品經理或使用者體驗專家審核更新後的使用者文件，確認其易讀性、準確性和涵蓋範圍。"
+        },
+        {
+          "id": 3,
+          "title": "協調並執行使用者測試 (UAT)",
+          "description": "安排並引導目標使用者對新功能進行測試，收集回饋意見，確認功能符合預期並驗證文件的有效性。",
+          "dependencies": [
+            2
+          ],
+          "details": "確定參與測試的使用者群體。準備測試計畫和測試案例，涵蓋新功能的主要使用場景。提供測試環境和必要的支援（包括更新後的文件）。收集使用者的測試結果、問題和建議。記錄並追蹤發現的 Bug 或改進點。",
+          "status": "done",
+          "testStrategy": "使用者根據測試計畫執行測試案例，並提供結構化回饋。團隊分析回饋，評估功能是否達到驗收標準。"
+        }
+      ]
+    },
+    {
+      "id": 48,
+      "title": "Update Virtual Machine CRUD after GPU Card Implementation",
+      "description": "Update Virtual Machine CRUD operations to include GPU Card related fields and functionality by implementing a new 'CardUsage' entity and integrating its management into the existing VM workflows.",
+      "status": "done",
+      "dependencies": [],
+      "priority": "medium",
+      "details": "Implement a new database table 'CardUsage' to track GPU card assignments and usage within Virtual Machines. The table schema should include:\n- id (Primary Key)\n- cardIndex (Integer)\n- cardUuid (String)\n- usage (e.g., percentage, String/Enum)\n- virtualMachineId (Foreign Key referencing VirtualMachine.id)\n\nImplement backend components (Repository, Service, Controller) for the 'CardUsage' entity. Provide API endpoints for CRUD operations on 'CardUsage'.\n\nOn the frontend, integrate the management of 'CardUsage' into the existing Virtual Machine Add, Edit, and View pages. Display assigned GPU cards and their usage details as a sub-table within the VM details. Allow adding, editing, and deleting 'CardUsage' entries directly from the VM edit page. Do not create a separate main menu item for 'CardUsage'.",
+      "testStrategy": "Test the creation, reading, updating, and deletion of 'CardUsage' entries via the new API endpoints.\nTest the integration of 'CardUsage' management within the Virtual Machine Add/Edit/View pages. Verify that 'CardUsage' data is correctly displayed as a sub-table.\nTest adding, editing, and deleting 'CardUsage' entries from the VM edit page.\nVerify that the foreign key constraint between 'CardUsage' and 'VirtualMachine' is correctly enforced.\nEnsure that deleting a Virtual Machine correctly handles associated 'CardUsage' entries (e.g., cascade delete or appropriate handling).\nPerform integration tests to ensure backend and frontend components interact correctly.",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Design and create 'CardUsage' database table schema. Include fields: id (PK), cardIndex, cardUuid, usage, virtualMachineId (FK to VirtualMachine.id)",
+          "description": "",
+          "details": "",
+          "status": "done",
+          "dependencies": [],
+          "parentTaskId": 48
+        },
+        {
+          "id": 2,
+          "title": "Implement backend Repository for 'CardUsage' entity. Create methods for CRUD operations.",
+          "description": "",
+          "details": "",
+          "status": "done",
+          "dependencies": [],
+          "parentTaskId": 48
+        },
+        {
+          "id": 3,
+          "title": "Implement backend Service for 'CardUsage' business logic. Utilize the repository for data access.",
+          "description": "",
+          "details": "",
+          "status": "done",
+          "dependencies": [],
+          "parentTaskId": 48
+        },
+        {
+          "id": 4,
+          "title": "Implement backend Controller for 'CardUsage' API endpoints. Define routes for CRUD operations.",
+          "description": "",
+          "details": "",
+          "status": "done",
+          "dependencies": [],
+          "parentTaskId": 48
+        },
+        {
+          "id": 5,
+          "title": "Define and implement API endpoints for 'CardUsage' CRUD operations.",
+          "description": "",
+          "details": "",
+          "status": "done",
+          "dependencies": [],
+          "parentTaskId": 48
+        },
+        {
+          "id": 6,
+          "title": "Update backend Virtual Machine service/controller to handle 'CardUsage' relationships (e.g., fetching VM with associated cards).",
+          "description": "",
+          "details": "",
+          "status": "done",
+          "dependencies": [],
+          "parentTaskId": 48
+        },
+        {
+          "id": 7,
+          "title": "Integrate 'CardUsage' display as a sub-table in the Frontend VM View page.",
+          "description": "",
+          "details": "",
+          "status": "done",
+          "dependencies": [],
+          "parentTaskId": 48
+        },
+        {
+          "id": 8,
+          "title": "Integrate 'CardUsage' management (Add/Edit/Delete) into the Frontend VM Edit page.",
+          "description": "",
+          "details": "",
+          "status": "done",
+          "dependencies": [],
+          "parentTaskId": 48
+        },
+        {
+          "id": 9,
+          "title": "Update Frontend VM Add page to potentially include initial 'CardUsage' assignment.",
+          "description": "",
+          "details": "",
+          "status": "done",
+          "dependencies": [],
+          "parentTaskId": 48
+        },
+        {
+          "id": 10,
+          "title": "Implement frontend components for the 'CardUsage' sub-table and CRUD forms.",
+          "description": "",
+          "details": "",
+          "status": "done",
+          "dependencies": [],
+          "parentTaskId": 48
+        },
+        {
+          "id": 11,
+          "title": "Update API & Project Readme document",
+          "description": "Review current project Readme document & backend API document and Task 48 (including subtasks), then update relevant documents.",
+          "details": "",
+          "status": "done",
+          "dependencies": [],
+          "parentTaskId": 48
+        }
+      ]
+    },
+    {
+      "id": 49,
+      "title": "Enhance Virtual Machine Management",
+      "description": "Enhance Virtual Machine management to include additional editable fields and improve UI/UX.",
+      "details": "",
+      "testStrategy": "",
+      "status": "pending",
+      "dependencies": [],
+      "priority": "medium",
+      "subtasks": []
+    }
+  ]
+}

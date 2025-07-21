@@ -1,0 +1,11 @@
+# Task ID: 35
+# Title: DB Schema 設計 - GpuCardModel (GPU 型號/規格)
+# Status: done
+# Dependencies: None
+# Priority: medium
+# Description: 根據需求設計新的 GpuCardModel。此 Model 用於記錄 GPU 的唯一型號資訊。包含欄位：id (PK), vendor (String), modelName (String), architecture (String, 可選), memoryGb (Int)。確保 vendor 和 modelName 的組合具有唯一性約束。產出: 更新後的 prisma/schema.prisma 文件片段。
+# Details:
+
+
+# Test Strategy:
+

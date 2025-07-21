@@ -1,0 +1,11 @@
+# Task ID: 34
+# Title: 全面審查專案代碼與現有 Schema
+# Status: done
+# Dependencies: None
+# Priority: medium
+# Description: 詳細審查專案的 Readme.md, backend/ (特別是 backend/prisma/schema.prisma), 以及 frontend/ 目錄下的所有代碼。完全理解目前專案的啟動流程、環境配置需求。掌握後端 API 的實作方式、代碼結構、資料庫互動邏輯。掌握前端元件的組織方式、狀態管理、API 串接方法。深入理解當前 prisma/schema.prisma 中各 Model 的定義及其之間的關聯性。產出: 一份審查筆記，記錄關鍵發現、潛在問題點、以及對當前架構的理解。
+# Details:
+
+
+# Test Strategy:
+

@@ -1,0 +1,313 @@
+Overview
+本文件旨在定義一個內部伺服器管理控制台 (Console UI) 的需求。目前，產品經理 (PM) 需要手動管理多台伺服器的資訊，包括 IP 位址、CPU、硬碟、記憶體以及多張 GPU 卡的使用狀態。這些資訊分散記錄在 Wiki 或 Spreadsheets 中，不僅耗時費力，也容易造成資訊不同步的問題。此控制台旨在解決上述痛點，提供一個集中化的平台，讓 PM 及相關團隊成員能夠方便地新增、查詢、更新和刪除 (CRUD) 伺服器硬體規格及其使用狀態。特別地，由於伺服器資源（尤其是 GPU）常被切分成虛擬機器 (VM) 並分配給不同用途，控制台也需要支援記錄這些 VM 的分配情況、主機防火牆設定以及對應 VM 的連接埠轉發 (Port forwarding) 規則。此系統將整合 Google OAuth 進行登入，並由管理員 (Admin) 審核公司成員的存取權限，以確保資訊安全。其核心價值在於提升伺服器資源管理的效率、準確性與協作便利性。
+
+Core Features
+以下為本產品的主要功能列表及描述：
+
+使用者身份驗證與授權 (User Authentication and Authorization)
+
+功能描述: 系統允許公司成員使用其 Google (Gmail) 帳號透過 OAuth 2.0 登入。新使用者登入後需由指定管理員審核通過後方可存取系統。
+重要性: 確保只有授權的公司成員才能存取敏感的伺服器資訊，簡化登入流程並提升安全性。
+運作方式: 使用者點擊登入按鈕，導向 Google 登入頁面。成功驗證後，系統會接收回調資訊。若是首次登入，其帳號狀態將標記為「待審核」，並通知管理員。管理員在後台介面批准後，使用者即可正常使用系統功能。
+伺服器庫存管理 (Server Inventory Management)
+
+功能描述: 允許使用者新增、查看、修改和刪除伺服器的詳細規格資訊。包含但不限於：伺服器名稱/標籤、IP 位址、CPU 型號與核心數、總記憶體容量、硬碟規格與容量、作業系統等。
+重要性: 提供一個集中化的資料庫來記錄所有伺服器的硬體配置，方便 PM 快速查詢與管理。
+運作方式: UI 上提供表單讓使用者輸入或修改伺服器規格。所有資訊將儲存於後端資料庫。列表頁面將展示所有伺服器的概覽資訊，並提供搜尋與篩選功能。
+GPU 卡管理 (GPU Card Management)
+
+功能描述: 針對每台伺服器，允許使用者新增、查看、修改和刪除其搭載的多張 GPU 卡的詳細資訊，例如 GPU 型號、記憶體大小等。
+重要性: GPU 是重要的運算資源，精確管理每張 GPU 卡的狀態對於資源分配至關重要。
+運作方式: 在伺服器詳細資訊頁面下，可以管理該伺服器擁有的 GPU 卡列表。每張 GPU 卡可以被獨立記錄和追蹤。
+資源用途與分配管理 (Resource Usage and Allocation Management)
+
+功能描述: 允許使用者記錄和更新每台伺服器或每張 GPU 卡（或其切分的 VM）的當前用途、負責人/團隊、專案名稱等。
+重要性: 追蹤資源的實際使用情況，避免資源閒置或衝突，提升資源利用率。
+運作方式: 使用者可以在伺服器或 GPU 卡的詳細頁面中編輯其用途描述、指派對象等欄位。
+虛擬機器 (VM) 分配追蹤 (Virtual Machine (VM) Allocation Tracking)
+
+功能描述: 允許使用者記錄基於特定 GPU 卡（或伺服器整體資源）所切分出來的 VM 資訊，包括 VM 名稱、作業系統、分配的資源量 (如 vCPU、RAM、GPU資源片段)、用途等。
+重要性: 許多 GPU 資源會透過 VM 的形式進行細化分配，需要明確記錄這些分配關係。
+運作方式: 在 GPU 卡或伺服器的管理介面下，可以新增和管理與其關聯的 VM 列表，並記錄各 VM 的詳細配置和用途。
+網路設定記錄 (Network Configuration Logging)
+
+功能描述: 允許使用者記錄主機的防火牆設定規則以及針對特定 VM 的連接埠轉發 (Port forwarding) 設定。例如：來源/目的 IP、來源/目的埠號、協定等。
+重要性: 方便追蹤和管理伺服器及 VM 的網路可存取性，解決連線問題時能快速查找設定。
+運作方式: 在伺服器詳細頁面或 VM 詳細頁面，提供欄位或列表讓使用者輸入和管理相關的防火牆規則與連接埠轉發資訊。
+User Experience
+User Personas
+產品經理 (PM) / 資源管理員
+
+目標: 高效管理所有伺服器資源，確保資訊準確，快速分配資源給不同專案或用途，追蹤資源使用情況。
+痛點: 目前依賴人工更新 Wiki/Spreadsheets，耗時且易出錯，資訊同步不及時。
+需求: 簡單易用的介面來 CRUD 伺服器、GPU、VM 資訊；清晰的資源使用狀態概覽；方便的搜尋和篩選功能。
+系統管理員 (Admin)
+
+目標: 維護系統的正常運作，管理使用者存取權限。
+需求: 審核新使用者帳號的介面；管理使用者角色與權限 (初期可能簡化為 Admin/Member)。
+一般公司成員 (General Company Member)
+
+目標: 查詢特定伺服器或 VM 的配置、用途或負責人，以便進行工作。
+需求: 透過 Google 帳號快速登入；直觀地瀏覽和搜尋被授權查看的伺服器資源資訊。
+Key User Flows
+新使用者首次登入與審核流程:
+
+使用者訪問控制台 URL -> 點擊「使用 Google 登入」 -> Google 帳號授權 -> 系統檢查是否為新用戶 -> 若為新用戶，提示「帳號待審核」 -> 管理員收到通知 (或定期檢查) -> 管理員登入系統 -> 進入使用者管理介面 -> 找到待審核帳號並批准 -> 使用者下次登入或刷新後即可正常使用。
+PM 新增一台伺服器及其 GPU:
+
+PM 登入系統 -> 導航至「伺服器庫存」頁面 -> 點擊「新增伺服器」按鈕 -> 填寫伺服器基本資訊 (IP, CPU, RAM, Disk 等) -> 儲存 -> 進入該伺服器詳細頁面 -> 點擊「新增 GPU」 -> 填寫 GPU 型號、記憶體等資訊 -> 儲存。
+PM 更新伺服器/GPU 用途並分配 VM:
+
+PM 登入系統 -> 搜尋或瀏覽找到目標伺服器 -> 進入詳細頁面 -> 修改「伺服器用途」欄位 -> 儲存。
+PM 找到目標 GPU 卡 -> 點擊「新增 VM」或「管理 VM」 -> 填寫 VM 名稱、分配資源、用途 -> 儲存。
+PM 記錄防火牆與連接埠轉發:
+
+PM 登入系統 -> 找到目標伺服器 -> 進入詳細頁面 -> 導航至「網路設定」區域 -> 點擊「新增防火牆規則」 -> 填寫規則內容 -> 儲存。
+PM 找到目標 VM (或伺服器) -> 點擊「新增連接埠轉發」 -> 填寫外部埠、內部 VM IP、內部埠等 -> 儲存。
+一般成員查詢伺服器資訊:
+
+成員登入系統 -> 使用搜尋框輸入關鍵字 (如 IP、用途、負責人) 或瀏覽伺服器列表 -> 點擊目標伺服器查看詳細規格與用途。
+UI/UX Considerations
+直觀性: 介面設計應簡潔明瞭，使用者無需過多培訓即可上手。
+一致性: 整體風格、操作邏輯、圖示按鈕等應保持一致。
+響應式設計: 支援不同螢幕尺寸的瀏覽，尤其是在桌上型電腦上的良好體驗。
+高效操作: 對於常用的 CRUD 操作，應提供快捷路徑，減少點擊次數。
+清晰的資訊呈現: 列表頁應能清晰展示關鍵資訊，詳細頁則應結構化呈現所有相關數據。
+有效的搜尋與篩選: 提供強大的搜尋和多條件篩選功能，幫助使用者快速定位資源。
+明確的狀態反饋: 操作成功、失敗或進行中，應有明確的視覺提示。
+Technical Architecture
+System Components
+前端 (Frontend - Console UI):
+
+技術棧建議: React, Vue.js, or Angular (擇一，取決於團隊熟悉度與生態)。
+職責: 提供使用者互動介面，處理使用者輸入，向後端 API 發送請求，展示後端返回的數據。
+後端 (Backend - API Server):
+
+技術棧建議: Python (Flask/Django), Node.js (Express), or Go (Gin) (擇一)。
+職責: 處理業務邏輯，提供 RESTful API 接口供前端調用，與資料庫互動，處理身份驗證邏輯。
+資料庫 (Database):
+
+技術棧建議: PostgreSQL, MySQL (關聯式資料庫較適合此類結構化數據)。
+職責: 持久化儲存所有伺服器、GPU、VM、使用者、網路設定等資訊。
+身份驗證服務 (Authentication Service):
+
+整合 Google OAuth 2.0 進行使用者身份驗證。
+Data Models (初步設計)
+User:
+
+id (PK)
+email (String, Unique, Indexed)
+name (String)
+avatar_url (String, Optional, from Google)
+role (Enum: 'admin', 'member', default: 'member')
+status (Enum: 'pending_approval', 'approved', 'revoked', default: 'pending_approval')
+created_at (Timestamp)
+updated_at (Timestamp)
+Server:
+
+id (PK)
+name_label (String, Indexed)
+ip_address (String, Unique, Indexed)
+cpu_model (String)
+cpu_cores (Integer)
+memory_gb (Integer)
+disk_spec (String) // e.g., "2TB NVMe SSD + 4TB HDD"
+os (String)
+purpose (Text, Nullable)
+assigned_to_project (String, Nullable)
+notes (Text, Nullable)
+created_by_user_id (FK to User.id)
+updated_by_user_id (FK to User.id)
+created_at (Timestamp)
+updated_at (Timestamp)
+GpuCard:
+
+id (PK)
+server_id (FK to Server.id, Indexed)
+model (String)
+memory_gb (Integer)
+purpose (Text, Nullable)
+notes (Text, Nullable)
+created_at (Timestamp)
+updated_at (Timestamp)
+VirtualMachine (VM):
+
+id (PK)
+host_server_id (FK to Server.id, Indexed)
+assigned_gpu_card_id (FK to GpuCard.id, Nullable, Indexed) // 若 VM 直接綁定到某張 GPU
+name_label (String, Indexed)
+os (String, Nullable)
+vcpu_cores_assigned (Integer, Nullable)
+ram_gb_assigned (Integer, Nullable)
+gpu_resource_slice_description (String, Nullable) // e.g., "1/2 MIG", "Shared"
+purpose (Text, Nullable)
+assigned_to_user_email (String, Nullable)
+internal_ip_address (String, Nullable)
+notes (Text, Nullable)
+created_at (Timestamp)
+updated_at (Timestamp)
+FirewallRule:
+
+id (PK)
+server_id (FK to Server.id, Indexed)
+rule_description (String)
+direction (Enum: 'inbound', 'outbound')
+protocol (String, e.g., 'TCP', 'UDP', 'ICMP', 'ANY')
+source_ip_cidr (String)
+source_port_range (String, Nullable)
+destination_ip_cidr (String)
+destination_port_range (String, Nullable)
+action (Enum: 'allow', 'deny')
+notes (Text, Nullable)
+created_at (Timestamp)
+updated_at (Timestamp)
+PortForwardingRule:
+
+id (PK)
+host_server_id (FK to Server.id, Indexed)
+target_vm_id (FK to VirtualMachine.id, Nullable, Indexed) // 若轉發到特定 VM
+target_internal_ip (String) // 若非特定 VM，則直接填寫內部 IP
+protocol (String, e.g., 'TCP', 'UDP')
+external_port (Integer)
+internal_port (Integer)
+description (String, Nullable)
+notes (Text, Nullable)
+created_at (Timestamp)
+updated_at (Timestamp)
+APIs and Integrations
+Internal RESTful APIs:
+
+/auth/google/login (GET): Initiates Google OAuth flow.
+/auth/google/callback (GET): Handles Google OAuth callback.
+/auth/logout (POST): Logs out the user.
+/auth/me (GET): Gets current logged-in user info.
+/users (GET, POST for admin): Manage users (admin only).
+/users/{id}/approve (PUT for admin): Approve user.
+/servers (GET, POST): List servers, create a new server.
+/servers/{id} (GET, PUT, DELETE): Get, update, delete a specific server.
+/servers/{server_id}/gpus (GET, POST): List GPUs for a server, add a GPU.
+/servers/{server_id}/gpus/{gpu_id} (GET, PUT, DELETE): Get, update, delete a specific GPU.
+/servers/{server_id}/vms (GET, POST): List VMs for a server, add a VM.
+/servers/{server_id}/firewall_rules (GET, POST): List/Add firewall rules for a server.
+/servers/{server_id}/firewall_rules/{rule_id} (PUT, DELETE): Update/Delete a firewall rule.
+/servers/{server_id}/port_forwarding_rules (GET, POST): List/Add port forwarding rules.
+/servers/{server_id}/port_forwarding_rules/{rule_id} (PUT, DELETE): Update/Delete a port forwarding rule.
+/vms (GET, POST): List all VMs, create a new VM (alternative to server-nested).
+/vms/{id} (GET, PUT, DELETE): Get, update, delete a specific VM.
+External Integrations:
+
+Google OAuth 2.0 API: For user authentication.
+Infrastructure Requirements
+Hosting Environment: Cloud platform (GCP, AWS, Azure) or on-premise virtual/physical servers.
+Web Server: Nginx or Apache (for serving frontend and as a reverse proxy for backend).
+Application Server: Environment to run the chosen backend language (e.g., Python WSGI server, Node.js runtime).
+Database Server: Dedicated or managed database service (e.g., Google Cloud SQL, AWS RDS).
+SSL/TLS Certificate: For HTTPS secure communication.
+Backup and Recovery Mechanism: For the database and application state.
+(Optional) CI/CD Pipeline: For automated testing and deployment.
+Development Roadmap
+MVP Requirements (Phase 1)
+User Authentication & Management (Basic):
+Google OAuth login.
+New user registration goes into "pending approval" state.
+Admin role can view list of users and approve/revoke access (simple status change).
+Basic user profile (email, name).
+Server Inventory (Core):
+Ability to ADD a new server with: Name/Label, IP Address, CPU, Memory, Disk.
+Ability to VIEW a list of all servers with these core fields.
+Ability to EDIT an existing server's core fields.
+Ability to DELETE a server.
+Server Usage Tracking (Basic):
+Ability to add/edit a "Purpose" text field for each server.
+Frontend UI (Basic):
+Login page.
+Dashboard/List view for servers.
+Form for adding/editing servers.
+Basic user management page for Admin.
+Future Enhancements (Phase 2 - Building upon MVP)
+GPU Card Management:
+Extend Server model to include multiple GPU cards.
+UI to add/edit/delete GPU cards (model, memory) associated with a server.
+Display GPU information on the server detail page.
+VM Allocation Tracking (Basic):
+Data model for VMs (name, host server, basic purpose).
+UI to add/edit/delete VMs associated with a server (or a GPU if directly tied).
+Display VM list on server detail page.
+Network Configuration Logging (Basic):
+Data models for Firewall Rules and Port Forwarding.
+UI to add/edit/delete firewall rules for a server.
+UI to add/edit/delete port forwarding rules for a server/VM.
+Advanced Search & Filtering:
+Implement search functionality for servers based on name, IP, purpose.
+Implement basic filtering capabilities on the server list.
+User Roles & Permissions (Refined):
+If needed, expand beyond simple 'admin'/'member' to more granular permissions (e.g., 'editor', 'viewer').
+Future Enhancements (Phase 3 - Polish & Advanced Features)
+Dashboard & Reporting:
+A summary dashboard showing key statistics (e.g., total servers, GPUs in use/free, common purposes).
+Ability to export server inventory or specific views to CSV/PDF.
+Audit Logging:
+Track important changes (e.g., server creation/modification/deletion, user approval) with timestamps and responsible user.
+Notifications:
+Email or in-app notifications to Admins for pending user approvals.
+Detailed VM Resource Tracking:
+Track more granular VM resources: vCPU, RAM, specific GPU slice assignment details.
+Associate VMs more directly with GPU cards if that's the primary allocation method.
+(Optional) Direct Server Stats Integration:
+Explore possibilities of integrating with monitoring tools or SSH agents to pull live basic stats (CPU/Mem usage) - this is a significant undertaking and might be out of scope for a simple management console.
+Logical Dependency Chain
+Foundation (Core Backend & Authentication):
+
+Setup project structure (Frontend, Backend).
+Design and implement initial database schema for User and basic Server (MVP fields).
+Implement backend API for Google OAuth login/callback, user creation, and storing user session/token.
+Implement backend API for basic CRUD operations on Server (MVP fields).
+Implement backend logic for Admin approval of users.
+Getting to Usable/Visible Front End (MVP UI):
+
+Develop Frontend login page, integrate with backend authentication API.
+Develop Frontend component to display a list of servers (fetches from backend).
+Develop Frontend form component for adding/editing a server (sends data to backend).
+Develop Frontend basic user management page for Admin (list users, approve button).
+Ensure basic navigation and layout.
+Pacing and Scoping Each Subsequent Feature (Iterative Development):
+
+Server Purpose:
+Backend: Add purpose field to Server model and API.
+Frontend: Add purpose field to server display and form.
+GPU Management (Phase 2):
+Backend: Design GpuCard model, implement APIs for CRUD on GPUs linked to a server.
+Frontend: UI components to list, add, edit, delete GPUs within a server's detail view.
+VM Tracking (Phase 2):
+Backend: Design VirtualMachine model, implement APIs for CRUD on VMs linked to a server/GPU.
+Frontend: UI components for VM management.
+Network Config Logging (Phase 2):
+Backend: Design FirewallRule and PortForwardingRule models, implement respective APIs.
+Frontend: UI components for managing these network configurations.
+Continue this pattern for other Phase 2 and Phase 3 features, ensuring each feature is atomic but builds upon the existing foundation.
+Risks and Mitigations
+Technical Challenges:
+
+Google OAuth Integration Complexity: Ensuring secure and correct implementation of OAuth 2.0.
+Mitigation: Utilize well-maintained official Google API client libraries. Thoroughly test the authentication and authorization flow.
+Scalable Database Design: Designing a database schema that can accommodate future needs and relationships without major rework.
+Mitigation: Invest time in upfront data modeling, consider potential future relationships. Use migrations for schema changes to allow iterative updates.
+API Security: Protecting APIs from unauthorized access and common web vulnerabilities.
+Mitigation: Implement proper authentication and authorization checks on all sensitive API endpoints. Use HTTPS. Consider rate limiting and input validation.
+Figuring out the MVP that we can build upon:
+
+Scope Creep for MVP: Tendency to add "just one more thing" to the MVP, delaying initial release.
+Mitigation: Strictly adhere to the defined MVP requirements. Maintain a backlog for post-MVP features. Regularly review scope with stakeholders.
+Defining "Usable Enough": Ensuring the MVP provides tangible value and isn't too barebones.
+Mitigation: Focus the MVP on solving the core pain point: centralized, editable server inventory and basic usage tracking. Get early feedback from PMs.
+Resource Constraints:
+
+Limited Development Resources (Time/Personnel): Potential shortage of developers or time to build all desired features.
+Mitigation: Prioritize features based on impact and effort. Adopt a phased development approach (MVP first). Clearly communicate timelines and potential trade-offs.
+Accuracy of Input Data: The system relies on users inputting correct and up-to-date information.
+Mitigation: Design intuitive UI to minimize input errors. Emphasize the importance of data accuracy to users. Consider adding validation rules. (Automated data fetching is a much larger scope).
+Adoption by PMs: Ensuring PMs actively use the new tool instead of falling back to old methods.
+Mitigation: Involve PMs in the design and feedback process. Ensure the tool is genuinely easier and more efficient than current methods. Provide clear documentation and brief training if needed.
+Appendix
+Research Findings: (To be added if specific research, e.g., on existing internal tools or competitor solutions, is conducted.)
+Technical Specifications: (To be added as technical decisions are finalized, e.g., specific library versions, detailed API endpoint contracts, deployment diagrams.)

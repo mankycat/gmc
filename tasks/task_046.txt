@@ -1,0 +1,43 @@
+# Task ID: 46
+# Title: Frontend - Server 介面整合 GPU 分配
+# Status: done
+# Dependencies: None
+# Priority: medium
+# Description: 在 Server 的新增/編輯/詳情頁面，整合 GpuCardInstance 的分配功能。允許用戶查看伺服器已安裝的 GPU 實例，並能從可用庫存中選擇 GpuCardInstance 分配給該伺服器，或移除已分配的實例。
+# Details:
+
+
+# Test Strategy:
+
+
+# Subtasks:
+## 1. Fetch and Display Assigned GPUs on Server Detail/Edit [done]
+### Dependencies: None
+### Description: Modify the server detail and edit pages to fetch and display the list of GpuCardInstances currently assigned to the specific server. This involves updating the data fetching logic for the server and rendering a dedicated section or list for assigned GPUs.
+### Details:
+Update the API call used to fetch server details to include associated GpuCardInstances. Render a new component or section on the server detail/edit page to list the assigned GPUs. Display relevant information for each assigned GPU (e.g., serial number, model).
+
+## 2. Fetch and Display Available GPU Inventory [done]
+### Dependencies: 46.1
+### Description: Add functionality to fetch a list of GpuCardInstances that are currently available (not assigned to any server). Display this list in a separate section or modal on the server edit page, allowing users to select GPUs for allocation.
+### Details:
+Create a new API call or modify an existing one to retrieve GpuCardInstances with a null or unassigned server relationship. Implement a UI component (e.g., a selectable list, dropdown, or table) to display these available GPUs on the server edit page. Ensure the UI clearly distinguishes available GPUs from assigned ones.
+
+## 3. Implement GPU Allocation Action [done]
+### Dependencies: 46.1, 46.2
+### Description: Add UI elements and logic to allow users to select one or more available GPUs from the inventory list and allocate them to the current server. This involves triggering an API call to update the selected GpuCardInstances with the server's ID.
+### Details:
+Add selection mechanisms (e.g., checkboxes, multi-select) to the available GPU list. Implement an 'Allocate' button or similar action. On click, gather the IDs of selected available GPUs and make an API call (e.g., PUT or POST to a dedicated endpoint) to assign them to the server. Handle the API response, update the UI to move the allocated GPUs from the 'available' list to the 'assigned' list, and clear the selection.
+
+## 4. Implement GPU Deallocation Action [done]
+### Dependencies: 46.1, 46.3
+### Description: Add UI elements and logic to allow users to select one or more assigned GPUs and deallocate them from the server. This involves triggering an API call to remove the server's ID from the selected GpuCardInstances.
+### Details:
+Add selection mechanisms or 'Remove' buttons next to the assigned GPUs. Implement a 'Deallocate' or 'Remove' action. On click, gather the IDs of selected assigned GPUs and make an API call (e.g., DELETE or PUT to a dedicated endpoint) to unassign them from the server. Handle the API response, update the UI to move the deallocated GPUs from the 'assigned' list back to the 'available' list, and clear the selection.
+
+## 5. Integrate into Server Forms and Refine UI/UX [done]
+### Dependencies: 46.4
+### Description: Integrate the GPU allocation/deallocation functionality seamlessly into the Server Add and Edit forms. Refine the user interface and user experience, add validation, loading states, and error handling.
+### Details:
+Ensure the GPU management section is part of the Server Add/Edit form flow. Handle saving the server form along with the GPU assignments (potentially requiring a single API call or coordinated calls). Add validation (e.g., preventing allocation if server save fails). Implement loading indicators during API calls. Display user-friendly success/error messages. Ensure the UI is responsive and intuitive.
+

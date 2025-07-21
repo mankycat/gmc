@@ -1,0 +1,22 @@
+{
+  "name": "gpu-management-backend",
+  "version": "1.0.0",
+  "description": "Backend API server for GPU management",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.7.0",
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0"
+  },
+  "devDependencies": {
+    "prisma": "^6.7.0"
+  }
+}

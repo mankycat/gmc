@@ -1,0 +1,67 @@
+# Task ID: 50
+# Title: Implement GpuCardModel Stock Management and Enforcement
+# Status: done
+# Dependencies: None
+# Priority: high
+# Description: Enhance `GpuCardModel` to include a total stock quantity. Implement logic to ensure that the creation of new `GpuCardInstance` records is validated against this stock quantity, preventing over-allocation.
+# Details:
+The task involves modifying the `GpuCardModel` schema, updating CRUD APIs, implementing stock validation logic in `GpuCardInstance` creation, and updating frontend forms to handle the new stock management functionality.
+
+# Test Strategy:
+Test creating/editing a `GpuCardModel` to set its `totalAcquiredStock` via the UI and API. Test creating `GpuCardInstance`s for a model: successfully creating instances up to the `totalAcquiredStock` limit, and verifying that attempting to create an instance beyond the `totalAcquiredStock` limit is prevented and an error is shown (both API response and UI feedback). Test behavior when `totalAcquiredStock` is set to 0.
+
+# Subtasks:
+## 1. Review Documentation, Existing Code, and Related Tasks [done]
+### Dependencies: None
+### Description: Review `README.md`, `API_DOC.md`, `database-erd.md`. Examine `backend/prisma/schema.prisma` (for `GpuCardModel` and `GpuCardInstance`), related backend services (`gpuCardModelService.js`, `gpuCardInstanceService.js`), and frontend forms (`frontend/src/components/GpuCardModelForm.tsx`, `frontend/src/components/GpuCardInstanceForm.tsx`). Also, review the original 'Task 3' (related to GpuCardModel count) and 'Task 4' (related to UI/UX) to ensure this new stock management logic integrates smoothly with any UI/UX changes for displaying counts or model information.
+### Details:
+
+
+## 2. Backend: Add `totalAcquiredStock` Field to GpuCardModel Schema [done]
+### Dependencies: 50.1
+### Description: Modify the `GpuCardModel` in `backend/prisma/schema.prisma` to add a new integer field, for example, `totalAcquiredStock`. This field will store the total number of units of this GPU model that have been acquired or are part of the inventory.
+### Details:
+`totalAcquiredStock Int @default(0)`
+
+## 3. Backend: Update GpuCardModel CRUD APIs for `totalAcquiredStock` [done]
+### Dependencies: 50.2
+### Description: Modify the existing backend CRUD API implementation for `GpuCardModel` (i.e., `gpuCardModelRepository.js`, `gpuCardModelService.js`, `gpuCardModelController.js`) to support reading, creating, and updating the new `totalAcquiredStock` field. Ensure that API responses for `GpuCardModel` include this new field.
+### Details:
+
+
+## 4. Frontend: Update GpuCardModel Form for `totalAcquiredStock` [done]
+### Dependencies: 50.3
+### Description: Modify `frontend/src/components/GpuCardModelForm.tsx` to include an input field for operators to set or update the `totalAcquiredStock` when creating or editing a `GpuCardModel`. This form should now submit the `totalAcquiredStock` value to the updated backend API.
+### Details:
+Ensure appropriate validation for this field (e.g., must be a non-negative integer).
+
+## 5. Backend: Implement Stock Validation Logic in GpuCardInstance Creation [done]
+### Dependencies: 50.4
+### Description: In `backend/src/services/gpuCardInstanceService.js` (specifically in the `createGpuCardInstance` method or equivalent): Before creating a new `GpuCardInstance`, retrieve the `totalAcquiredStock` of the selected `GpuCardModel`. Count the number of currently existing `GpuCardInstance` records associated with that `GpuCardModel`. If the current count of instances is already equal to or greater than `totalAcquiredStock`, disallow the creation of a new instance and return an appropriate error message (e.g., 'Stock limit reached for this GPU model').
+### Details:
+Each `GpuCardInstance` record represents a single physical GPU card.
+
+## 6. Backend: Update GpuCardInstance API for Stock Validation [done]
+### Dependencies: 50.5
+### Description: Ensure the `gpuCardInstanceController.js` correctly handles and returns errors from the service layer related to stock validation (e.g., HTTP 409 Conflict or 400 Bad Request with a clear error message).
+### Details:
+
+
+## 7. Frontend: Handle Stock Validation Errors in GpuCardInstance Form [done]
+### Dependencies: 50.6
+### Description: Modify `frontend/src/components/GpuCardInstanceForm.tsx` to gracefully handle and display any stock validation error messages received from the backend when attempting to create a new `GpuCardInstance`.
+### Details:
+
+
+## 8. Testing: Verify Stock Management Functionality [done]
+### Dependencies: 50.7
+### Description: Test creating/editing a `GpuCardModel` to set its `totalAcquiredStock` via the UI and API. Test creating `GpuCardInstance`s for a model: successfully creating instances up to the `totalAcquiredStock` limit, and verifying that attempting to create an instance beyond the `totalAcquiredStock` limit is prevented and an error is shown (both API response and UI feedback). Test behavior when `totalAcquiredStock` is set to 0.
+### Details:
+
+
+## 9. Documentation: Update Project Documents [done]
+### Dependencies: 50.8
+### Description: Update `README.md`, `API_DOC.md` (for `GpuCardModel` and `GpuCardInstance` API changes, including the new field, its handling in CRUD operations, and error responses), and `database-erd.md` (for the schema change) to reflect the new stock management functionality.
+### Details:
+
+

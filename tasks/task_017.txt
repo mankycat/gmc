@@ -1,0 +1,25 @@
+# Task ID: 17
+# Title: Implement Default Admin User Creation on Startup
+# Status: done
+# Dependencies: None
+# Priority: high
+# Description: Add logic to create default admin user on application startup.
+# Details:
+
+
+# Test Strategy:
+
+
+# Subtasks:
+## 1. Implement Core Default Admin User Creation Logic [done]
+### Dependencies: None
+### Description: Create a function or service that encapsulates the logic for creating a default admin user. This logic should check if an admin user already exists (e.g., by a specific identifier like email or role). If no admin user is found, it should create a new user with predefined default credentials (username, password, role), hash the password, and persist the user to the database.
+### Details:
+Define default admin credentials (consider using environment variables or configuration files). Utilize existing user service/repository methods for checking user existence and saving new users. Ensure password hashing is correctly applied before saving. This function/service should be callable independently of the application startup process.
+
+## 2. Integrate Default Admin User Creation into Application Startup [done]
+### Dependencies: 17.1
+### Description: Modify the application's startup sequence to call the core default admin user creation logic implemented in Subtask 1. This call should happen after the database connection is established and necessary services (like the user service/repository) are initialized, but before the application starts serving requests.
+### Details:
+Identify the appropriate place in your application's lifecycle for initialization tasks (e.g., an application listener, a specific startup class, or within the main application entry point). Call the function/service from Subtask 1 here. Ensure this logic runs only once upon successful application startup.
+

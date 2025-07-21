@@ -1,0 +1,102 @@
+# Task ID: 44
+# Title: Frontend - GpuCardModel 管理介面
+# Status: done
+# Dependencies: None
+# Priority: medium
+# Description: 參考現有 Server 相關頁面 (如 ServerList, ServerDetail, ServerForm 等) 及服務 (如 serverApiService, apiClient) 的實作方式，開發前端介面，用於管理 (列表、新增、編輯、刪除) GpuCardModel (GPU 型號)。列表頁顯示所有 GPU 型號，表單用於新增/編輯 GPU 型號資訊。
+# Details:
+根據以下檔案的實作模式進行開發：
+- Readme
+- frontend/src/main.tsx (路由設定)
+- frontend/src/components/ServerGpuCard.tsx (元件參考)
+- frontend/src/components/ServerForm.tsx (表單元件參考)
+- frontend/src/components/ServerFormWrapper.tsx (表單頁面結構參考)
+- frontend/src/pages/ServerDetail.tsx (詳細頁面結構參考)
+- frontend/src/pages/ServerList.tsx (列表頁面結構參考)
+- frontend/src/services/apiClient.ts (API 客戶端參考)
+- frontend/src/services/serverApiService.ts (API 服務參考)
+- frontend/src/utils/auth.ts (認證處理參考)
+
+開發內容包含：
+1.  建立 GpuCardModel 相關的 API 服務 (類似 serverApiService)。
+2.  開發 GpuCardModel 列表頁面，顯示所有 GPU 型號。
+3.  開發 GpuCardModel 新增/編輯表單頁面。
+4.  實作新增、編輯、刪除 GPU 型號的功能。
+5.  設定相關路由。
+
+# Test Strategy:
+1.  單元測試：測試 GpuCardModel API 服務函式。
+2.  單元測試：測試列表頁面元件是否正確渲染資料。
+3.  單元測試：測試表單元件的輸入處理和驗證邏輯。
+4.  整合測試：測試列表頁面是否能正確呼叫 API 並顯示資料。
+5.  整合測試：測試新增/編輯表單提交後是否能正確呼叫 API。
+6.  整合測試：測試刪除功能是否能正確呼叫 API。
+7.  端對端測試：測試從列表頁到新增/編輯頁面的導航，以及完整的 CRUD 操作流程。
+
+# Subtasks:
+## 44-1. undefined [done]
+### Dependencies: None
+### Description: 參考 serverApiService.ts 建立 gpuCardModelApiService.ts，包含列表、取得單一、新增、編輯、刪除的 API 呼叫函式。
+### Details:
+
+
+## 44-2. undefined [done]
+### Dependencies: None
+### Description: 參考 ServerList.tsx 建立 GpuCardModelList.tsx 頁面元件，用於顯示 GPU 型號列表。
+### Details:
+
+
+## 44-3. undefined [done]
+### Dependencies: None
+### Description: 在 GpuCardModel 列表頁面中，實作從 API 載入並顯示資料的功能。
+### Details:
+
+
+## 44-4. undefined [done]
+### Dependencies: None
+### Description: 參考 ServerForm.tsx 和 ServerFormWrapper.tsx 建立 GpuCardModelForm.tsx 元件和 GpuCardModelFormWrapper.tsx 頁面元件，用於新增/編輯 GPU 型號。
+### Details:
+
+
+## 44-5. undefined [done]
+### Dependencies: None
+### Description: 在 GpuCardModel 表單頁面中，實作新增 GPU 型號的功能。
+### Details:
+
+
+## 44-6. undefined [done]
+### Dependencies: None
+### Description: 在 GpuCardModel 表單頁面中，實作編輯 GPU 型號的功能 (根據 ID 載入資料並提交更新)。
+### Details:
+
+
+## 44-7. undefined [done]
+### Dependencies: None
+### Description: 在列表頁或詳細頁中，實作刪除 GPU 型號的功能。
+### Details:
+
+
+## 44-8. undefined [done]
+### Dependencies: None
+### Description: 參考 main.tsx 設定 GpuCardModel 相關的路由 (列表頁、新增頁、編輯頁)。
+### Details:
+
+
+## 44-9. undefined [done]
+### Dependencies: None
+### Description: 為 gpuCardModelApiService 編寫單元測試。
+### Details:
+
+
+## 44-10. undefined [done]
+### Dependencies: None
+### Description: 為 GpuCardModel 列表和表單元件編寫單元測試。
+### Details:
+
+
+## 44-11. undefined [done]
+### Dependencies: None
+### Description: 編寫 GpuCardModel CRUD 操作的整合測試。
+### Details:
+
+

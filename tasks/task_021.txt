@@ -1,0 +1,57 @@
+# Task ID: 21
+# Title: Frontend: Implement VM Management UI and Logic
+# Status: done
+# Dependencies: 15
+# Priority: high
+# Description: Implement the user interface and frontend logic for managing virtual machines, including listing, viewing details, creating, updating, and deleting VMs.
+# Details:
+This task involves building the frontend components and logic required to interact with the backend Virtual Machine (VM) management APIs (Task 15). Key areas include:
+
+1.  **Component Development:** Create reusable UI components for displaying VM lists, individual VM details, and forms for creating/editing VMs.
+2.  **API Integration:** Implement service layer functions to call the backend CRUD APIs for VMs (GET all, GET by ID, POST, PUT, DELETE). Handle asynchronous operations and potential API errors.
+3.  **State Management:** Manage the state of the VM list, individual VM data, loading states, and error states using the chosen frontend state management solution.
+4.  **Routing:** Set up routing to navigate between the VM list view, VM detail view, and VM creation/edit forms.
+5.  **Form Handling:** Implement form validation and submission logic for creating and updating VMs.
+6.  **User Experience:** Ensure a smooth user experience with appropriate loading indicators, error messages, and confirmation dialogs (e.g., for deletion).
+7.  **Dependency:** This task is dependent on the successful completion and availability of the backend VM CRUD APIs developed in Task 15.
+
+# Test Strategy:
+Testing for this task should cover UI functionality, logic, and API integration:
+
+1.  **Unit Tests:** Write unit tests for individual components (e.g., rendering with different data states) and frontend logic (e.g., form validation, state updates).
+2.  **Integration Tests:** Implement integration tests to verify the interaction between frontend services and the backend APIs. Use mocking or a test backend environment to simulate API responses, including success, error, and edge cases.
+3.  **End-to-End Tests:** Develop end-to-end tests using a testing framework (e.g., Cypress, Selenium) to simulate user flows for listing, viewing, creating, updating, and deleting VMs through the UI.
+4.  **Manual Testing:** Perform manual testing to visually inspect the UI, test responsiveness, usability, and verify all CRUD operations function correctly in a deployed environment interacting with the actual backend.
+5.  **Error Handling Tests:** Specifically test how the UI handles various API error responses (e.g., network errors, validation errors, not found errors) and displays appropriate feedback to the user.
+
+# Subtasks:
+## 1. Set up VM Management Routing and Base Pages [done]
+### Dependencies: None
+### Description: Establish the basic routing structure for VM management, including routes for the VM list, VM detail view, and VM creation/edit forms. Create placeholder components or pages for each route.
+### Details:
+Configure the frontend router (e.g., React Router, Vue Router) to handle paths like `/vms` (list), `/vms/:id` (detail), and `/vms/new` or `/vms/:id/edit` (forms). Create minimal page components (e.g., `VmListPage`, `VmDetailPage`, `VmFormPage`) that will be populated in later steps. Ensure navigation links or programmatic navigation is possible between these routes.
+
+## 2. Implement VM API Service Layer [done]
+### Dependencies: None
+### Description: Create a dedicated service or module responsible for making API calls to the backend VM management endpoints (GET all, GET by ID, POST, PUT, DELETE).
+### Details:
+Develop asynchronous functions (e.g., using `fetch` or Axios) that encapsulate the logic for interacting with the backend API (Task 15). Handle request parameters, headers, and basic response parsing. Implement error handling for API calls (e.g., network errors, API error responses). This layer should be reusable by different components.
+
+## 3. Implement VM List View and Data Fetching [done]
+### Dependencies: 21.1, 21.2
+### Description: Develop the component(s) for displaying the list of virtual machines. Integrate the API service to fetch the list data and display it.
+### Details:
+Create the `VmListPage` component. Use the VM API service (Subtask 2) to fetch the list of VMs when the page loads. Display the data in a table or list format. Implement basic state management for the list data, loading state, and potential errors. Add links or actions to navigate to the VM detail or edit pages (using routing from Subtask 1).
+
+## 4. Implement VM Detail View and Create/Edit Forms [done]
+### Dependencies: 21.1, 21.2
+### Description: Develop components and logic for viewing individual VM details and for creating/editing VMs using forms. Integrate API calls for fetching a single VM, creating, and updating.
+### Details:
+Create `VmDetailPage` and `VmFormPage` components. For the detail page, use the VM API service (Subtask 2) to fetch data based on the ID from the route parameters (Subtask 1). Display the VM's properties. For the form page, create a reusable form component for VM properties. Implement logic to handle form input, validation, and submission. Use the API service (Subtask 2) to send POST requests for new VMs and PUT requests for updates. Handle form state, loading, and errors. Redirect or navigate appropriately after successful submission.
+
+## 5. Implement VM Deletion and Enhance User Experience [done]
+### Dependencies: 21.2, 21.3, 21.4
+### Description: Add functionality to delete VMs, including confirmation dialogs. Refine the overall user experience across all VM management views.
+### Details:
+Add a delete action (e.g., button) to the VM list items (Subtask 3) and/or the detail page (Subtask 4). Implement a confirmation dialog before proceeding with deletion. Use the VM API service (Subtask 2) to send the DELETE request. Handle the response and update the UI accordingly (e.g., remove the VM from the list, navigate away from the detail page). Review all views (list, detail, form) to ensure consistent loading indicators, clear error messages, and appropriate feedback for user actions (e.g., success notifications after create/edit/delete).
+

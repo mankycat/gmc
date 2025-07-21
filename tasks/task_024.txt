@@ -1,0 +1,37 @@
+# Task ID: 24
+# Title: Frontend: Integrate Features and Fix Routing
+# Status: done
+# Dependencies: None
+# Priority: medium
+# Description: Integrate implemented frontend features like VM management and authentication logic with the routing configuration, and fix any existing routing issues.
+# Details:
+This task involves connecting the previously implemented frontend components and logic (specifically VM management UI/logic from Task 21 and authentication checks from Task 23) with the application's routing system. Review the current routing configuration (e.g., in `src/router/index.js` or similar) to ensure it correctly handles public and protected routes. Implement route guards using the authentication logic to prevent unauthorized access to protected areas (like the VM management dashboard). Ensure smooth navigation between different views (login, dashboard, VM list, VM details, etc.). Address any known issues with the current routing setup, such as incorrect redirects, broken links, or components not rendering correctly on route changes. Verify that parameters are passed correctly through routes where needed (e.g., for VM details).
+
+# Test Strategy:
+1. Verify that accessing a protected route (e.g., /dashboard, /vms) while logged out redirects the user to the login page. 2. Verify that accessing a public route (e.g., /login, /register) while logged in redirects the user to the dashboard or a designated landing page. 3. Log in successfully and navigate to the VM management section. Verify that the VM list loads correctly. 4. Click on a VM in the list and verify that the VM details page loads with the correct information. 5. Test navigation links/buttons within the application to ensure they direct to the correct routes. 6. Log out and verify that the user is redirected to the login page and cannot access protected routes. 7. Check the browser console for any routing-related errors or warnings during navigation.
+
+# Subtasks:
+## 1. Analyze and Clean Up Base Routing Configuration [done]
+### Dependencies: None
+### Description: Review the existing frontend routing configuration (e.g., in `src/router/index.js`). Identify and fix any fundamental issues unrelated to the new features, such as incorrect paths, broken links, misconfigured redirects for public routes, or components not rendering correctly on basic navigation. Ensure the basic structure is sound before adding new logic.
+### Details:
+Examine the route definitions, history mode vs hash mode, base paths, and any existing navigation logic. Use browser developer tools to trace navigation and identify errors. Refactor or correct basic route definitions as needed. Ensure public routes like login or home (if applicable) function correctly.
+
+## 2. Implement Authentication Route Guards [done]
+### Dependencies: 24.1
+### Description: Integrate the authentication logic (from Task 23) with the routing system by implementing navigation guards. These guards should check if a user is authenticated before allowing access to protected routes. Redirect unauthenticated users attempting to access protected routes to the login page.
+### Details:
+Utilize global navigation guards (`router.beforeEach`) or per-route guards. Access the authentication state (e.g., from a Vuex store or Pinia store). Define which routes are protected. If a user is not authenticated and tries to access a protected route, use `next('/login')` or similar to redirect. Handle the case where a user *is* authenticated and tries to access the login/register page (e.g., redirect to dashboard).
+
+## 3. Define and Configure VM Management Routes [done]
+### Dependencies: 24.2
+### Description: Add the specific routes required for the VM management features (from Task 21). This includes routes for listing VMs, viewing VM details, and potentially creation/editing. Ensure these routes are correctly defined, use the appropriate components, and are configured as protected routes using the guards implemented in Subtask 2.
+### Details:
+Define new route objects in the router configuration for paths like `/vms`, `/vms/:id`, `/vms/create`, etc. Map these paths to the relevant VM management components (e.g., `VmListView`, `VmDetailsView`). Mark these routes as requiring authentication (e.g., using meta fields like `meta: { requiresAuth: true }`) so the guards from Subtask 2 protect them. Ensure route parameters (like `:id` for details) are correctly configured.
+
+## 4. End-to-End Navigation Testing and Refinement [done]
+### Dependencies: 24.3
+### Description: Perform comprehensive testing of all navigation paths, covering both public and protected routes, including the newly added VM management routes. Test user flows like login -> dashboard -> VM list -> VM details -> logout. Verify correct parameter passing for detail views. Address any remaining routing issues, such as incorrect redirects, broken links within the application, or state issues on navigation.
+### Details:
+Manually test all significant navigation paths. Click on links and use browser back/forward buttons. Verify that route parameters are correctly received by components (e.g., VM ID in the details view). Check for console errors during navigation. Refine route definitions, guards, or component logic as needed to fix any discovered issues.
+

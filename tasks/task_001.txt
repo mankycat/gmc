@@ -1,0 +1,11 @@
+# Task ID: 1
+# Title: Setup Project Structure and Repositories
+# Status: done
+# Dependencies: None
+# Priority: high
+# Description: Set up project structure for backend API server and frontend console UI.
+# Details:
+
+
+# Test Strategy:
+

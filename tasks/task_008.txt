@@ -1,0 +1,37 @@
+# Task ID: 8
+# Title: Frontend: Build Server Add/Edit Form UI
+# Status: done
+# Dependencies: 5, 7
+# Priority: high
+# Description: Develop frontend UI components for adding and editing server information.
+# Details:
+
+
+# Test Strategy:
+
+
+# Subtasks:
+## 1. Implement Basic Server Form Structure [done]
+### Dependencies: None
+### Description: Create the core HTML/JSX structure for the server add/edit form component. Include input fields for essential server properties like name, IP address, status, and any other relevant fields. Add placeholder buttons for submit and cancel actions.
+### Details:
+Use standard form elements (input, select, textarea, etc.). Define the basic component structure using the chosen frontend framework (e.g., React functional component, Vue component). Focus only on the structure, not state or styling yet.
+
+## 2. Implement Form State Management and Basic Validation [done]
+### Dependencies: 8.1
+### Description: Add state management to the form component to track the values entered into each input field. Implement basic client-side validation rules, such as marking required fields and validating the format of specific inputs (e.g., IP address). Display simple validation error messages next to the relevant fields.
+### Details:
+Use framework-specific state hooks or data properties to manage form input values. Implement validation logic either on input change (`onChange`, `v-model`) or on form submission attempt. Display validation errors conditionally based on the validation state.
+
+## 3. Implement Edit Mode Data Loading [done]
+### Dependencies: 8.2
+### Description: Modify the form component to support an 'edit' mode. This involves accepting existing server data as input (e.g., via props) and pre-populating the form fields with this data when the component is used for editing an existing server.
+### Details:
+Add logic to detect if the component is in edit mode (e.g., based on a prop indicating an existing server ID or data object). If in edit mode, initialize the form's state with the provided server data when the component mounts or receives new data.
+
+## 4. Apply Styling and Finalize UI Elements [done]
+### Dependencies: 8.3
+### Description: Apply CSS or use a styling framework/library to style the form component. Ensure the layout is clean, input fields and buttons are visually distinct, and validation messages are clearly visible. Refine button appearances (e.g., primary for submit, secondary for cancel).
+### Details:
+Use CSS modules, styled-components, Tailwind CSS, Bootstrap, or another chosen styling method. Ensure consistent padding, margins, font styles, and colors according to the application's design system. Make sure the form is usable and visually appealing.
+

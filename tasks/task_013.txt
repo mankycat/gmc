@@ -1,0 +1,37 @@
+# Task ID: 13
+# Title: Backend: Implement GPU Card Model and CRUD APIs
+# Status: done
+# Dependencies: 2, 5
+# Priority: medium
+# Description: Design and implement GpuCard data model and backend RESTful APIs for CRUD operations.
+# Details:
+
+
+# Test Strategy:
+
+
+# Subtasks:
+## 1. Design and Implement GpuCard Data Model [done]
+### Dependencies: None
+### Description: Define the database schema or ORM model for the GpuCard entity. This includes identifying necessary fields (e.g., name, manufacturer, memory size/type, clock speed, interface, power, release date), choosing appropriate data types, and setting constraints.
+### Details:
+Use the chosen backend framework's ORM (e.g., SQLAlchemy, Django ORM, Mongoose, etc.) to define the model class/schema. Implement necessary database migrations if applicable.
+
+## 2. Implement GpuCard Create and Read APIs [done]
+### Dependencies: 13.1
+### Description: Implement the backend API endpoints for creating a new GpuCard (POST /gpu-cards) and retrieving GpuCards (GET /gpu-cards for list, GET /gpu-cards/{id} for single).
+### Details:
+Use the backend framework's routing and controller/view layer. Implement logic to receive data for creation, save it using the model from Subtask 1. For read, implement logic to query the database for a single card by ID or a list of cards.
+
+## 3. Implement GpuCard Update and Delete APIs [done]
+### Dependencies: 13.2
+### Description: Implement the backend API endpoints for updating an existing GpuCard (PUT/PATCH /gpu-cards/{id}) and deleting a GpuCard (DELETE /gpu-cards/{id}).
+### Details:
+Implement logic to find the record by ID, update its fields based on request data, and save changes. For deletion, find by ID and remove the record. Handle cases where the specified ID does not exist.
+
+## 4. Add Validation, Error Handling, and Basic API Tests [done]
+### Dependencies: 13.3
+### Description: Enhance the implemented CRUD APIs with input validation (e.g., required fields, data types), proper error handling (e.g., 400 Bad Request, 404 Not Found, 500 Internal Server Error), and write basic unit/integration tests for the API endpoints.
+### Details:
+Implement validation logic (e.g., using serializers, request parsers, or model validation). Add error handling middleware or specific error responses for common issues (invalid input, resource not found). Write automated tests covering successful operations and key error scenarios for all CRUD endpoints.
+

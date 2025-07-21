@@ -1,0 +1,31 @@
+# Task ID: 14
+# Title: Frontend: Build GPU Card Management UI on Server Detail
+# Status: done
+# Dependencies: 7, 13
+# Priority: medium
+# Description: Develop frontend UI components to display and manage GPU cards on Server Detail page.
+# Details:
+
+
+# Test Strategy:
+
+
+# Subtasks:
+## 1. Fetch and Display Basic GPU List [done]
+### Dependencies: None
+### Description: Implement the API call to fetch the list of GPU cards associated with the current server and display a basic list or table showing essential information like GPU name, model, and current status.
+### Details:
+Use the existing frontend API client to call the appropriate backend endpoint for fetching server details, ensuring it includes the list of associated GPUs. Render the fetched data in a simple list or table format within a new section on the Server Detail page. Handle loading and error states gracefully.
+
+## 2. Create Detailed GPU Card Component [done]
+### Dependencies: 14.1
+### Description: Develop a reusable UI component to display detailed information for a single GPU card. This component should present data like vendor, model, memory, driver version, temperature, utilization, and any relevant status indicators in a visually clear card or panel format.
+### Details:
+Design and implement a dedicated component (e.g., `GpuCard`) that accepts a single GPU data object as props. Display detailed attributes using appropriate labels and formatting. Include visual elements like icons or color coding for status and utilization metrics. Ensure the component is responsive.
+
+## 3. Integrate Detailed GPU Cards into Server Detail Layout [done]
+### Dependencies: 14.1, 14.2
+### Description: Modify the basic list implemented in Subtask 1 to use the detailed `GpuCard` component for each item. Integrate the complete GPU section (the list of detailed cards) into the final layout of the Server Detail page, ensuring proper placement, styling, and responsiveness within the overall page structure.
+### Details:
+Update the rendering logic from Subtask 1 to iterate over the fetched GPU list and render the `GpuCard` component for each GPU, passing the respective data. Place this list/section within the designated area on the Server Detail page (e.g., a dedicated tab, a section below other hardware details). Apply necessary CSS for layout, spacing, and alignment to fit seamlessly with the rest of the page.
+

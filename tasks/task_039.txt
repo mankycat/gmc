@@ -1,0 +1,11 @@
+# Task ID: 39
+# Title: DB Schema 調整 - 處理舊 GpuCard Model
+# Status: done
+# Dependencies: None
+# Priority: medium
+# Description: 決定如何處理現有的 GpuCard Model。建議是移除或重命名，並規劃數據遷移策略（如果需要）。分析現有 GpuCard 中的數據。如果數據需要保留，規劃遷移至新的 GpuCardModel 和 GpuCardInstance 的腳本或步驟。從 prisma/schema.prisma 中移除舊的 GpuCard Model 定義。調整 User Model，移除與舊 GpuCard 的直接關聯 gpuCards: GpuCard[]。
+# Details:
+
+
+# Test Strategy:
+

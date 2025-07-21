@@ -1,0 +1,61 @@
+# Task ID: 41
+# Title: Backend - GpuCardModel CRUD API
+# Status: done
+# Dependencies: None
+# Priority: medium
+# Description: 實作 GpuCardModel (GPU 型號/規格) 的後端 CRUD API。API 端點用於列表、創建、讀取、更新、刪除 GPU 型號。
+
+請review & 參考 Readme 以及現有的 backend/src/index.js, backend/src/repositories/serverRepository.js, backend/src/services/serverService.js 的實作方式來進行。
+# Details:
+根據現有的專案結構，實作 GpuCardModel 的 CRUD API 應包含以下層次：
+
+1.  **Repository 層**: 負責與資料庫互動，執行 GpuCardModel 的增刪改查操作。
+2.  **Service 層**: 包含業務邏輯，協調 Repository 層的操作。
+3.  **Controller/Router 層**: 定義 API 端點，處理請求和回應，呼叫 Service 層。
+
+# Test Strategy:
+1.  使用工具 (如 Postman, curl) 或自動化測試框架測試各個 CRUD API 端點。
+2.  測試列表 (GET /api/gpu-card-models) 是否能正確返回資料。
+3.  測試創建 (POST /api/gpu-card-models) 是否能成功新增資料並返回新資料。
+4.  測試讀取 (GET /api/gpu-card-models/:id) 是否能根據 ID 返回特定資料。
+5.  測試更新 (PUT /api/gpu-card-models/:id) 是否能成功更新特定資料。
+6.  測試刪除 (DELETE /api/gpu-card-models/:id) 是否能成功刪除特定資料。
+7.  測試邊界情況和錯誤處理 (如無效 ID, 缺少必要欄位等)。
+
+# Subtasks:
+## 41-1. undefined [done]
+### Dependencies: None
+### Description: Review existing code structure (Readme, server related files).
+### Details:
+
+
+## 41-2. undefined [done]
+### Dependencies: None
+### Description: Implement GpuCardModel Repository.
+### Details:
+Create `backend/src/repositories/gpuCardModelRepository.js` following the pattern of `serverRepository.js`.
+
+## 41-3. undefined [done]
+### Dependencies: None
+### Description: Implement GpuCardModel Service.
+### Details:
+Create `backend/src/services/gpuCardModelService.js` following the pattern of `serverService.js`.
+
+## 41-4. undefined [done]
+### Dependencies: None
+### Description: Implement GpuCardModel Controller/Router.
+### Details:
+Create `backend/src/controllers/gpuCardModelController.js` or similar, defining API endpoints for CRUD operations.
+
+## 41-5. undefined [done]
+### Dependencies: None
+### Description: Integrate GpuCardModel routes into the main application.
+### Details:
+Add the new routes to `backend/src/index.js` or a dedicated router file.
+
+## 41-6. undefined [done]
+### Dependencies: None
+### Description: Write and execute tests for GpuCardModel CRUD API.
+### Details:
+Implement tests based on the defined test strategy.
+
