@@ -36,3 +36,4 @@ tasks/*.md
 !tasks/tasks.json
 !tasks/task-complexity-report.json
 GEMINI.md
+.taskmaster/config.json

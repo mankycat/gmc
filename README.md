@@ -7,7 +7,7 @@ This project aims to provide a web-based console for managing GPU resources and 
 - `backend/`: Contains the backend API server code (Node.js with Express and Prisma).
 - `frontend/`: Contains the frontend console UI code (React with Vite and React Router).
 - `scripts/`: Contains utility scripts for development and task management.
-- `tasks/`: Contains task definitions and documentation.
+- `.taskmaster/`: Contains task definitions and documentation.
 
 ## Project Design and Implementation Details
 
