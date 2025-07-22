@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Box, TextField, Button, Typography } from '@mui/material';
-import { getGpuCardInstancesByServer, getGpuCardInstances, updateGpuCardInstance } from '../services/gpuCardInstanceApiService';
 
 interface Server {
   id: string;
@@ -12,14 +11,6 @@ interface Server {
   diskSpec: string;
   os: string;
   purpose: string;
-}
-
-interface GpuCardInstance {
-  id: string;
-  gpuCardModelId: string;
-  serverId: string;
-  status: string;
-  purchaseDate: string;
 }
 
 interface ServerFormProps {
@@ -42,23 +33,7 @@ const ServerForm: React.FC<ServerFormProps> = ({ server, isEditing, onClose, onS
     purpose: server?.purpose || '',
   });
 
-  const [assignedGpuCardInstances, setAssignedGpuCardInstances] = useState<GpuCardInstance[]>([]);
-  const [availableGpuCardInstances, setAvailableGpuCardInstances] = useState<GpuCardInstance[]>([]);
-
   const [errors, setErrors] = useState<Partial<Record<keyof Server, string>>>({});
-
-  useEffect(() => {
-    const fetchGpuCardInstances = async () => {
-      if (server?.id) {
-        const assignedGpuInstances = await getGpuCardInstancesByServer(server.id);
-        setAssignedGpuCardInstances(assignedGpuInstances as GpuCardInstance[]);
-      }
-
-      const availableGpuInstances = await getGpuCardInstances();
-      setAvailableGpuCardInstances((availableGpuInstances as GpuCardInstance[]).filter(gpu => !gpu.serverId));
-    };
-    fetchGpuCardInstances();
-  }, [server]);
 
   const validateForm = (): boolean => {
     const newErrors: Partial<Record<keyof Server, string>> = {};
@@ -83,30 +58,6 @@ const ServerForm: React.FC<ServerFormProps> = ({ server, isEditing, onClose, onS
       ...formData,
       [name]: name === 'cpuCores' || name === 'memoryGb' ? Number(value) : value,
     });
-  };
-
-  const handleGpuAllocation = async (gpuId: string) => {
-    try {
-      await updateGpuCardInstance(gpuId, { serverId: server?.id });
-      const assignedGpuInstances = await getGpuCardInstancesByServer(server?.id as string);
-      setAssignedGpuCardInstances(assignedGpuInstances as GpuCardInstance[]);
-      const availableGpuInstances = await getGpuCardInstances();
-      setAvailableGpuCardInstances((availableGpuInstances as GpuCardInstance[]).filter(gpu => !gpu.serverId));
-    } catch (error) {
-      console.error('Error allocating GPU:', error);
-    }
-  };
-
-  const handleGpuDeallocation = async (gpuId: string) => {
-    try {
-      await updateGpuCardInstance(gpuId, { serverId: null });
-      const assignedGpuInstances = await getGpuCardInstancesByServer(server?.id as string);
-      setAssignedGpuCardInstances(assignedGpuInstances as GpuCardInstance[]);
-      const availableGpuInstances = await getGpuCardInstances();
-      setAvailableGpuCardInstances((availableGpuInstances as GpuCardInstance[]).filter(gpu => !gpu.serverId));
-    } catch (error) {
-      console.error('Error deallocating GPU:', error);
-    }
   };
 
   return (
@@ -183,42 +134,12 @@ const ServerForm: React.FC<ServerFormProps> = ({ server, isEditing, onClose, onS
         fullWidth
         sx={{ marginBottom: 2 }}
       />
-      <Typography variant="h6">Assigned GPUs</Typography>
-      <select multiple={true} size={5} style={{ width: '100%' }}>
-        {assignedGpuCardInstances.length > 0 ? (
-          assignedGpuCardInstances.map((gpu) => (
-            <option key={gpu.id} value={gpu.id}>
-              {gpu.id}
-            </option>
-          ))
-        ) : (
-          <option disabled>No GPUs assigned</option>
-        )}
-      </select>
-      <Typography variant="h6">Available GPUs</Typography>
-      <select multiple={true} size={5} style={{ width: '100%' }}>
-        {availableGpuCardInstances.length > 0 ? (
-          availableGpuCardInstances.map((gpu) => (
-            <option key={gpu.id} value={gpu.id}>
-              {gpu.id}
-            </option>
-          ))
-        ) : (
-          <option disabled>No GPUs available</option>
-        )}
-      </select>
-      {isEditing && (
-        <div>
-          <Button onClick={() => assignedGpuCardInstances.forEach(gpu => handleGpuDeallocation(gpu.id))}>Deallocate All</Button>
-          <Button onClick={() => availableGpuCardInstances.forEach(gpu => handleGpuAllocation(gpu.id))}>Allocate All</Button>
-        </div>
-      )}
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1 }}>
         <Button onClick={onClose} color="secondary" variant="outlined">
           CANCEL
         </Button>
         <Button type="submit" variant="contained" color="primary" disabled={!isEditing}>
-          {isEditing ? 'UPDATE' : 'CREATE'}
+          {isEditing ? (server ? 'UPDATE' : 'CREATE') : 'CREATE'}
         </Button>
       </Box>
     </Box>
