@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Box, TextField, Button, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 interface Server {
   id: string;
@@ -34,11 +35,12 @@ const ServerForm: React.FC<ServerFormProps> = ({ server, isEditing, onClose, onS
   });
 
   const [errors, setErrors] = useState<Partial<Record<keyof Server, string>>>({});
+  const { t } = useTranslation();
 
   const validateForm = (): boolean => {
     const newErrors: Partial<Record<keyof Server, string>> = {};
-    if (!formData.nameLabel) newErrors.nameLabel = 'Name Label is required';
-    if (!formData.ipAddress) newErrors.ipAddress = 'IP Address is required';
+    if (!formData.nameLabel) newErrors.nameLabel = t('Name Label is required');
+    if (!formData.ipAddress) newErrors.ipAddress = t('IP Address is required');
     // Add more validation rules as needed
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -62,9 +64,9 @@ const ServerForm: React.FC<ServerFormProps> = ({ server, isEditing, onClose, onS
 
   return (
     <Box component="form" onSubmit={handleSubmit} sx={{ padding: 2 }}>
-      <Typography variant="h4">{isEditing ? (server ? 'Edit Server' : 'Add Server') : 'View Server'}</Typography>
+      <Typography variant="h4">{isEditing ? (server ? t('Edit Server') : t('Add Server')) : t('View Server')}</Typography>
       <TextField
-        label="Name Label"
+        label={t('Name Label')}
         name="nameLabel"
         value={formData.nameLabel}
         onChange={isEditing ? handleChange : undefined}
@@ -77,7 +79,7 @@ const ServerForm: React.FC<ServerFormProps> = ({ server, isEditing, onClose, onS
         }}
       />
       <TextField
-        label="IP Address"
+        label={t('IP Address')}
         name="ipAddress"
         value={formData.ipAddress}
         onChange={handleChange}
@@ -87,7 +89,7 @@ const ServerForm: React.FC<ServerFormProps> = ({ server, isEditing, onClose, onS
         sx={{ marginBottom: 2 }}
       />
       <TextField
-        label="CPU Model"
+        label={t('CPU Model')}
         name="cpuModel"
         value={formData.cpuModel}
         onChange={handleChange}
@@ -95,7 +97,7 @@ const ServerForm: React.FC<ServerFormProps> = ({ server, isEditing, onClose, onS
         sx={{ marginBottom: 2 }}
       />
       <TextField
-        label="CPU Cores"
+        label={t('CPU Cores')}
         name="cpuCores"
         value={formData.cpuCores}
         onChange={handleChange}
@@ -103,7 +105,7 @@ const ServerForm: React.FC<ServerFormProps> = ({ server, isEditing, onClose, onS
         sx={{ marginBottom: 2 }}
       />
       <TextField
-        label="Memory (GB)"
+        label={t('Memory (GB)')}
         name="memoryGb"
         value={formData.memoryGb}
         onChange={handleChange}
@@ -111,7 +113,7 @@ const ServerForm: React.FC<ServerFormProps> = ({ server, isEditing, onClose, onS
         sx={{ marginBottom: 2 }}
       />
       <TextField
-        label="Disk Spec"
+        label={t('Disk Spec')}
         name="diskSpec"
         value={formData.diskSpec}
         onChange={handleChange}
@@ -119,7 +121,7 @@ const ServerForm: React.FC<ServerFormProps> = ({ server, isEditing, onClose, onS
         sx={{ marginBottom: 2 }}
       />
       <TextField
-        label="OS"
+        label={t('OS')}
         name="os"
         value={formData.os}
         onChange={handleChange}
@@ -127,7 +129,7 @@ const ServerForm: React.FC<ServerFormProps> = ({ server, isEditing, onClose, onS
         sx={{ marginBottom: 2 }}
       />
       <TextField
-        label="Purpose"
+        label={t('Purpose')}
         name="purpose"
         value={formData.purpose}
         onChange={handleChange}
@@ -136,10 +138,10 @@ const ServerForm: React.FC<ServerFormProps> = ({ server, isEditing, onClose, onS
       />
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1 }}>
         <Button onClick={onClose} color="secondary" variant="outlined">
-          CANCEL
+          {t('CANCEL')}
         </Button>
         <Button type="submit" variant="contained" color="primary" disabled={!isEditing}>
-          {isEditing ? (server ? 'UPDATE' : 'CREATE') : 'CREATE'}
+          {isEditing ? (server ? t('UPDATE') : t('CREATE')) : t('CREATE')}
         </Button>
       </Box>
     </Box>

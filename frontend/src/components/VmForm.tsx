@@ -3,6 +3,7 @@ import { Typography, TextField, Button, Box, MenuItem, Select, InputLabel, FormC
 import { createVirtualMachine, updateVirtualMachine } from '../services/vmApiService';
 import cardUsageApiService from '../services/cardUsageApiService';
 import { listServers } from '../services/serverApiService';
+import { useTranslation } from 'react-i18next';
 // const { createCardUsage, updateCardUsage, deleteCardUsage } = cardUsageApiService;
 
 interface VmFormData {
@@ -62,6 +63,7 @@ const VmForm: React.FC<VmFormProps> = ({ vm, isEditing = false, onClose }) => {
   const [success, setSuccess] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [servers, setServers] = useState<{ id: string; nameLabel: string }[]>([]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchServers = async () => {
@@ -103,11 +105,11 @@ const VmForm: React.FC<VmFormProps> = ({ vm, isEditing = false, onClose }) => {
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
-    if (!formData.nameLabel) newErrors.nameLabel = 'Name is required';
-    if (!formData.vcpuCoresAssigned || formData.vcpuCoresAssigned <= 0) newErrors.vcpuCoresAssigned = 'vCPU Cores must be a positive number';
-    if (!formData.ramGbAssigned || formData.ramGbAssigned <= 0) newErrors.ramGbAssigned = 'RAM (GB) must be a positive number';
-    if (!formData.internalIpAddress) newErrors.internalIpAddress = 'Internal IP Address is required';
-    if (!formData.hostServerId) newErrors.hostServerId = 'Host Server ID is required';
+    if (!formData.nameLabel) newErrors.nameLabel = t('Name is required');
+    if (!formData.vcpuCoresAssigned || formData.vcpuCoresAssigned <= 0) newErrors.vcpuCoresAssigned = t('vCPU Cores must be a positive number');
+    if (!formData.ramGbAssigned || formData.ramGbAssigned <= 0) newErrors.ramGbAssigned = t('RAM (GB) must be a positive number');
+    if (!formData.internalIpAddress) newErrors.internalIpAddress = t('Internal IP Address is required');
+    if (!formData.hostServerId) newErrors.hostServerId = t('Host Server ID is required');
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -132,11 +134,11 @@ const VmForm: React.FC<VmFormProps> = ({ vm, isEditing = false, onClose }) => {
           cardUsages: submissionData.cardUsages || [], // Ensure cardUsages is an array
         });
       }
-      setSuccess('Virtual machine saved successfully');
+      setSuccess(t('Virtual machine saved successfully'));
       setError(null);
       onClose(true); // Pass true to indicate success and trigger refresh
     } catch (err) {
-      setError('Failed to save virtual machine');
+      setError(t('Failed to save virtual machine'));
       setSuccess(null);
       console.error('Error saving VM:', err);
     }
@@ -144,9 +146,9 @@ const VmForm: React.FC<VmFormProps> = ({ vm, isEditing = false, onClose }) => {
 
   return (
     <Box component="form" onSubmit={handleSubmit} sx={{ mt: 2 }}>
-      <Typography variant="h4">{isEditing ? 'Edit' : 'Create'} Virtual Machine</Typography>
+      <Typography variant="h4">{t(isEditing ? 'Edit' : 'Create')} {t('Virtual Machine')}</Typography>
       <TextField
-        label="Name"
+        label={t('Name')}
         name="nameLabel"
         value={formData.nameLabel}
         onChange={handleChange}
@@ -156,7 +158,7 @@ const VmForm: React.FC<VmFormProps> = ({ vm, isEditing = false, onClose }) => {
         sx={{ mb: 2 }}
       />
       <TextField
-        label="vCPU Cores"
+        label={t('vCPU Cores')}
         name="vcpuCoresAssigned"
         type="number"
         value={formData.vcpuCoresAssigned}
@@ -167,7 +169,7 @@ const VmForm: React.FC<VmFormProps> = ({ vm, isEditing = false, onClose }) => {
         sx={{ mb: 2 }}
       />
       <TextField
-        label="RAM (GB)"
+        label={t('RAM (GB)')}
         name="ramGbAssigned"
         type="number"
         value={formData.ramGbAssigned}
@@ -178,7 +180,7 @@ const VmForm: React.FC<VmFormProps> = ({ vm, isEditing = false, onClose }) => {
         sx={{ mb: 2 }}
       />
       <TextField
-        label="Internal IP Address"
+        label={t('Internal IP Address')}
         name="internalIpAddress"
         value={formData.internalIpAddress}
         onChange={handleChange}
@@ -188,7 +190,7 @@ const VmForm: React.FC<VmFormProps> = ({ vm, isEditing = false, onClose }) => {
         sx={{ mb: 2 }}
       />
       <TextField
-        label="Purpose"
+        label={t('Purpose')}
         name="purpose"
         value={formData.purpose}
         onChange={handleChange}
@@ -198,12 +200,12 @@ const VmForm: React.FC<VmFormProps> = ({ vm, isEditing = false, onClose }) => {
         sx={{ mb: 2 }}
       />
       <FormControl fullWidth sx={{ mb: 2 }} error={!!errors.hostServerId}>
-        <InputLabel>Host Server</InputLabel>
+        <InputLabel>{t('Host Server')}</InputLabel>
         <Select
           name="hostServerId"
           value={formData.hostServerId}
           onChange={handleChange}
-          label="Host Server"
+          label={t('Host Server')}
         >
           {servers.map((server) => (
             <MenuItem key={server.id} value={server.id}>
@@ -216,7 +218,7 @@ const VmForm: React.FC<VmFormProps> = ({ vm, isEditing = false, onClose }) => {
       {formData.cardUsages?.map((cardUsage, index) => (
         <Box key={index} sx={{ mb: 2 }}>
           <TextField
-            label="Card Index"
+            label={t('Card Index')}
             type="number"
             value={cardUsage.cardIndex}
             onChange={(e) => handleCardUsageChange(index, 'cardIndex', (e.target as HTMLInputElement).valueAsNumber)}
@@ -224,34 +226,34 @@ const VmForm: React.FC<VmFormProps> = ({ vm, isEditing = false, onClose }) => {
             sx={{ mb: 1 }}
           />
           <TextField
-            label="Card UUID"
+            label={t('Card UUID')}
             value={cardUsage.cardUuid}
             onChange={(e) => handleCardUsageChange(index, 'cardUuid', e.target.value)}
             fullWidth
             sx={{ mb: 1 }}
           />
           <TextField
-            label="Usage"
+            label={t('Usage')}
             value={cardUsage.usage}
             onChange={(e) => handleCardUsageChange(index, 'usage', e.target.value)}
             fullWidth
             sx={{ mb: 1 }}
           />
           <Button onClick={() => handleRemoveCardUsage(index, cardUsage.id)} color="error">
-            Remove
+            {t('Remove')}
           </Button>
         </Box>
       ))}
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
         <Button onClick={addCardUsage} variant="outlined">
-          Add Card Usage
+          {t('Add Card Usage')}
         </Button>
         <Box sx={{ display: 'flex', gap: 1 }}>
           <Button onClick={() => onClose(false)} color="secondary" variant="outlined">
-            CANCEL
+            {t('CANCEL')}
           </Button>
           <Button type="submit" variant="contained" color="primary">
-            {isEditing ? 'UPDATE' : 'CREATE'}
+            {isEditing ? t('UPDATE') : t('CREATE')}
           </Button>
         </Box>
       </Box>

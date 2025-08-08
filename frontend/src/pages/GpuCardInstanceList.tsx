@@ -7,6 +7,7 @@ import { getGpuCardInstances, createGpuCardInstance, updateGpuCardInstance, dele
 import { getGpuCardModels } from '../services/gpuCardModelApiService';
 import { getServers } from '../services/serverApiService';
 import { GpuCardInstanceFormData } from '../components/GpuCardInstanceForm';
+import { useTranslation } from 'react-i18next';
 
 interface GpuCardInstance {
   id: string;
@@ -35,6 +36,7 @@ const GpuCardInstanceList: React.FC = () => {
   const [gpuCardModels, setGpuCardModels] = useState<GpuCardModel[]>([]);
   const [servers, setServers] = useState<Server[]>([]);
   const [saveError, setSaveError] = useState<string | null>(null); // State to hold the error message
+  const { t } = useTranslation();
 
   const handleAddGpuCardInstance = () => {
     setIsEditing(false);
@@ -111,12 +113,12 @@ const GpuCardInstanceList: React.FC = () => {
 
   const getGpuCardModelName = (gpuCardModelId: string) => {
     const gpuCardModel = gpuCardModels.find((model) => model.id === gpuCardModelId);
-    return gpuCardModel ? gpuCardModel.modelName : 'Unknown';
+    return gpuCardModel ? gpuCardModel.modelName : t('Unknown');
   };
 
   const getServerName = (serverId: string) => {
     const server = servers.find((server) => server.id === serverId);
-    return server ? server.nameLabel : 'Unknown';
+    return server ? server.nameLabel : t('Unknown');
   };
 
   const handleFormSave = async (gpuCardInstanceData: GpuCardInstanceFormData) => {
@@ -139,7 +141,7 @@ const GpuCardInstanceList: React.FC = () => {
       if (error.response && error.response.data && error.response.data.message) {
         setSaveError(error.response.data.message);
       } else {
-        setSaveError('An unexpected error occurred while saving the GPU Card Instance.');
+        setSaveError(t('An unexpected error occurred while saving the GPU Card Instance.'));
       }
       throw error; // Re-throw error to allow GpuCardInstanceForm to catch it if needed for its own validation/state
     }
@@ -148,31 +150,31 @@ const GpuCardInstanceList: React.FC = () => {
   return (
     <Box sx={{ padding: 2 }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-        <Typography variant="h4">GPU Card Instance List</Typography>
-        <Button 
-          variant="contained" 
-          color="primary" 
+        <Typography variant="h4">{t('GPU Card Instance List')}</Typography>
+        <Button
+          variant="contained"
+          color="primary"
           onClick={handleAddGpuCardInstance}
           sx={{ height: 'fit-content' }}
         >
-          ADD GPU CARD INSTANCE
+          {t('ADD GPU CARD INSTANCE')}
         </Button>
       </Box>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell>GPU Card Model</TableCell>
-              <TableCell>Server</TableCell>
-              <TableCell>Count</TableCell>
-              <TableCell>Actions</TableCell>
+              <TableCell>{t('ID')}</TableCell>
+              <TableCell>{t('GPU Card Model')}</TableCell>
+              <TableCell>{t('Server')}</TableCell>
+              <TableCell>{t('Count')}</TableCell>
+              <TableCell>{t('Actions')}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {gpuCardInstances.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={6} align="center">No GPU Card Instances available</TableCell>
+                <TableCell colSpan={6} align="center">{t('No GPU Card Instances available')}</TableCell>
               </TableRow>
             ) : (
               gpuCardInstances.map((gpuCardInstance) => (
@@ -214,7 +216,7 @@ const GpuCardInstanceList: React.FC = () => {
         open={deleteDialogOpen}
         onClose={() => setDeleteDialogOpen(false)}
         onConfirm={handleConfirmDelete}
-        resourceName={`GPU Card Instance ${gpuCardInstanceToDelete?.id || ''}`}
+        resourceName={`${t('GPU Card Instance')} ${gpuCardInstanceToDelete?.id || ''}`}
       />
     </Box>
   );

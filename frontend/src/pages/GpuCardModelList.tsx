@@ -4,6 +4,7 @@ import { Edit, Delete } from '@mui/icons-material';
 import GpuCardModelForm from '../components/GpuCardModelForm';
 import DeleteConfirmationDialog from '../components/DeleteConfirmationDialog';
 import { getGpuCardModels, createGpuCardModel, updateGpuCardModel, deleteGpuCardModel } from '../services/gpuCardModelApiService';
+import { useTranslation } from 'react-i18next';
 
 interface GpuCardModel {
   id: string;
@@ -30,6 +31,7 @@ const GpuCardModelList = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [gpuCardModelToDelete, setGpuCardModelToDelete] = useState<GpuCardModel | null>(null);
+  const { t } = useTranslation();
 
   const handleAddGpuCardModel = () => {
     setIsEditing(false);
@@ -83,33 +85,33 @@ const GpuCardModelList = () => {
   return (
     <Box sx={{ padding: 2 }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-        <Typography variant="h4">GPU Card Model List</Typography>
-        <Button 
-          variant="contained" 
-          color="primary" 
+        <Typography variant="h4">{t('GPU Card Model List')}</Typography>
+        <Button
+          variant="contained"
+          color="primary"
           onClick={handleAddGpuCardModel}
           sx={{ height: 'fit-content' }}
         >
-          ADD GPU CARD MODEL
+          {t('ADD GPU CARD MODEL')}
         </Button>
       </Box>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell>Vendor</TableCell>
-              <TableCell>Model Name</TableCell>
-              <TableCell>Architecture</TableCell>
-              <TableCell>Memory (GB)</TableCell>
-              <TableCell>Total Acquired Stock</TableCell>
-              <TableCell>Actions</TableCell>
+              <TableCell>{t('ID')}</TableCell>
+              <TableCell>{t('Vendor')}</TableCell>
+              <TableCell>{t('Model Name')}</TableCell>
+              <TableCell>{t('Architecture')}</TableCell>
+              <TableCell>{t('Memory (GB)')}</TableCell>
+              <TableCell>{t('Total Acquired Stock')}</TableCell>
+              <TableCell>{t('Actions')}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {gpuCardModels.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={6} align="center">No GPU Card Models available</TableCell>
+                <TableCell colSpan={6} align="center">{t('No GPU Card Models available')}</TableCell>
               </TableRow>
             ) : (
               gpuCardModels.map((gpuCardModel) => (

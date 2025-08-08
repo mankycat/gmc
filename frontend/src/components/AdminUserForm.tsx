@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Box, TextField, Button, Typography, Checkbox, FormControlLabel } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 interface AdminUserFormData {
   email: string;
@@ -23,13 +24,14 @@ const AdminUserForm: React.FC<AdminUserFormProps> = ({ user, isEditing, onClose,
   });
 
   const [errors, setErrors] = useState<Partial<Record<keyof AdminUserFormData, string>>>({});
+  const { t } = useTranslation();
 
   const validateForm = (): boolean => {
     const newErrors: Partial<Record<keyof AdminUserFormData, string>> = {};
-    if (!formData.email) newErrors.email = 'Email is required';
-    if (!formData.password) newErrors.password = 'Password is required';
+    if (!formData.email) newErrors.email = t('Email is required');
+    if (!formData.password) newErrors.password = t('Password is required');
     if (isEditing && formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = 'Passwords do not match';
+      newErrors.confirmPassword = t('Passwords do not match');
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -53,9 +55,9 @@ const AdminUserForm: React.FC<AdminUserFormProps> = ({ user, isEditing, onClose,
 
   return (
     <Box component="form" onSubmit={handleSubmit} sx={{ padding: 2 }}>
-      <Typography variant="h4">{isEditing ? 'Edit' : 'Create'} Admin User</Typography>
+      <Typography variant="h4">{t(isEditing ? 'Edit' : 'Create')} {t('Admin User')}</Typography>
       <TextField
-        label="Email"
+        label={t('Email')}
         name="email"
         value={formData.email}
         onChange={handleChange}
@@ -65,7 +67,7 @@ const AdminUserForm: React.FC<AdminUserFormProps> = ({ user, isEditing, onClose,
         sx={{ marginBottom: 2 }}
       />
       <TextField
-        label="Password"
+        label={t('Password')}
         name="password"
         type="password"
         value={formData.password}
@@ -77,7 +79,7 @@ const AdminUserForm: React.FC<AdminUserFormProps> = ({ user, isEditing, onClose,
       />
       {isEditing && (
         <TextField
-          label="Confirm Password"
+          label={t('Confirm Password')}
           name="confirmPassword"
           type="password"
           value={formData.confirmPassword}
@@ -96,14 +98,14 @@ const AdminUserForm: React.FC<AdminUserFormProps> = ({ user, isEditing, onClose,
             name="isAdmin"
           />
         }
-        label="isAdmin"
+        label={t('isAdmin')}
       />
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1 }}>
         <Button onClick={onClose} color="secondary" variant="outlined">
-          CANCEL
+          {t('CANCEL')}
         </Button>
         <Button type="submit" variant="contained" color="primary">
-          {isEditing ? 'UPDATE' : 'CREATE'}
+          {isEditing ? t('UPDATE') : t('CREATE')}
         </Button>
       </Box>
     </Box>

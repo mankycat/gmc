@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Box, TextField, Button, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 interface GpuCardModel {
   id: string;
@@ -34,13 +35,14 @@ const GpuCardModelForm: React.FC<GpuCardModelFormProps> = ({ gpuCardModel, isEdi
   });
 
   const [errors, setErrors] = useState<Partial<Record<keyof GpuCardModelFormData, string>>>({});
+  const { t } = useTranslation();
 
   const validateForm = (): boolean => {
     const newErrors: Partial<Record<keyof GpuCardModelFormData, string>> = {};
-    if (!formData.vendor) newErrors.vendor = 'Vendor is required';
-    if (!formData.modelName) newErrors.modelName = 'Model Name is required';
-    if (formData.memoryGb <= 0) newErrors.memoryGb = 'Memory (GB) must be greater than 0';
-    if (formData.totalAcquiredStock < 0) newErrors.totalAcquiredStock = 'Total Acquired Stock must be non-negative';
+    if (!formData.vendor) newErrors.vendor = t('Vendor is required');
+    if (!formData.modelName) newErrors.modelName = t('Model Name is required');
+    if (formData.memoryGb <= 0) newErrors.memoryGb = t('Memory (GB) must be greater than 0');
+    if (formData.totalAcquiredStock < 0) newErrors.totalAcquiredStock = t('Total Acquired Stock must be non-negative');
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -64,9 +66,9 @@ const GpuCardModelForm: React.FC<GpuCardModelFormProps> = ({ gpuCardModel, isEdi
 
   return (
     <Box component="form" onSubmit={handleSubmit} sx={{ padding: 2 }}>
-      <Typography variant="h4">{isEditing ? 'Edit GPU Card Model' : 'Add GPU Card Model'}</Typography>
+      <Typography variant="h4">{isEditing ? t('Edit GPU Card Model') : t('Add GPU Card Model')}</Typography>
       <TextField
-        label="Vendor"
+        label={t('Vendor')}
         name="vendor"
         value={formData.vendor}
         onChange={handleChange}
@@ -79,7 +81,7 @@ const GpuCardModelForm: React.FC<GpuCardModelFormProps> = ({ gpuCardModel, isEdi
         }}
       />
       <TextField
-        label="Model Name"
+        label={t('Model Name')}
         name="modelName"
         value={formData.modelName}
         onChange={handleChange}
@@ -89,7 +91,7 @@ const GpuCardModelForm: React.FC<GpuCardModelFormProps> = ({ gpuCardModel, isEdi
         sx={{ marginBottom: 2 }}
       />
       <TextField
-        label="Architecture"
+        label={t('Architecture')}
         name="architecture"
         value={formData.architecture}
         onChange={handleChange}
@@ -97,7 +99,7 @@ const GpuCardModelForm: React.FC<GpuCardModelFormProps> = ({ gpuCardModel, isEdi
         sx={{ marginBottom: 2 }}
       />
       <TextField
-        label="Memory (GB)"
+        label={t('Memory (GB)')}
         name="memoryGb"
         value={formData.memoryGb}
         onChange={handleChange}
@@ -108,7 +110,7 @@ const GpuCardModelForm: React.FC<GpuCardModelFormProps> = ({ gpuCardModel, isEdi
         type="number"
       />
       <TextField
-        label="Total Acquired Stock"
+        label={t('Total Acquired Stock')}
         name="totalAcquiredStock"
         value={formData.totalAcquiredStock}
         onChange={handleChange}
@@ -123,10 +125,10 @@ const GpuCardModelForm: React.FC<GpuCardModelFormProps> = ({ gpuCardModel, isEdi
       />
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1 }}>
         <Button onClick={onClose} color="secondary" variant="outlined">
-          CANCEL
+          {t('CANCEL')}
         </Button>
         <Button type="submit" variant="contained" color="primary">
-          {isEditing ? 'Update' : 'Create'}
+          {isEditing ? t('Update') : t('Create')}
         </Button>
       </Box>
     </Box>
