@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 const LanguageSwitcher: React.FC = () => {
   const { i18n } = useTranslation();
+  console.log('Current language:', i18n.language);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const handleOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -16,7 +17,14 @@ const LanguageSwitcher: React.FC = () => {
   };
 
   const changeLanguage = (lng: string) => {
-    i18n.changeLanguage(lng);
+    console.log('Switching language to', lng);
+    i18n.changeLanguage(lng, (err) => {
+      if (err) {
+        console.error('語言切換失敗:', err);
+      } else {
+        console.log('語言已切換為', i18n.language);
+      }
+    });
     handleClose();
   };
 
@@ -27,7 +35,7 @@ const LanguageSwitcher: React.FC = () => {
       </IconButton>
       <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
         <MenuItem onClick={() => changeLanguage('en')}>English</MenuItem>
-        <MenuItem onClick={() => changeLanguage('zh-tw')}>繁體中文</MenuItem>
+        <MenuItem onClick={() => changeLanguage('zh-TW')}>繁體中文</MenuItem>
       </Menu>
     </>
   );
