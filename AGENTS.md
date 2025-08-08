@@ -71,6 +71,7 @@ The project has completed the following tasks:
 2. Improved code structure and organization.
 3. Updated `main.tsx` to use `ServerFormWrapper` and `ProtectedRoute` components.
 4. Updated `index.html` to reference `main.tsx` instead of `main.jsx`.
+5. Add i18n feature in `frontend/src/locales` and apply to all the fronend pages.
 
 ## Stock Management Functionality
 
