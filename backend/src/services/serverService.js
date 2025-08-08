@@ -1,4 +1,5 @@
 const serverRepository = require('../repositories/serverRepository');
+const gpuCardInstanceRepository = require('../repositories/gpuCardInstanceRepository');
 
 const createServer = async (data) => {
   try {
