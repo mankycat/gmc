@@ -4,6 +4,7 @@ import { Edit, Delete, Visibility } from '@mui/icons-material';
 import ServerForm from '../components/ServerForm';
 import DeleteConfirmationDialog from '../components/DeleteConfirmationDialog';
 import { getServers, createServer, updateServer, deleteServer } from '../services/serverApiService';
+import { useTranslation } from 'react-i18next';
 
 interface Server {
   id: string;
@@ -24,6 +25,7 @@ const ServerList = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [serverToDelete, setServerToDelete] = useState<Server | null>(null);
+  const { t } = useTranslation();
 
   const handleAddServer = () => {
     setIsEditing(true);
@@ -76,36 +78,36 @@ const ServerList = () => {
   return (
     <Box sx={{ padding: 2 }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-        <Typography variant="h4">Server List</Typography>
-        <Button 
-          variant="contained" 
-          color="primary" 
+        <Typography variant="h4">{t('Server List')}</Typography>
+        <Button
+          variant="contained"
+          color="primary"
           onClick={handleAddServer}
           sx={{ height: 'fit-content' }}
         >
-          ADD SERVER
+          {t('ADD SERVER')}
         </Button>
       </Box>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell>Name Label</TableCell>
-              <TableCell>IP Address</TableCell>
-              <TableCell>CPU Model</TableCell>
-              <TableCell>CPU Cores</TableCell>
-              <TableCell>Memory (GB)</TableCell>
-              <TableCell>Disk Spec</TableCell>
-              <TableCell>OS</TableCell>
-              <TableCell>Purpose</TableCell>
-              <TableCell>Actions</TableCell>
+              <TableCell>{t('ID')}</TableCell>
+              <TableCell>{t('Name Label')}</TableCell>
+              <TableCell>{t('IP Address')}</TableCell>
+              <TableCell>{t('CPU Model')}</TableCell>
+              <TableCell>{t('CPU Cores')}</TableCell>
+              <TableCell>{t('Memory (GB)')}</TableCell>
+              <TableCell>{t('Disk Spec')}</TableCell>
+              <TableCell>{t('OS')}</TableCell>
+              <TableCell>{t('Purpose')}</TableCell>
+              <TableCell>{t('Actions')}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {servers.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={10} align="center">No servers available</TableCell>
+                <TableCell colSpan={10} align="center">{t('No servers available')}</TableCell>
               </TableRow>
             ) : (
               servers.map((server) => (

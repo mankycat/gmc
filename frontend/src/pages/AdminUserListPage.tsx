@@ -17,6 +17,7 @@ import {
 import { Edit } from '@mui/icons-material';
 import { listUsers, createAdminUser, updateAdminUser } from '../services/userApiService';
 import AdminUserForm from '../components/AdminUserForm';
+import { useTranslation } from 'react-i18next';
 
 interface User {
   id: string;
@@ -35,6 +36,7 @@ const AdminUserListPage = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [openAddUserDialog, setOpenAddUserDialog] = useState(false);
   const [editingUserId, setEditingUserId] = useState<string | null>(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -77,30 +79,30 @@ const AdminUserListPage = () => {
   return (
     <Box sx={{ padding: 2 }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-        <Typography variant="h4">Admin Users</Typography>
-        <Button 
-          variant="contained" 
-          color="primary" 
+        <Typography variant="h4">{t('Admin Users')}</Typography>
+        <Button
+          variant="contained"
+          color="primary"
           onClick={() => setOpenAddUserDialog(true)}
           sx={{ height: 'fit-content' }}
         >
-          ADD USER
+          {t('ADD USER')}
         </Button>
       </Box>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Email</TableCell>
-              <TableCell>isAdmin</TableCell>
-              <TableCell>Actions</TableCell>
+              <TableCell>{t('Email')}</TableCell>
+              <TableCell>{t('isAdmin')}</TableCell>
+              <TableCell>{t('Actions')}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {users.map((user) => (
               <TableRow key={user.id}>
                 <TableCell>{user.email}</TableCell>
-                <TableCell>{user.isAdmin ? 'Yes' : 'No'}</TableCell>
+                <TableCell>{user.isAdmin ? t('Yes') : t('No')}</TableCell>
                 <TableCell>
                   <IconButton onClick={() => handleEditUser(user)}><Edit /></IconButton>
                 </TableCell>

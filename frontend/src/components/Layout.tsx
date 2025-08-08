@@ -1,20 +1,24 @@
 import React from 'react';
 import { Outlet, Link } from 'react-router-dom';
-import { Box, AppBar, Toolbar, Typography, Drawer, List, ListItem, ListItemButton, ListItemText, Button, IconButton } from '@mui/material';
+import { Box, AppBar, Toolbar, Typography, Drawer, List, ListItem, ListItemButton, ListItemText, Button } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const drawerWidth = 240;
 
 const Layout = () => {
+  const { t } = useTranslation();
   return (
     <Box sx={{ display: 'flex' }}>
       <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
         <Toolbar>
           <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-            GPU Management Console
+            {t('GPU Management Console')}
           </Typography>
+          <LanguageSwitcher />
           <Button color="inherit" startIcon={<LogoutIcon />} component={Link} to="/login">
-            Logout
+            {t('Logout')}
           </Button>
         </Toolbar>
       </AppBar>
@@ -31,27 +35,27 @@ const Layout = () => {
           <List>
             <ListItem disablePadding>
               <ListItemButton component={Link} to="/">
-                <ListItemText primary="Servers" />
+                <ListItemText primary={t('Servers')} />
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
               <ListItemButton component={Link} to="/admin/users">
-                <ListItemText primary="Admin Users" />
+                <ListItemText primary={t('Admin Users')} />
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
               <ListItemButton component={Link} to="/gpu-card-models">
-                <ListItemText primary="GPU Card Models" />
+                <ListItemText primary={t('GPU Card Models')} />
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
               <ListItemButton component={Link} to="/gpu-card-instances">
-                <ListItemText primary="GPU Card Instances" />
+                <ListItemText primary={t('GPU Card Instances')} />
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
               <ListItemButton component={Link} to="/vms">
-                <ListItemText primary="Virtual Machines" />
+                <ListItemText primary={t('Virtual Machines')} />
               </ListItemButton>
             </ListItem>
           </List>

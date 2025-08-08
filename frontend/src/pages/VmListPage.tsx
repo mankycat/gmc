@@ -23,6 +23,7 @@ import { Edit, Delete } from '@mui/icons-material';
 import { listVirtualMachines, deleteVirtualMachine, createVirtualMachine } from '../services/vmApiService';
 import VmForm from '../components/VmForm';
 import CardUsageSubTable from '../components/CardUsageSubTable';
+import { useTranslation } from 'react-i18next';
 
 interface VirtualMachine {
   id: string;
@@ -72,6 +73,7 @@ const VmListPage = () => {
     assignedGpuCardId: '',
     userId: ''
   });
+  const { t } = useTranslation();
 
   const fetchVms = async () => {
     try {
@@ -81,7 +83,7 @@ const VmListPage = () => {
       setVms(vmData.virtualMachines);
       setTotalPages(Math.ceil(vmData.totalCount / limit));
     } catch (err) {
-      setError('Failed to fetch virtual machines');
+      setError(t('Failed to fetch virtual machines'));
       console.error('Error fetching VMs:', err);
     } finally {
       setLoading(false);
@@ -97,7 +99,7 @@ const VmListPage = () => {
       await deleteVirtualMachine(vm.id);
       setVms(vms.filter((v) => v.id !== vm.id));
     } catch (err) {
-      setError('Failed to delete virtual machine');
+      setError(t('Failed to delete virtual machine'));
       console.error('Error deleting VM:', err);
     }
   };
@@ -151,30 +153,30 @@ const VmListPage = () => {
     <Box sx={{ padding: 2 }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
         <Typography variant="h4" gutterBottom>
-          Virtual Machines
+          {t('Virtual Machines')}
         </Typography>
-        <Button 
-          variant="contained" 
-          color="primary" 
+        <Button
+          variant="contained"
+          color="primary"
           onClick={() => setOpenAddVmDialog(true)}
           sx={{ height: 'fit-content' }}
         >
-          ADD VIRTUAL MACHINE
+          {t('ADD VIRTUAL MACHINE')}
         </Button>
       </Box>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell>VM Name</TableCell>
-              <TableCell>Internal IP</TableCell>
-              <TableCell>Purpose</TableCell>
-              <TableCell>Host Server Name</TableCell>
-              <TableCell>Host Server IP</TableCell>
-              <TableCell>VM RAM (GB)</TableCell>
-              <TableCell>GPU Resources</TableCell>
-              <TableCell>Actions</TableCell>
+              <TableCell>{t('ID')}</TableCell>
+              <TableCell>{t('VM Name')}</TableCell>
+              <TableCell>{t('Internal IP')}</TableCell>
+              <TableCell>{t('Purpose')}</TableCell>
+              <TableCell>{t('Host Server Name')}</TableCell>
+              <TableCell>{t('Host Server IP')}</TableCell>
+              <TableCell>{t('VM RAM (GB)')}</TableCell>
+              <TableCell>{t('GPU Resources')}</TableCell>
+              <TableCell>{t('Actions')}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -192,7 +194,7 @@ const VmListPage = () => {
                     {vm.cardUsages && vm.cardUsages.length > 0 ? (
                       <CardUsageSubTable cardUsages={vm.cardUsages} />
                     ) : (
-                      'No GPU Resources'
+                      t('No GPU Resources')
                     )}
                   </TableCell>
                   <TableCell>
@@ -203,7 +205,7 @@ const VmListPage = () => {
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={9} align="center">No virtual machines found.</TableCell>
+                <TableCell colSpan={9} align="center">{t('No virtual machines found.')}</TableCell>
               </TableRow>
             )}
           </TableBody>

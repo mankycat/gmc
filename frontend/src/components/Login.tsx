@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Box, Button, TextField, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
+  const { t } = useTranslation();
 
   const handleGoogleLogin = () => {
     window.location.href = 'http://localhost:3001/auth/google/login';
@@ -19,7 +21,7 @@ const Login = () => {
         body: JSON.stringify({ email, password }),
       });
       if (!response.ok) {
-        throw new Error('Invalid credentials');
+        throw new Error(t('Invalid credentials'));
       }
       const data = await response.json();
       localStorage.setItem('authToken', data.token);
@@ -49,17 +51,17 @@ const Login = () => {
         borderRadius: 2,
         boxShadow: 3
       }}>
-        <Typography variant="h4" sx={{ marginBottom: 2 }}>Login</Typography>
+        <Typography variant="h4" sx={{ marginBottom: 2 }}>{t('Login')}</Typography>
         <form onSubmit={handleSubmit}>
           <TextField
-            label="Email"
+            label={t('Email')}
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             sx={{ marginBottom: 2, width: '100%' }}
           />
           <TextField
-            label="Password"
+            label={t('Password')}
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -67,11 +69,11 @@ const Login = () => {
           />
           {error && <Typography color="error" sx={{ marginBottom: 2 }}>{error}</Typography>}
           <Button type="submit" variant="contained" sx={{ width: '100%' }}>
-            Login
+            {t('Login')}
           </Button>
         </form>
         <Button variant="contained" onClick={handleGoogleLogin} sx={{ marginTop: 2, width: '100%' }}>
-          Login with Google
+          {t('Login with Google')}
         </Button>
       </Box>
     </Box>

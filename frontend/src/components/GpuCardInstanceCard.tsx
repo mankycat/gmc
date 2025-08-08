@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 interface GpuCardInstance {
   id: string;
@@ -14,13 +15,14 @@ interface GpuCardInstanceCardProps {
 }
 
 const GpuCardInstanceCard: React.FC<GpuCardInstanceCardProps> = ({ gpuCardInstance }) => {
+  const { t } = useTranslation();
   return (
     <Box sx={{ padding: 2, border: '1px solid gray', marginBottom: 2 }}>
-      <Typography><strong>ID:</strong> {gpuCardInstance.id}</Typography>
-      <Typography><strong>GPU Card Model ID:</strong> {gpuCardInstance.gpuCardModelId}</Typography>
-      <Typography><strong>Server ID:</strong> {gpuCardInstance.serverId}</Typography>
-      <Typography><strong>Status:</strong> {gpuCardInstance.status}</Typography>
-      <Typography><strong>Purchase Date:</strong> {gpuCardInstance.purchaseDate}</Typography>
+      <Typography><strong>{t('ID')}:</strong> {gpuCardInstance.id}</Typography>
+      <Typography><strong>{t('GPU Card Model ID')}:</strong> {gpuCardInstance.gpuCardModelId}</Typography>
+      <Typography><strong>{t('Server ID')}:</strong> {gpuCardInstance.serverId}</Typography>
+      <Typography><strong>{t('Status')}:</strong> {gpuCardInstance.status}</Typography>
+      <Typography><strong>{t('Purchase Date')}:</strong> {gpuCardInstance.purchaseDate}</Typography>
     </Box>
   );
 };

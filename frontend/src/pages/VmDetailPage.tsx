@@ -5,6 +5,7 @@ import { getVirtualMachine } from '../services/vmApiService';
 import cardUsageApiService from '../services/cardUsageApiService';
 import { getServer } from '../services/serverApiService';
 const { getCardUsagesByVirtualMachineId } = cardUsageApiService;
+import { useTranslation } from 'react-i18next';
 
 interface VirtualMachine {
   id: string;
@@ -38,6 +39,7 @@ const VmDetailPage = () => {
   const [cardUsages, setCardUsages] = useState<CardUsage[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchVmAndCardUsages = async () => {
@@ -59,7 +61,7 @@ const VmDetailPage = () => {
           }
         }
       } catch (err) {
-        setError('Failed to fetch virtual machine or card usages');
+        setError(t('Failed to fetch virtual machine or card usages'));
         console.error('Error fetching VM or card usages:', err);
       } finally {
         setLoading(false);
@@ -69,7 +71,7 @@ const VmDetailPage = () => {
   }, [id]);
 
   if (loading) {
-    return <Typography>Loading...</Typography>;
+    return <Typography>{t('Loading...')}</Typography>;
   }
 
   if (error) {
@@ -77,33 +79,33 @@ const VmDetailPage = () => {
   }
 
   if (!vm) {
-    return <Typography>Virtual machine not found.</Typography>;
+    return <Typography>{t('Virtual machine not found.')}</Typography>;
   }
 
   return (
     <div>
-      <Typography variant="h4">Virtual Machine Detail</Typography>
-      <Typography><strong>ID:</strong> {vm.id}</Typography>
-      <Typography><strong>Name Label:</strong> {vm.nameLabel}</Typography>
-      <Typography><strong>vCPU Cores Assigned:</strong> {vm.vcpuCoresAssigned}</Typography>
-      <Typography><strong>RAM (GB) Assigned:</strong> {vm.ramGbAssigned}</Typography>
-      {vm.gpuResourceSlice && <Typography><strong>GPU Resource Slice:</strong> {vm.gpuResourceSlice}</Typography>}
-      {vm.purpose && <Typography><strong>Purpose:</strong> {vm.purpose}</Typography>}
-      {vm.assignedToUserEmail && <Typography><strong>Assigned To:</strong> {vm.assignedToUserEmail}</Typography>}
-      {vm.internalIpAddress && <Typography><strong>Internal IP:</strong> {vm.internalIpAddress}</Typography>}
-      {vm.notes && <Typography><strong>Notes:</strong> {vm.notes}</Typography>}
-      <Typography><strong>Host Server ID:</strong> {vm.hostServerId}</Typography>
-      {vm.assignedGpuCardId && <Typography><strong>Assigned GPU Card ID:</strong> {vm.assignedGpuCardId}</Typography>}
+      <Typography variant="h4">{t('Virtual Machine Detail')}</Typography>
+      <Typography><strong>{t('ID')}:</strong> {vm.id}</Typography>
+      <Typography><strong>{t('Name Label')}:</strong> {vm.nameLabel}</Typography>
+      <Typography><strong>{t('vCPU Cores Assigned')}:</strong> {vm.vcpuCoresAssigned}</Typography>
+      <Typography><strong>{t('RAM (GB) Assigned')}:</strong> {vm.ramGbAssigned}</Typography>
+      {vm.gpuResourceSlice && <Typography><strong>{t('GPU Resource Slice')}:</strong> {vm.gpuResourceSlice}</Typography>}
+      {vm.purpose && <Typography><strong>{t('Purpose')}:</strong> {vm.purpose}</Typography>}
+      {vm.assignedToUserEmail && <Typography><strong>{t('Assigned To')}:</strong> {vm.assignedToUserEmail}</Typography>}
+      {vm.internalIpAddress && <Typography><strong>{t('Internal IP')}:</strong> {vm.internalIpAddress}</Typography>}
+      {vm.notes && <Typography><strong>{t('Notes')}:</strong> {vm.notes}</Typography>}
+      <Typography><strong>{t('Host Server ID')}:</strong> {vm.hostServerId}</Typography>
+      {vm.assignedGpuCardId && <Typography><strong>{t('Assigned GPU Card ID')}:</strong> {vm.assignedGpuCardId}</Typography>}
 
-      <Typography variant="h6" sx={{ marginTop: 2 }}>Card Usages</Typography>
+      <Typography variant="h6" sx={{ marginTop: 2 }}>{t('Card Usages')}</Typography>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell>Card Index</TableCell>
-              <TableCell>Card UUID</TableCell>
-              <TableCell>Usage</TableCell>
+              <TableCell>{t('ID')}</TableCell>
+              <TableCell>{t('Card Index')}</TableCell>
+              <TableCell>{t('Card UUID')}</TableCell>
+              <TableCell>{t('Usage')}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
