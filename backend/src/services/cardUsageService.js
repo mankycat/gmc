@@ -1,4 +1,6 @@
 const cardUsageRepository = require('../repositories/cardUsageRepository');
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 
 const createCardUsage = async (data, tx) => {
   console.log('createCardUsage called with data:', data);
