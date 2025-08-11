@@ -34,6 +34,11 @@ const virtualMachineSchema = Joi.object({
   userId: Joi.string().required()
 });
 
+const loginSchema = Joi.object({
+  email: Joi.string().email().required(),
+  password: Joi.string().required()
+});
+
 const app = express();
 
 app.use(cors());
@@ -284,17 +289,77 @@ app.delete('/api/gpu-card-instances/:id', gpuCardInstanceController.deleteGpuCar
 app.post('/api/servers/:serverId/assign-gpu', serverController.assignGpuToServer);
 app.delete('/api/servers/:serverId/unassign-gpu/:gpuInstanceId', serverController.unassignGpuFromServer);
 
-// Local User Account Login API with JWT
-app.post('/auth/login', async (req, res) => {
-  const loginSchema = Joi.object({
-    email: Joi.string().email().required(),
-    password: Joi.string().required()
-  });
+// Login Schema (需保留給新舊版引用)
+// app.post('/auth/login', async (req, res) => {
+//   const loginSchema = Joi.object({
+//     email: Joi.string().email().required(),
+//     password: Joi.string().required()
+//   });
 
-  const { error } = loginSchema.validate(req.body);
-  if (error) {
-    return res.status(400).json({ message: error.details[0].message });
+//   const { error } = loginSchema.validate(req.body);
+//   if (error) {
+//     return res.status(400).json({ message: error.details[0].message });
+//   }
+
+//   try {
+//     const { email, password } = req.body;
+//     const user = await prisma.user.findUnique({ where: { email } });
+//     if (!user || !(await bcrypt.compare(password, user.password))) {
+//       return res.status(401).json({ message: 'Invalid credentials' });
+//     }
+//     const token = jwt.sign(
+//       { 
+//         userId: user.id,
+//         email: user.email,
+//         isAdmin: user.isAdmin 
+//       }, 
+//       process.env.JWT_SECRET, 
+//       { 
+//         expiresIn: '1h',
+//         algorithm: 'HS256'
+//       }
+//     );
+//     res.json({ 
+//       token,
+//       userId: user.id // Add userId to the response
+//     });
+//   } catch (err) {
+//     console.error('Error during login:', err);
+//     res.status(500).json({ message: 'Internal Server Error' });
+//   }
+// });
+
+app.get('/api/virtual-machines', virtualMachineController.listVirtualMachines);
+app.get('/api/virtual-machines/:id', virtualMachineController.getVirtualMachine);
+app.post('/api/virtual-machines', virtualMachineController.createVirtualMachine);
+app.put('/api/virtual-machines/:id', virtualMachineController.updateVirtualMachine);
+app.delete('/api/virtual-machines/:id', virtualMachineController.deleteVirtualMachine);
+
+// ---- Health check ----
+app.get('/api/health', (req, res) => {
+  res.json({ ok: true, time: new Date().toISOString() });
+});
+
+// ---- Auth handlers：抽成函式（新/舊路徑共用）----
+const logoutHandler = async (req, res) => {
+  try {
+    const authHeader = req.headers.authorization;
+    if (!authHeader) {
+      return res.status(200).json({ message: 'No token provided' });
+    }
+    const token = authHeader.split(' ')[1];
+    console.log('Logging out user with token:', token);
+    // TODO: 真實情境可把 token 加入 blacklist
+    res.status(200).json({ message: 'Logged out successfully' });
+  } catch (err) {
+    console.error('Error during logout:', err);
+    res.status(500).json({ message: 'Internal Server Error' });
   }
+};
+
+const loginHandler = async (req, res) => {
+  const { error } = loginSchema.validate(req.body);
+  if (error) return res.status(400).json({ message: error.details[0].message });
 
   try {
     const { email, password } = req.body;
@@ -303,34 +368,29 @@ app.post('/auth/login', async (req, res) => {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
     const token = jwt.sign(
-      { 
-        userId: user.id,
-        email: user.email,
-        isAdmin: user.isAdmin 
-      }, 
-      process.env.JWT_SECRET, 
-      { 
-        expiresIn: '1h',
-        algorithm: 'HS256'
-      }
+      { userId: user.id, email: user.email, isAdmin: user.isAdmin },
+      process.env.JWT_SECRET,
+      { expiresIn: '1h', algorithm: 'HS256' }
     );
-    res.json({ 
-      token,
-      userId: user.id // Add userId to the response
-    });
+    res.json({ token, userId: user.id });
   } catch (err) {
     console.error('Error during login:', err);
     res.status(500).json({ message: 'Internal Server Error' });
   }
-});
+};
 
-app.get('/api/virtual-machines', virtualMachineController.listVirtualMachines);
-app.get('/api/virtual-machines/:id', virtualMachineController.getVirtualMachine);
-app.post('/api/virtual-machines', virtualMachineController.createVirtualMachine);
-app.put('/api/virtual-machines/:id', virtualMachineController.updateVirtualMachine);
-app.delete('/api/virtual-machines/:id', virtualMachineController.deleteVirtualMachine);
+// ---
+
+// ---- 路由對應：新舊並存（遷移期）----
+// 新：統一掛在 /api/auth/*
+app.post('/api/auth/login', loginHandler);
+app.post('/api/auth/logout', logoutHandler);
+
+// 舊：維持相容（前端改完後可移除）
+app.post('/auth/login', loginHandler);
+app.post('/auth/logout', logoutHandler);
 
 const PORT = 3001;
-app.listen(PORT, () => {
-  console.error(`Server is running on http://localhost:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server is running on http://0.0.0.0:${PORT}`);
 });
