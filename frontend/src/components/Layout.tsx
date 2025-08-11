@@ -1,7 +1,21 @@
 import React from 'react';
 import { Outlet, Link } from 'react-router-dom';
-import { Box, AppBar, Toolbar, Typography, Drawer, List, ListItem, ListItemButton, ListItemText, Button } from '@mui/material';
+import {
+  Box,
+  AppBar,
+  Toolbar,
+  Typography,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Button,
+  Collapse,
+} from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from './LanguageSwitcher';
 
@@ -9,6 +23,16 @@ const drawerWidth = 240;
 
 const Layout = () => {
   const { t } = useTranslation();
+  const [gpuOpen, setGpuOpen] = React.useState(false);
+  const [svmOpen, setSvmOpen] = React.useState(false);
+
+  const handleGpuClick = () => {
+    setGpuOpen(!gpuOpen);
+  };
+
+  const handleSvmClick = () => {
+    setSvmOpen(!svmOpen);
+  };
   return (
     <Box sx={{ display: 'flex' }}>
       <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
@@ -34,30 +58,50 @@ const Layout = () => {
         <Box sx={{ overflow: 'auto' }}>
           <List>
             <ListItem disablePadding>
-              <ListItemButton component={Link} to="/">
-                <ListItemText primary={t('Servers')} />
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding>
               <ListItemButton component={Link} to="/admin/users">
                 <ListItemText primary={t('Admin Users')} />
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
-              <ListItemButton component={Link} to="/gpu-card-models">
-                <ListItemText primary={t('GPU Card Models')} />
+              <ListItemButton onClick={handleGpuClick}>
+                <ListItemText primary={t('GPU Card')} />
+                {gpuOpen ? <ExpandLess /> : <ExpandMore />}
               </ListItemButton>
             </ListItem>
+            <Collapse in={gpuOpen} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                <ListItem disablePadding>
+                  <ListItemButton sx={{ pl: 4 }} component={Link} to="/gpu-card-models">
+                    <ListItemText primary={t('GPU Card Models')} />
+                  </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding>
+                  <ListItemButton sx={{ pl: 4 }} component={Link} to="/gpu-card-instances">
+                    <ListItemText primary={t('GPU Card Instances')} />
+                  </ListItemButton>
+                </ListItem>
+              </List>
+            </Collapse>
             <ListItem disablePadding>
-              <ListItemButton component={Link} to="/gpu-card-instances">
-                <ListItemText primary={t('GPU Card Instances')} />
+              <ListItemButton onClick={handleSvmClick}>
+                <ListItemText primary={t('Servers & VMs')} />
+                {svmOpen ? <ExpandLess /> : <ExpandMore />}
               </ListItemButton>
             </ListItem>
-            <ListItem disablePadding>
-              <ListItemButton component={Link} to="/vms">
-                <ListItemText primary={t('Virtual Machines')} />
-              </ListItemButton>
-            </ListItem>
+            <Collapse in={svmOpen} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                <ListItem disablePadding>
+                  <ListItemButton sx={{ pl: 4 }} component={Link} to="/">
+                    <ListItemText primary={t('Servers')} />
+                  </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding>
+                  <ListItemButton sx={{ pl: 4 }} component={Link} to="/vms">
+                    <ListItemText primary={t('Virtual Machines')} />
+                  </ListItemButton>
+                </ListItem>
+              </List>
+            </Collapse>
           </List>
         </Box>
       </Drawer>
