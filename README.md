@@ -91,22 +91,39 @@ The project now includes stock management functionality for GPU card models. Thi
 - npm or yarn
 - Docker and Docker Compose
 
-### Database Setup (using Docker Compose)
+### Running the Stack with Docker Compose
 
-1.  Ensure Docker and Docker Compose are installed and running on your system.
-2.  Navigate to the project root directory in your terminal.
-3.  Run the following command to start the PostgreSQL database container:
-    ```bash
-    docker-compose up -d
-    ```
-4.  Apply the Prisma database migrations to set up the schema:
-    ```bash
-    cd backend
-    npx prisma migrate dev --name initial_schema
-    ```
-    *(Note: If you encounter drift issues, you may need to run `npx prisma migrate reset` in the `backend` directory to drop and recreate the database before applying migrations. **This will delete all data in the database.**)*
+1. Ensure Docker and Docker Compose are installed and running on your system.
+2. Copy the example environment files and adjust as needed:
+   ```bash
+   cp backend/.env.example backend/.env
+   cp frontend/.env.example frontend/.env
+   ```
+3. From the project root, build and start all services:
+   ```bash
+   docker compose up -d --build
+   ```
+   The frontend will be available at `http://localhost:5173` and the backend API at `http://localhost:3001`.
+4. Database data is persisted in the `db_data` volume. To reset the database completely, run:
+   ```bash
+   docker compose down -v
+   ```
+5. To apply new Prisma migrations after pulling updates:
+   ```bash
+   docker compose exec backend npx prisma migrate deploy
+   ```
+6. To create a new migration while developing:
+   ```bash
+   docker compose exec backend npx prisma migrate dev --name <migration_name>
+   ```
+7. If the schema drifts or you need to start over, reset the database (this deletes all data):
+   ```bash
+   docker compose exec backend npx prisma migrate reset
+   ```
 
-### Backend Setup and Running
+The following sections describe how to run the backend and frontend without Docker if you prefer a manual setup.
+
+### Backend Setup and Running (without Docker)
 
 1.  Navigate to the `backend` directory in your terminal:
     ```bash
@@ -134,7 +151,7 @@ The project now includes stock management functionality for GPU card models. Thi
     ```
     The backend should start and listen on `http://localhost:3001`.
 
-### Frontend Setup and Running
+### Frontend Setup and Running (without Docker)
 
 1.  Open a new terminal and navigate to the `frontend` directory:
     ```bash
